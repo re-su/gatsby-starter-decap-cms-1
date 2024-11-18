@@ -20,8 +20,26 @@ export const IndexPageTemplate = ({
 }) => {
   const heroImage = getImage(image) || image;
 
+    // Add Netlify Identity Script to the page
+    useEffect(() => {
+      if (typeof window !== "undefined" && window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", (user) => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+        window.netlifyIdentity.init();
+      }
+    }, []);
+
   return (
     <div>
+      <script
+        src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+        async
+      ></script>
       <FullWidthImage img={heroImage} title={title} subheading={subheading} />
       <section className="section section--gradient">
         <div className="container">
