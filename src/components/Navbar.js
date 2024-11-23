@@ -1,25 +1,93 @@
 import React, { useState } from "react";
-import { Link } from "gatsby";
-import github from "../img/github-icon.svg";
+import { Link, useStaticQuery, graphql } from "gatsby";
 import logo from "../img/logo.svg";
 
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
 
+  const data = useStaticQuery(graphql`
+    query NavbarQuery {
+      allMarkdownRemark(
+        filter: {
+          frontmatter: {
+            templateKey: { regex: "/page/" }
+            path: { ne: null }
+          }
+        }
+        sort: { fields: frontmatter___title, order: ASC }
+      ) {
+        edges {
+          node {
+            frontmatter {
+              title
+              path
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const pages = data.allMarkdownRemark.edges;
+
+  // Utility function to capitalize the first letter of a string
+  const capitalize = (string) =>
+    string ? string.charAt(0).toUpperCase() + string.slice(1) : "";
+
+  // Function to organize pages into a nested structure
+  const organizePages = (pages) => {
+    const nestedPages = [];
+
+    pages.forEach(({ node }) => {
+      const { path, parentPath, title } = node.frontmatter;
+
+      // Find the parent item and add the current page as a child
+      if (parentPath) {
+        const parent = nestedPages.find((item) => item.path === parentPath);
+        if (parent) {
+          parent.children = parent.children || [];
+          parent.children.push({ title, path });
+        }
+      } else {
+        // If no parentPath, this is a top-level item
+        nestedPages.push({ title, path });
+      }
+    });
+
+    return nestedPages;
+  };
+
+  // Function to render nested menu items
+  const renderMenu = (menuItems) => {
+    return menuItems.map(({ title, path, children }) => (
+      <div key={path} className="navbar-item has-dropdown is-hoverable">
+        <Link to={path} className="navbar-link">
+          {capitalize(title)}
+        </Link>
+        {children && children.length > 0 && (
+          <div className="navbar-dropdown">
+            {children.map((child) => (
+              <Link key={child.path} to={child.path} className="navbar-item">
+                {capitalize(child.title)}
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+    ));
+  };
+
+  const organizedPages = organizePages(pages);
+
   return (
-    <nav
-      className="navbar is-transparent"
-      role="navigation"
-      aria-label="main-navigation"
-    >
+    <nav className="navbar is-transparent" role="navigation" aria-label="main-navigation">
       <div className="container">
         <div className="navbar-brand">
           <Link to="/" className="navbar-item" title="Logo">
-            <img src={logo} alt="Kaldi" style={{ width: "88px" }} />
+            <img src={logo} alt="Site Logo" style={{ width: "88px" }} />
           </Link>
-          {/* Hamburger menu */}
           <button
-            className={`navbar-burger burger ${isActive && "is-active"}`}
+            className={`navbar-burger burger ${isActive ? "is-active" : ""}`}
             aria-expanded={isActive}
             onClick={() => setIsActive(!isActive)}
           >
@@ -28,54 +96,11 @@ const Navbar = () => {
             <span />
           </button>
         </div>
-        <ul
-          id="navMenu"
-          className={` navbar-start has-text-centered navbar-menu ${
-            isActive && "is-active"
-          }`}
-        >
-          {/* TODO: inline override of padding is a result of refactoring
-                to a ul for accessibilty purposes, would like to see a css
-                re-write that makes this unneccesary.
-             */}
-          <li className="navbar-item" style={{ padding: "0px" }}>
-            <Link className="navbar-item" to="/about">
-              About
-            </Link>
-          </li>
-          <li className="navbar-item" style={{ padding: "0px" }}>
-            <Link className="navbar-item" to="/products">
-              Products
-            </Link>
-          </li>
-          <li className="navbar-item" style={{ padding: "0px" }}>
-            <Link className="navbar-item" to="/blog">
-              Blog
-            </Link>
-          </li>
-          <li className="navbar-item" style={{ padding: "0px" }}>
-            <Link className="navbar-item" to="/contact">
-              Contact
-            </Link>
-          </li>
-          <li className="navbar-item" style={{ padding: "0px" }}>
-            <Link className="navbar-item" to="/contact/examples">
-              Form Examples
-            </Link>
-          </li>
-          <li className="navbar-end has-text-centered">
-            <a
-              className="navbar-item"
-              href="https://github.com/decaporg/gatsby-plugin-decap-cms"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="icon">
-                <img src={github} alt="Github" />
-              </span>
-            </a>
-          </li>
-        </ul>
+        <div id="navMenu" className={`navbar-menu ${isActive ? "is-active" : ""}`}>
+          <div className="navbar-start">
+            {renderMenu(organizedPages)} {/* Render the menu with nested pages */}
+          </div>
+        </div>
       </div>
     </nav>
   );

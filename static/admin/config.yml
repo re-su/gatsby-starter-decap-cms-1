@@ -61,6 +61,7 @@ collections:
                 ],
             }
           - { label: Description, name: description, widget: string }
+          - { label: Desc, name: desc, widget: string }
           - {
               label: Intro,
               name: intro,
@@ -133,6 +134,8 @@ collections:
             }
           - { label: "Title", name: "title", widget: "string" }
           - { label: "Body", name: "body", widget: "markdown" }
+          - { label: Desc, name: desc, widget: string }
+          - { label: Menu, name: menutest, widget: menutest }
       - file: "src/pages/products/index.md"
         label: "Products Page"
         name: "products"
@@ -244,3 +247,17 @@ collections:
                   },
                 ],
             }
+      - file: "src/pages/about/test/index.md"
+        label: "Test"
+        name: "test"
+        fields:
+          - {
+              label: "Template Key",
+              name: "templateKey",
+              widget: "hidden",
+              default: "about-page",
+            }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+          - { label: Desc, name: desc, widget: string }
+          - { label: Menu, name: menutest, widget: menutest }

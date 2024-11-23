@@ -16,6 +16,7 @@ export const IndexPageTemplate = ({
   subheading,
   mainpitch,
   description,
+  desc,
   intro,
 }) => {
   const heroImage = getImage(image) || image;
@@ -33,6 +34,9 @@ export const IndexPageTemplate = ({
         window.netlifyIdentity.init();
       }
     }, []);
+
+    console.log(desc);
+    console.log(description);
 
   return (
     <div>
@@ -60,7 +64,9 @@ export const IndexPageTemplate = ({
                       <h3 className="has-text-weight-semibold is-size-2">
                         {heading}
                       </h3>
-                      <p>{description}</p>
+                      o<p>{description}</p>o
+                      {desc}
+                      Menu up
                     </div>
                   </div>
                   <Features gridItems={intro.blurbs} />
@@ -117,6 +123,7 @@ const IndexPage = ({ data }) => {
         mainpitch={frontmatter.mainpitch}
         description={frontmatter.description}
         intro={frontmatter.intro}
+        desc={frontmatter.desc}
       />
     </Layout>
   );
@@ -149,6 +156,7 @@ export const pageQuery = graphql`
           description
         }
         description
+        desc
         intro {
           blurbs {
             image {

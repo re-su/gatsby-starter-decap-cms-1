@@ -5,9 +5,9 @@ import Layout from "../components/Layout";
 import Content, { HTMLContent } from "../components/Content";
 
 // eslint-disable-next-line
-export const AboutPageTemplate = ({ title, content, contentComponent }) => {
+export const AboutPageTemplate = ({ title, desc, content, contentComponent, menutest }) => {
   const PageContent = contentComponent || Content;
-
+  console.log(desc);
   return (
     <section className="section section--gradient">
       <div className="container">
@@ -15,7 +15,7 @@ export const AboutPageTemplate = ({ title, content, contentComponent }) => {
           <div className="column is-10 is-offset-1">
             <div className="section">
               <h2 className="title is-size-3 has-text-weight-bold is-bold-light">
-                {title}
+                {title} {menutest}
               </h2>
               <PageContent className="content" content={content} />
             </div>
@@ -41,6 +41,8 @@ const AboutPage = ({ data }) => {
         contentComponent={HTMLContent}
         title={post.frontmatter.title}
         content={post.html}
+        desc={post.frontmatter.desc}
+        menutest={post.frontmatter.menutest}
       />
     </Layout>
   );
@@ -58,6 +60,8 @@ export const aboutPageQuery = graphql`
       html
       frontmatter {
         title
+        desc
+        menutest
       }
     }
   }
