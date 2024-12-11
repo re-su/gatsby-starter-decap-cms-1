@@ -36,36 +36,54 @@ const Navbar = () => {
 
   // Function to organize pages into a nested structure
   const organizePages = (pages) => {
-    const nestedPages = [];
+    const pageMap = {};
 
+    // Build a map of pages for quick lookup
     pages.forEach(({ node }) => {
-      const { path, parentPath, title } = node.frontmatter;
+      const { path, title } = node.frontmatter;
 
-      // Find the parent item and add the current page as a child
-      if (parentPath) {
-        const parent = nestedPages.find((item) => item.path === parentPath);
-        if (parent) {
-          parent.children = parent.children || [];
-          parent.children.push({ title, path });
-        }
-      } else {
-        // If no parentPath, this is a top-level item
-        nestedPages.push({ title, path });
+      const segments = path.split("/").filter(Boolean); // Split path and filter empty segments
+      const parentPath = `/${segments.slice(0, -1).join("/")}` || "/"; // Get parent path
+      const currentPath = `/${segments.join("/")}`; // Get current path
+      console.log(segments, parentPath, currentPath);
+      if (!pageMap[currentPath] || !pageMap[currentPath].path || !pageMap[currentPath].title) {
+        pageMap[currentPath] = null;
+        pageMap[currentPath] = { title, path: currentPath, children: [] };
+        console.log(1);
       }
+
+      if (parentPath !== "/" && pageMap[parentPath]) {
+        pageMap[parentPath].children.push(pageMap[currentPath]);
+        console.log(2);
+      } else if (parentPath !== "/" && !pageMap[parentPath]) {
+        pageMap[parentPath] = { children: [pageMap[currentPath]] };
+        console.log(3);
+      }
+      console.log("=======================================")
     });
 
-    return nestedPages;
+    console.log(pageMap);
+
+    // Return only root-level pages
+    return Object.values(pageMap).filter(
+      (page) =>
+        !pages.some(({ node }) =>
+          page && page.path &&
+          page.path.startsWith(node.frontmatter.path) &&
+          page.path !== node.frontmatter.path
+        )
+    );
   };
 
   // Function to render nested menu items
   const renderMenu = (menuItems) => {
     return menuItems.map(({ title, path, children }) => (
       <div key={path} className="navbar-item has-dropdown is-hoverable">
-        <Link to={path} className="navbar-link">
+        <Link to={path} className={children && children.length > 0 ? "navbar-link" : "navbar-item"}>
           {capitalize(title)}
         </Link>
         {children && children.length > 0 && (
-          <div className="navbar-dropdown">
+          <div className="navbar-dropdown is-hoverable">
             {children.map((child) => (
               <Link key={child.path} to={child.path} className="navbar-item">
                 {capitalize(child.title)}
@@ -78,9 +96,10 @@ const Navbar = () => {
   };
 
   const organizedPages = organizePages(pages);
+  console.log(organizedPages)
 
   return (
-    <nav className="navbar is-transparent" role="navigation" aria-label="main-navigation">
+    <nav className="navbar is-transparent" role="navigation" aria-label="dropdown navigation">
       <div className="container">
         <div className="navbar-brand">
           <Link to="/" className="navbar-item" title="Logo">

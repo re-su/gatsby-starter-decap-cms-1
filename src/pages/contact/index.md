@@ -1,5 +1,5 @@
 ---
-title: "Contact"
-templateKey: "contact-page"
-path: "/contact"
+title: Contact
+templateKey: contact-page
+path: /contact
 ---
