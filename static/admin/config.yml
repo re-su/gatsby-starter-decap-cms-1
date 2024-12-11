@@ -35,6 +35,10 @@ collections:
 
   - name: "pages"
     label: "Pages"
+    folder: "src/pages"
+    nested:
+      depth: 100 # max depth to show in the collection tree
+      summary: '{{title}}'
     files:
       - file: "src/pages/index.md"
         label: "Landing Page"
