@@ -262,8 +262,8 @@ collections:
           - { label: Desc, name: desc, widget: string }
           - { label: Menu, name: menutest, widget: menutest }
       - file: "src/pages/about2/index.md"
-        label: "Test"
-        name: "test"
+        label: "AboutTest"
+        name: "abouttest"
         fields:
           - {
               label: "Template Key",
