@@ -261,3 +261,17 @@ collections:
           - { label: "Body", name: "body", widget: "markdown" }
           - { label: Desc, name: desc, widget: string }
           - { label: Menu, name: menutest, widget: menutest }
+      - file: "src/pages/about2/index.md"
+        label: "Test"
+        name: "test"
+        fields:
+          - {
+              label: "Template Key",
+              name: "templateKey",
+              widget: "hidden",
+              default: "about-page",
+            }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+          - { label: Desc, name: desc, widget: string }
+          - { label: Menu, name: menutest, widget: menutest }
