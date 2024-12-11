@@ -1,7 +1,7 @@
 ---
-templateKey: 'about-page'
-path: /about/test
-title: Test site 1
+templateKey: about-page
+path: /about
+title: About our values
 desc: testdesc1
 menutest: menuvalue
 ---
