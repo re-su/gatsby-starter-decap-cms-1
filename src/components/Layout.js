@@ -10,7 +10,7 @@ import { withPrefix } from "gatsby";
 
 const TemplateWrapper = ({ children }) => {
   const { title, description } = useSiteMetadata();
-  const IS_INDEX_PAGE = window.location.pathname === "/" || window.location.pathname === "";
+  const IS_INDEX_PAGE = window !== undefined && (window.location.pathname === "/" || window.location.pathname === "");
 
   return (
     <div>

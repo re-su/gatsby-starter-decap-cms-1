@@ -5,7 +5,7 @@ const useLogoScroll = ({ initialPosition = "60", isIndexPage } = {}) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
+      const currentScrollPos = window !== undefined ? window.pageYOffset : 0;
       console.log(isIndexPage);
       if(!isIndexPage) {
         setLogoPosition("0")
