@@ -1,0 +1,137 @@
+/* Main Banner */
+.main-banner
+  position: relative
+  overflow: hidden
+  height: 80vh
+  display: flex
+  align-items: center
+  justify-content: center
+  place-items: center
+  background: linear-gradient(90deg, #ffd2d2 40%, $primary-color 100%)
+
+.floating-icon
+  position: absolute
+  width: 70px
+  filter: blur(4px)
+  animation: float ease-in-out infinite
+  z-index: 1
+
+.banner-content
+  z-index: 1
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: center
+  width: 100%
+  padding: 1em
+  margin-top: 60px
+
+.person-image
+  max-height: 70vh
+  max-width: 500px
+  min-width: 300px !important
+  width: auto
+  margin-bottom: 1rem
+
+.text-bubble
+  background-color: white
+  border: 2px solid black
+  padding: 1.5rem 2rem
+  color: black
+  font-size: 1.2rem
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15)
+  max-width: 500px
+  position: relative
+  border-radius: 20px 20px 20px 20px
+
+  /* Desktop Tail */
+  .bubble-tail
+    position: absolute
+    top: 50%
+    left: -17px
+    transform: translateY(-50%)
+    width: 0
+    height: 0
+
+  .bubble-tail.dark
+    border-top: 17px solid transparent
+    border-bottom: 17px solid transparent
+    border-right: 17px solid black
+
+  .bubble-tail.light
+    left: -14px
+    border-top: 15px solid transparent
+    border-bottom: 15px solid transparent
+    border-right: 15px solid white
+
+.text-word
+  white-space: nowrap
+  display: inline-block
+
+.text-char
+  opacity: 0
+  display: inline-block
+  animation: fadeInFromLeft 0.2s ease-out forwards
+
+@keyframes float
+  0%, 100%
+    transform: translateY(0)
+  50%
+    transform: translateY(-15px)
+
+@keyframes fadeInFromLeft
+  0%
+    opacity: 0
+    transform: translateX(-10px)
+  100%
+    opacity: 1
+    transform: translateX(0)
+
+/* Mobile Styles */
+@media (max-width: 768px)
+  .main-banner
+    height: 80vh
+
+  .banner-content
+    flex-direction: column-reverse
+    height: 100%
+    margin: 0
+    margin-top: 60px
+    padding: 0
+
+  .person-image
+    height: 50%
+    margin: 0
+
+  .text-bubble
+    max-width: 80%
+    padding: 20px
+    background: #f0f0f0
+    border-radius: 15px
+    // border: 0
+    color: #333
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2)
+    position: relative
+    font-size: 1em
+
+    /* Mobile Tail (Bottom Center) */
+    &::after
+      content: ''
+      position: absolute
+      bottom: -18px
+      left: 50%
+      transform: translateX(-50%)
+      width: 0
+      height: 0
+      border-left: 20px solid transparent
+      border-right: 20px solid transparent
+      border-top: 20px solid #f0f0f0 /* Tail color matches bubble background */
+
+  .floating-icon
+    width: 40px
+    opacity: 0.8
+    filter: blur(2px) /* Less blur for better visibility */
+
+  /* Hiding desktop-tail on mobile */
+  .bubble-tail
+    display: none

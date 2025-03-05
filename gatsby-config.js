@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: "Gatsby + Netlify CMS Starter",
     description:
-      "This repo contains an example business website that is built with Gatsby, and Netlify CMS.It follows the JAMstack architecture by using Git as a single source of truth, and Netlify for continuous deployment, and CDN distribution.",
+      "This repo contains an example business website that is built with Gatsby and Netlify CMS. It follows the JAMstack architecture by using Git as a single source of truth, and Netlify for continuous deployment and CDN distribution.",
   },
   plugins: [
     "gatsby-plugin-react-helmet",
@@ -14,8 +14,16 @@ module.exports = {
         },
       },
     },
+    // {
+    //   resolve: "gatsby-plugin-react-svg",
+    //   options: {
+    //     rule: {
+    //       include: /src\/img\/svg/, // Ensure this matches your actual SVG folder
+    //     },
+    //   },
+    // },
     {
-      // keep as first gatsby-source-filesystem plugin for gatsby image support
+      // Keep this as the first gatsby-source-filesystem plugin for Gatsby image support
       resolve: "gatsby-source-filesystem",
       options: {
         path: `${__dirname}/static/img`,
@@ -43,13 +51,10 @@ module.exports = {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
-          'gatsby-remark-relative-images',
+          "gatsby-remark-relative-images",
           {
             resolve: "gatsby-remark-images",
             options: {
-              // It's important to specify the maxWidth (in pixels) of
-              // the content container as this plugin uses this as the
-              // base for generating different widths of each image.
               maxWidth: 2048,
             },
           },
@@ -69,13 +74,13 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-purgecss", // purges all unused/unreferenced css rules
+      resolve: "gatsby-plugin-purgecss",
       options: {
         develop: true, // Activates purging in npm run develop
-        purgeOnly: ['/bulma-style.sass'], // applies purging only on the bulma css file
+        purgeOnly: ["/bulma-style.sass"], // Applies purging only on the Bulma CSS file
         printRejected: true,
       },
-    }, // must be after other CSS plugins
-    "gatsby-plugin-netlify", // make sure to keep it last in the array
+    },
+    "gatsby-plugin-netlify", // Make sure to keep it last in the array
   ],
 };

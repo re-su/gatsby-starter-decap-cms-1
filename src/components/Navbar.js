@@ -1,17 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import logo from "../img/logo.svg";
 
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(typeof window !== "undefined" ? window.pageYOffset : 0);
+  const IS_INDEX_PAGE = window.location.pathname === "/" || window.location.pathname === "";
+
+  // Scroll behavior
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      const navbar = document.getElementById("navbar");
+      console.log(currentScrollPos, prevScrollPos);
+      if (prevScrollPos > currentScrollPos) {
+        navbar.style.top = "0"; // Show the navbar
+      } else if(currentScrollPos > 200) {
+        navbar.style.top = "-60px"; // Hide the navbar
+      }
+
+      if (currentScrollPos <= 10 && prevScrollPos > 10) {
+        navbar.style.backgroundColor = "rgba(164, 226, 255, 0)";
+      } else if (currentScrollPos > 10 && prevScrollPos <= 10) {
+        navbar.style.backgroundColor = "rgba(164, 226, 255, 1)";
+      }
+
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    const handleLoad = () => {
+      console.log("HANDLE LOAD")
+      const currentScrollPos = window.pageYOffset;
+      console.log("SCroll pos in load: ", currentScrollPos)
+      if(currentScrollPos <= 10) {
+        document.getElementById("navbar").style.backgroundColor = "rgba(164, 226, 255, 0)"
+      }
+    }
+    console.log("Is index: ", IS_INDEX_PAGE);
+
+    if(IS_INDEX_PAGE) {
+      window.addEventListener("scroll", handleScroll);
+      handleLoad();
+    }
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollPos]);
 
   const data = useStaticQuery(graphql`
     query NavbarQuery {
       allMarkdownRemark(
         filter: {
           frontmatter: {
-            templateKey: { regex: "/page/" }
-            path: { ne: null }
+            templateKey: { regex: "/^(?!.*index-page).*page$/" }
           }
         }
         sort: { fields: frontmatter___title, order: ASC }
@@ -22,6 +64,9 @@ const Navbar = () => {
               title
               path
             }
+            fields {
+              slug
+            }
           }
         }
       }
@@ -30,7 +75,6 @@ const Navbar = () => {
 
   const pages = data.allMarkdownRemark.edges;
 
-  // Utility function to capitalize the first letter of a string
   const capitalize = (string) =>
     string ? string.charAt(0).toUpperCase() + string.slice(1) : "";
 
@@ -40,50 +84,48 @@ const Navbar = () => {
 
     // Build a map of pages for quick lookup
     pages.forEach(({ node }) => {
-      const { path, title } = node.frontmatter;
+      const slug = node.fields.slug;
+      const path = node.frontmatter.path ? node.frontmatter.path : slug;
+      const title = node.frontmatter.title;
 
-      const segments = path.split("/").filter(Boolean); // Split path and filter empty segments
-      const parentPath = `/${segments.slice(0, -1).join("/")}` || "/"; // Get parent path
-      const currentPath = `/${segments.join("/")}`; // Get current path
-      console.log(segments, parentPath, currentPath);
+      const segments = path.split("/").filter(Boolean);
+      const parentPath = `/${segments.slice(0, -1).join("/")}` || "/";
+      const currentPath = `/${segments.join("/")}`;      
+
       if (!pageMap[currentPath] || !pageMap[currentPath].path || !pageMap[currentPath].title) {
         pageMap[currentPath] = null;
         pageMap[currentPath] = { title, path: currentPath, children: [] };
-        console.log(1);
       }
 
       if (parentPath !== "/" && pageMap[parentPath]) {
         pageMap[parentPath].children.push(pageMap[currentPath]);
-        console.log(2);
       } else if (parentPath !== "/" && !pageMap[parentPath]) {
         pageMap[parentPath] = { children: [pageMap[currentPath]] };
-        console.log(3);
       }
-      console.log("=======================================")
+
     });
 
-    console.log(pageMap);
-
-    // Return only root-level pages
     return Object.values(pageMap).filter(
       (page) =>
         !pages.some(({ node }) =>
-          page && page.path &&
+          page.path &&
           page.path.startsWith(node.frontmatter.path) &&
           page.path !== node.frontmatter.path
         )
     );
   };
 
-  // Function to render nested menu items
   const renderMenu = (menuItems) => {
     return menuItems.map(({ title, path, children }) => (
       <div key={path} className="navbar-item has-dropdown is-hoverable">
-        <Link to={path} className={children && children.length > 0 ? "navbar-link" : "navbar-item"}>
+        <Link
+          to={path}
+          className={children && children.length > 0 ? "navbar-link" : "navbar-item"}
+        >
           {capitalize(title)}
         </Link>
         {children && children.length > 0 && (
-          <div className="navbar-dropdown is-hoverable">
+          <div className="navbar-dropdown is-boxed">
             {children.map((child) => (
               <Link key={child.path} to={child.path} className="navbar-item">
                 {capitalize(child.title)}
@@ -96,10 +138,17 @@ const Navbar = () => {
   };
 
   const organizedPages = organizePages(pages);
-  console.log(organizedPages)
 
   return (
-    <nav className="navbar is-transparent" role="navigation" aria-label="dropdown navigation">
+    <nav
+      id="navbar"
+      className={`navbar is-fixed-top`}
+      role="navigation"
+      aria-label="main navigation"
+      style={{
+        transition: "top 0.3s, background-color 1s"
+      }}
+    >
       <div className="container">
         <div className="navbar-brand">
           <Link to="/" className="navbar-item" title="Logo">
@@ -116,9 +165,7 @@ const Navbar = () => {
           </button>
         </div>
         <div id="navMenu" className={`navbar-menu ${isActive ? "is-active" : ""}`}>
-          <div className="navbar-start">
-            {renderMenu(organizedPages)} {/* Render the menu with nested pages */}
-          </div>
+          <div className="navbar-start">{renderMenu(organizedPages)}</div>
         </div>
       </div>
     </nav>

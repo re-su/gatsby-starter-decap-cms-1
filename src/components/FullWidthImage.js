@@ -1,110 +1,211 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { GatsbyImage } from "gatsby-plugin-image";
+import personImage from "../img/logo-mirrored.svg";
+import bgtest from "../img/testbg.png";
+import book from "../img/book.svg";
+import pencil from "../img/pencil.svg";
+import star from "../img/star.svg";
+import puzzle from "../img/puzzle.svg";
+import fce from "../img/fce.svg";
+import education from "../img/education.svg";
+import bulb from "../img/bulb.svg";
 
 export default function FullWidthImage(props) {
   const {
     height = 400,
-    img,
-    title,
-    subheading,
     imgPosition = "top left",
   } = props;
+
+  // Helper function to generate random positions
+  const getRandomPosition = (icon) => {
+    // Define the positions
+    //console.log("pos", icon);
+    const positions = [
+      { top: "15%", left: "10%" }, // Top-left
+      { top: "15%", left: "80%" }, // Top-right
+      { top: "75%", left: "15%" }, // Bottom-left
+      { top: "75%", left: "75%" }, // Bottom-right
+      { top: "40%", left: "10%" }, // Mid-left
+      { top: "80%", left: "90%" }, // Mid-right
+      { top: "25%", left: "50%" }, // Near center-top
+      { top: "65%", left: "50%" }, // Near center-bottom
+    ];
+
+    //console.log(positions[icon]);
+    return positions[icon];
+  };
+
+
 
   return (
     <React.Fragment>
       <div
         className="margin-top-0"
         style={{
+          position: "relative",
+          overflow: "hidden",
+          height: "70vh",
           display: "grid",
+          gridTemplateColumns: "1fr",
+          gridTemplateRows: "auto 1fr auto",
           alignItems: "center",
+          justifyItems: "center",
+          background: "linear-gradient(90deg, rgba(255,156,246,1) 0%, rgba(115,224,255,1) 100%)",
         }}
       >
-        {img?.url ? (
+        {/* Floating Elements */}
+        {[book, pencil, star, puzzle, education, fce, bulb].map((icon, index) => (
           <img
-            src={img}
-            objectFit={"cover"}
-            objectPosition={imgPosition}
+            key={index}
+            src={icon}
+            alt={`Floating icon ${index}`}
             style={{
-              gridArea: "1/1",
-              // You can set a maximum height for the image, if you wish.
-              height: height,
-              width: "100%",
+              position: "absolute",
+              ...getRandomPosition(index),
+              width: "70px", // Set a uniform size
+              animation: `float ${Math.random() * 5 + 3}s ease-in-out infinite`, // Randomize float duration
+              zIndex: 1,
             }}
-            // This is a presentational image, so the alt should be an empty string
-            alt=""
           />
-        ) : (
-          <GatsbyImage
-            image={img}
-            objectFit={"cover"}
-            objectPosition={imgPosition}
+        ))}
+
+        {/* Content */}
+        <div
+          style={{
+            gridColumn: "1",
+            gridRow: "1",
+            zIndex: 1,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            padding: "1em",
+            marginTop: "2em",
+          }}
+        >
+          {/* Person Image */}
+          <img
+            src={personImage}
+            alt="Person"
             style={{
-              gridArea: "1/1",
-              // You can set a maximum height for the image, if you wish.
-              maxHeight: height,
+              maxHeight: "60vh",
+              width: "auto",
+              marginBottom: "1rem",
             }}
-            layout="fullWidth"
-            // You can optionally force an aspect ratio for the generated image
-            aspectratio={3 / 1}
-            // This is a presentational image, so the alt should be an empty string
-            alt=""
-            formats={["auto", "webp", "avif"]}
           />
-        )}
-        {(title || subheading) && (
+
+          {/* Text Bubble */}
           <div
             style={{
-              // By using the same grid area for both, they are stacked on top of each other
-              gridArea: "1/1",
+              backgroundColor: "white",
+              border: "2px solid black",
+              borderRadius: "20px",
+              padding: "1.5rem 2rem",
+              color: "black",
+              fontSize: "1.2rem",
+              boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.15)",
+              maxWidth: "500px",
+              marginBottom: "1.5rem",
               position: "relative",
-              // This centers the other elements inside the hero component
-              placeItems: "center",
-              display: "grid",
             }}
           >
-            {/* Any content here will be centered in the component */}
-            {title && (
-              <h1
-                className="has-text-weight-bold is-size-3-mobile is-size-2-tablet is-size-1-widescreen"
+            {Array.from("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.").map((char, index) => (
+              <span
+                key={index}
                 style={{
-                  boxShadow:
-                    "rgb(255, 68, 0) 0.5rem 0px 0px, rgb(255, 68, 0) -0.5rem 0px 0px",
-                  backgroundColor: "rgb(255, 68, 0)",
-                  color: "white",
-                  lineHeight: "1",
-                  padding: "0.25em",
+                  opacity: 0,
+                  display: "inline-block",
+                  animation: `fadeInFromLeft 0.2s ease-out ${index * 0.05}s forwards`, // Staggered animation
                 }}
               >
-                {title}
-              </h1>
-            )}
-            {subheading && (
-              <h3
-                className="has-text-weight-bold is-size-5-mobile is-size-5-tablet is-size-4-widescreen"
-                style={{
-                  boxShadow:
-                    "rgb(255, 68, 0) 0.5rem 0px 0px, rgb(255, 68, 0) -0.5rem 0px 0px",
-                  backgroundColor: "rgb(255, 68, 0)",
-                  color: "white",
-                  lineHeight: "1",
-                  padding: "0.25rem",
-                  marginTop: "0.5rem",
-                }}
-              >
-                {subheading}
-              </h3>
-            )}
+                {char === ' ' ? '\u00A0' : char} {/* Use non-breaking space for spaces */}
+              </span>
+            ))}
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "-17px",
+                transform: "translateY(-50%)",
+                width: "0",
+                height: "0",
+                borderTop: "17px solid transparent",
+                borderBottom: "17px solid transparent",
+                borderRight: "17px solid black",
+              }}
+            ></div>
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "-14px",
+                transform: "translateY(-50%)",
+                width: "0",
+                height: "0",
+                borderTop: "15px solid transparent",
+                borderBottom: "15px solid transparent",
+                borderRight: "15px solid white",
+              }}
+            ></div>
           </div>
-        )}
+        </div>
       </div>
+
+      {/* CSS Animation for Floating */}
+      <style>
+        {`
+          @keyframes float {
+            0%, 100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-15px);
+            }
+          }
+
+          @keyframes orbit {
+            0% {
+              transform: rotate(0deg) translateX(100px) rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg) translateX(100px) rotate(-360deg);
+            }
+          }
+
+          @keyframes pulsate {
+            0% {
+              transform: scale(1);
+              opacity: 1;
+            }
+            50% {
+              transform: scale(1.2);
+              opacity: 0.7;
+            }
+            100% {
+              transform: scale(1);
+              opacity: 1;
+            }
+          }
+            @keyframes fadeInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+        `}
+      </style>
     </React.Fragment>
   );
 }
 
 FullWidthImage.propTypes = {
+  height: PropTypes.number,
   img: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   title: PropTypes.string,
-  height: PropTypes.number,
   subheading: PropTypes.string,
 };

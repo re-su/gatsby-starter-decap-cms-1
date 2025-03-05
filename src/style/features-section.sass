@@ -1,0 +1,95 @@
+.features-section
+  width: 90%
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 0
+  margin: 0 auto
+  margin-top: 100px
+  background-color: #FFD2D2
+  box-shadow: 8px 8px 47px 0px rgba(66, 68, 90, 1)
+
+.features-container
+  width: 100%
+  display: flex
+  align-items: stretch
+  justify-content: space-between
+
+.features-image
+  width: 42%
+  background-color: #FFD2D2
+  height: 100%
+  display: flex
+  justify-content: center
+  align-items: flex-end
+
+  img
+    transform: scale(1.15) translateY(-6.5%)
+    height: 400px
+    object-fit: cover
+
+.features-content
+  display: flex
+  width: 58%
+  flex-direction: column
+  align-items: center
+  text-align: center
+  justify-content: center
+  background-color: rgb(164, 226, 255)
+  clip-path: polygon(0 30%, 6% 0, 100% 0, 100% 100%, 4% 100%, 0 73%, 4% 50%)
+
+.features-list
+  display: flex
+  flex-direction: column
+  align-items: stretch
+  letter-spacing: 3px //8
+  gap: 20px
+
+.feature-item
+  display: flex
+  align-items: center
+  gap: 15px
+  font-size: 1.2rem //1.3
+  font-weight: bold
+
+.feature-text
+  text-align: left
+
+.feature-icon
+  width: 40px
+  height: 40px
+  object-fit: contain
+  margin-right: 20px
+
+.feature-icon > img
+  width: 40px
+  max-width: 40px
+
+.see-more
+  margin-top: 40px
+  font-size: 0.9rem
+
+@media (max-width: 768px)
+  .features-section
+    background-color: $primary-color
+
+  .features-container
+    flex-direction: column  /* Stack elements vertically */
+    text-align: center
+
+  .features-image
+    width: 100%  /* Full width for image */
+    height: auto  /* Allow height to adjust with aspect ratio */
+    clip-path: polygon(50% -10%, 100% -10%, 100% 35%, 100% 100%, 80% 90%, 50% 100%, 20% 90%, -10% 100%, -10% 35%, -10% -10%)
+    img
+      max-height: 300px
+      object-fit: cover  /* Ensure image fills the container without stretching */
+
+  .features-content
+    width: 100%
+    clip-path: none
+    padding: 20px
+    // clip-path: none
+
+  .features-list
+    gap: 10px  /* Increased gap for better readability on small screens */

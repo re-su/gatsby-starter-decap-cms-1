@@ -1,0 +1,26 @@
+import { useState, useEffect } from "react";
+
+const useScrollVHThreshold = (vhThreshold = 50) => {
+  const [isThresholdExceeded, setIsThresholdExceeded] = useState(false);
+
+  useEffect(() => {
+    const thresholdInPixels = (vhThreshold / 100) * window.innerHeight;
+
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      setIsThresholdExceeded(currentScrollPos > thresholdInPixels);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("load", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("load", handleScroll);
+    };
+  }, [vhThreshold]);
+
+  return isThresholdExceeded;
+};
+
+export default useScrollVHThreshold;

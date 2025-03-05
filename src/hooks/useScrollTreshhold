@@ -1,0 +1,22 @@
+import { useState, useEffect } from "react";
+
+const useScrollThreshold = (threshold = 200) => {
+  const [isThresholdExceeded, setIsThresholdExceeded] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      setIsThresholdExceeded(currentScrollPos > threshold);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [threshold]);
+
+  return isThresholdExceeded;
+};
+
+export default useScrollThreshold;

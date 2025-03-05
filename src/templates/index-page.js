@@ -4,109 +4,70 @@ import { Link, graphql } from "gatsby";
 import { getImage } from "gatsby-plugin-image";
 
 import Layout from "../components/Layout";
-import Features from "../components/Features";
-import BlogRoll from "../components/BlogRoll";
-import FullWidthImage from "../components/FullWidthImage";
+import FeaturesSection from '../components/FeaturesSection';
+import SimpleInfoBox from '../components/SimpleInfoBox';
+import MainPageBanner from '../components/MainPageBanner';
+import GroupCourses from '../components/GroupCourses'
+import IndividualCourses from '../components/IndividualCourses';
 
-// eslint-disable-next-line
-export const IndexPageTemplate = ({
-  image,
-  title,
-  heading,
-  subheading,
-  mainpitch,
-  description,
-  desc,
-  intro,
-}) => {
+export const IndexPageTemplate = ({ image, heading, description, courses, individualCourses, features, sampleInfoBox }) => {
   const heroImage = getImage(image) || image;
 
-    // Add Netlify Identity Script to the page
-    useEffect(() => {
-      if (typeof window !== "undefined" && window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", (user) => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-        window.netlifyIdentity.init();
-      }
-    }, []);
-
-    console.log(desc);
-    console.log(description);
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", (user) => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+      window.netlifyIdentity.init();
+    }
+  }, []);
 
   return (
-    <div>
-      <script
-        src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-        async
-      ></script>
-      <FullWidthImage img={heroImage} title={title} subheading={subheading} />
-      <section className="section section--gradient">
-        <div className="container">
-          <div className="section">
-            <div className="columns">
-              <div className="column is-10 is-offset-1">
-                <div className="content">
-                  <div className="content">
-                    <div className="tile">
-                      <h1 className="title">{mainpitch.title}</h1>
-                    </div>
-                    <div className="tile">
-                      <h3 className="subtitle">{mainpitch.description}</h3>
-                    </div>
-                  </div>
-                  <div className="columns">
-                    <div className="column is-12">
-                      <h3 className="has-text-weight-semibold is-size-2">
-                        {heading}
-                      </h3>
-                      o<p>{description}</p>o
-                      {desc}
-                      Menu up
-                    </div>
-                  </div>
-                  <Features gridItems={intro.blurbs} />
-                  <div className="columns">
-                    <div className="column is-12 has-text-centered">
-                      <Link className="btn" to="/products">
-                        See all products
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="column is-12">
-                    <h3 className="has-text-weight-semibold is-size-2">
-                      Latest stories
-                    </h3>
-                    <BlogRoll />
-                    <div className="column is-12 has-text-centered">
-                      <Link className="btn" to="/blog">
-                        Read more
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <>
+      {console.log(features)}
+      <MainPageBanner message={heading} />
+      <section className="section main-section"> {/* Full width section */}
+        <div className="content">
+          {/* Features Section */}
+          <FeaturesSection features={features} />
+
+          {/* Render Course Categories */}
+          {/* <CourseCards courseCards={courses} /> */}
+          <GroupCourses courseCards={courses}/>
+          <IndividualCourses courseCards={individualCourses} />
+
+          {/* Info Box */}
+          {sampleInfoBox && (
+            <SimpleInfoBox
+              title={sampleInfoBox.title}
+              btnLink={sampleInfoBox.btnLink}
+              btnText={sampleInfoBox.btnText}
+              backgroundColor={sampleInfoBox.backgroundColor}
+            />
+          )}
         </div>
       </section>
-    </div>
+    </>
+
   );
 };
 
 IndexPageTemplate.propTypes = {
   image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  title: PropTypes.string,
   heading: PropTypes.string,
-  subheading: PropTypes.string,
-  mainpitch: PropTypes.object,
   description: PropTypes.string,
-  intro: PropTypes.shape({
-    blurbs: PropTypes.array,
+  courses: PropTypes.arrayOf(PropTypes.object),
+  individualCourses: PropTypes.arrayOf(PropTypes.object),
+  features: PropTypes.arrayOf(PropTypes.object),
+  sampleInfoBox: PropTypes.shape({
+    title: PropTypes.string,
+    btnLink: PropTypes.string,
+    btnText: PropTypes.string,
+    backgroundColor: PropTypes.string,
   }),
 };
 
@@ -117,13 +78,12 @@ const IndexPage = ({ data }) => {
     <Layout>
       <IndexPageTemplate
         image={frontmatter.image}
-        title={frontmatter.title}
         heading={frontmatter.heading}
-        subheading={frontmatter.subheading}
-        mainpitch={frontmatter.mainpitch}
         description={frontmatter.description}
-        intro={frontmatter.intro}
-        desc={frontmatter.desc}
+        courses={frontmatter.courses}
+        individualCourses={frontmatter.individualCourses}
+        features={frontmatter.features}
+        sampleInfoBox={frontmatter.sampleInfoBox}
       />
     </Layout>
   );
@@ -150,24 +110,33 @@ export const pageQuery = graphql`
           }
         }
         heading
-        subheading
-        mainpitch {
-          title
-          description
-        }
         description
-        desc
-        intro {
-          blurbs {
-            image {
-              childImageSharp {
-                gatsbyImageData(width: 240, quality: 64, layout: CONSTRAINED)
-              }
-            }
-            text
+        courses {
+          courseCard {
+            title
+            body
+            headerColor
+            btnLink
           }
-          heading
-          description
+        }
+        individualCourses {
+          courseCard {
+            title
+            headerColor
+            btnLink
+          }
+        }
+        features {
+          feature {
+            text
+            svgIcon
+          }
+        }
+        sampleInfoBox {
+          title
+          btnLink
+          btnText
+          backgroundColor
         }
       }
     }
