@@ -10,7 +10,12 @@ import { withPrefix } from "gatsby";
 
 const TemplateWrapper = ({ children }) => {
   const { title, description } = useSiteMetadata();
-  const IS_INDEX_PAGE = window !== undefined && (window.location.pathname === "/" || window.location.pathname === "");
+  const [isIndexPage, setIsIndexPage] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsIndexPage(window.location.pathname === "/" || window.location.pathname === "");
+  }, []);
+  
 
   return (
     <div>
@@ -51,7 +56,7 @@ const TemplateWrapper = ({ children }) => {
           property="og:image"
           content={`${withPrefix("/")}img/og-image.jpg`}
         />
-        <body className={`has-navbar-fixed-top ${IS_INDEX_PAGE ? 'is-index-page' : ''}`} />
+        <body className={`has-navbar-fixed-top ${isIndexPage ? 'is-index-page' : ''}`} />
       </Helmet>
       <Navbar />
       <div>{children}</div>
