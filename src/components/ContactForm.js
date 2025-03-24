@@ -74,7 +74,8 @@ const ContactForm = ({ display, id, handleSubmit }) => {
         <div className={`contact-form-container ${display ? "open" : ""}`}>
             <div className="contact-form">
                 <h3>Zapisz się na kurs</h3>
-                <form name="contact"
+                <form 
+                    name="course-form"
                     method="post"
                     action="/contact/thanks/"
                     data-netlify="true"
