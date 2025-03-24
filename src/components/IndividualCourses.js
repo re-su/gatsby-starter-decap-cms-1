@@ -8,7 +8,7 @@ const IndividualCourses = ({ courseCards, bgColor }) => {
       <h2 className="title is-4 has-text-centered">
         Oprócz zajęć grupowych w ofercie <br /> znajdują się również
       </h2>
-      <CourseCards courseCards={courseCards} />
+      <CourseCards courseCards={courseCards} cardsClasses={"is-6"}/>
     </section>
   );
 };
@@ -20,6 +20,7 @@ IndividualCourses.propTypes = {
       body: PropTypes.string.isRequired,
       headerColor: PropTypes.string.isRequired,
       btnLink: PropTypes.string.isRequired,
+      selectedCourse: PropTypes.object.isRequired
     })
   ).isRequired,
   bgColor: PropTypes.string,

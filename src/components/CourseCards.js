@@ -2,18 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import CourseCard from "./CourseCard";
 
-const CourseCards = ({ courseCards }) => {
+const CourseCards = ({ courseCards, cardsClasses }) => {
   return (
     <div className="cards columns is-multiline">
       {courseCards && courseCards.length > 0 ? (
         courseCards.map((courseCard, index) => (
-          <div key={index} className="column is-6">
+          <div key={index} className={`${cardsClasses} column`}>
             <CourseCard
-              title={courseCard.courseCard.title}
-              body={courseCard.courseCard.body}
-              price={courseCard.courseCard.price}
-              headerColor={courseCard.courseCard.headerColor}
-              btnLink={courseCard.courseCard.btnLink}
+              title={courseCard.title}
+              body={courseCard.body}
+              price={courseCard.price}
+              headerColor={courseCard.headerColor}
+              btnLink={courseCard.btnLink}
+              selectedCourse={courseCard.selectedCourse}
             />
           </div>
         ))
@@ -27,11 +28,12 @@ const CourseCards = ({ courseCards }) => {
 CourseCards.propTypes = {
   courseCards: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.string.isRequired, // courseCard.title must be a string
-      body: PropTypes.string.isRequired,  // courseCard.body must be a string
-      price: PropTypes.number.isRequired, // courseCard.price must be a number
-      headerColor: PropTypes.string.isRequired, // courseCard.headerColor must be a string
-      btnLink: PropTypes.string.isRequired, // courseCard.btnLink must be a string
+      title: PropTypes.string.isRequired,
+      body: PropTypes.string.isRequired,
+      price: PropTypes.number, // Made price optional (remove `.isRequired` if it's missing in some courses)
+      headerColor: PropTypes.string.isRequired,
+      btnLink: PropTypes.string.isRequired,
+      selectedCourse: PropTypes.object
     })
   ).isRequired,
 };

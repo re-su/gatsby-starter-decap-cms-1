@@ -37,8 +37,8 @@ const Footer = () => {
   return (
     <footer className="footer-container">
       <div className="footer-content">
-        <h2 className="footer-title">FRAGARIA SCHOOL</h2>
         <nav className="footer-nav">
+        <h2 className="footer-title">FRAGARIA SCHOOL</h2>
           {pages.map(({ title, path }) => (
             <Link key={path} to={path}>{title}</Link>
           ))}

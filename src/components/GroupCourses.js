@@ -10,7 +10,7 @@ const GroupCourses = ({ courseCards }) => {
   const isMobile = useMediaQuery({ maxWidth: 768 }); // ✅ Detect mobile screens
 
   return (
-    <div className="section" style={{ padding: "85px 1.5rem" }}>
+    <div className="section" id="group-offers" style={{ padding: "85px 1.5rem" }}>
       <div className="container">
         <div className={`columns is-vcentered ${isMobile ? "is-flex is-flex-direction-column" : ""}`}>
 
@@ -39,7 +39,7 @@ const GroupCourses = ({ courseCards }) => {
 
           {/* Course Cards */}
           <div className="column" style={{width: isMobile ? "100vw": "100%"}}>
-            <CourseCards courseCards={courseCards} />
+            <CourseCards courseCards={courseCards} cardsClasses={"is-6"} />
           </div>
 
           {/* Mobile: Show Strawberry Below Cards */}

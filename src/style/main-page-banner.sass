@@ -2,67 +2,102 @@
 .main-banner
   position: relative
   overflow: hidden
-  height: 80vh
+  // min-height: 80vh
   display: flex
   align-items: center
   justify-content: center
   place-items: center
-  background: linear-gradient(90deg, #ffd2d2 40%, $primary-color 100%)
-
-.floating-icon
-  position: absolute
-  width: 70px
-  filter: blur(4px)
-  animation: float ease-in-out infinite
-  z-index: 1
+  background: linear-gradient(90deg, $secondary-color 40%, $primary-color 100%)
 
 .banner-content
   z-index: 1
   display: flex
   flex-direction: row
   align-items: center
-  justify-content: center
+  justify-content: space-evenly
   width: 100%
   padding: 1em
   margin-top: 60px
 
+.banner-left
+  width: 40%
+  color: white
+  font-weight: bold
+  > h1
+    font-size: 1.8rem
+    font-weight: bold
+  > p
+    font-size: 1.5rem
+    margin-top: 20px
+    margin-bottom: 20px
+
+.banner-right
+  width: 40%
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.highlight
+  background-color: $primary-color
+  padding: 1px
+
+.offer-btn
+  margin: 0
+  padding: 10px 15px
+  font-size: 1.2rem
+  font-weight: normal
+
 .person-image
-  max-height: 70vh
-  max-width: 500px
-  min-width: 300px !important
+  max-height: 40vh
+  // max-width: 500px
+  // min-width: 300px !important
   width: auto
   margin-bottom: 1rem
 
 .text-bubble
-  background-color: white
-  border: 2px solid black
-  padding: 1.5rem 2rem
-  color: black
-  font-size: 1.2rem
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15)
+  width: 70%
   max-width: 500px
+  padding: 20px
+  background: #f0f0f0
+  border-radius: 15px
+  color: #333
+  margin-bottom: 20px
+  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2)
   position: relative
-  border-radius: 20px 20px 20px 20px
+  font-size: 1rem
 
-  /* Desktop Tail */
-  .bubble-tail
+  /* Mobile Tail (Bottom Center) */
+  &::after
+    content: ''
     position: absolute
-    top: 50%
-    left: -17px
-    transform: translateY(-50%)
+    bottom: -18px
+    left: 50%
+    transform: translateX(-50%)
     width: 0
     height: 0
+    border-left: 10px solid transparent
+    border-right: 10px solid transparent
+    border-top: 20px solid #f0f0f0 /* Tail color matches bubble background */
 
-  .bubble-tail.dark
-    border-top: 17px solid transparent
-    border-bottom: 17px solid transparent
-    border-right: 17px solid black
+  /* Desktop Tail */
+  // .bubble-tail
+  //   position: absolute
+  //   top: 50%
+  //   left: -17px
+  //   transform: translateY(-50%)
+  //   width: 0
+  //   height: 0
 
-  .bubble-tail.light
-    left: -14px
-    border-top: 15px solid transparent
-    border-bottom: 15px solid transparent
-    border-right: 15px solid white
+  // .bubble-tail.dark
+  //   border-top: 17px solid transparent
+  //   border-bottom: 17px solid transparent
+  //   border-right: 17px solid black
+
+  // .bubble-tail.light
+  //   left: -14px
+  //   border-top: 15px solid transparent
+  //   border-bottom: 15px solid transparent
+  //   border-right: 15px solid white
 
 .text-word
   white-space: nowrap
@@ -73,6 +108,50 @@
   display: inline-block
   animation: fadeInFromLeft 0.2s ease-out forwards
 
+/* Mobile Styles */
+@media (max-width: 768px)
+  .main-banner
+      background: linear-gradient(180deg, #ffd2d2 40%, $primary-color 100%)
+  .banner-content
+    flex-direction: column
+    margin: 0
+    gap: 50px
+    padding: 20px
+    padding-top: 70px
+
+  .banner-left
+    width: 100%
+    padding: 0px 20px
+    > h1
+      font-size: 1.5rem
+    > p
+      font-size: 1.2rem
+
+  .banner-right
+    width: 100%
+
+  .person-image
+    margin: 0
+    max-height: 32vh
+
+  .text-bubble
+    max-width: 80%
+    padding: 20px
+    background: #f0f0f0
+    border-radius: 15px
+    // border: 0
+    color: #333
+    // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2)
+    position: relative
+    font-size: 1rem
+
+  /* Hiding desktop-tail on mobile */
+  .bubble-tail
+    display: none
+
+/*
+    ANIMATIONS
+  */
 @keyframes float
   0%, 100%
     transform: translateY(0)
@@ -86,52 +165,3 @@
   100%
     opacity: 1
     transform: translateX(0)
-
-/* Mobile Styles */
-@media (max-width: 768px)
-  .main-banner
-    height: 80vh
-
-  .banner-content
-    flex-direction: column-reverse
-    height: 100%
-    margin: 0
-    margin-top: 60px
-    padding: 0
-
-  .person-image
-    height: 50%
-    margin: 0
-
-  .text-bubble
-    max-width: 80%
-    padding: 20px
-    background: #f0f0f0
-    border-radius: 15px
-    // border: 0
-    color: #333
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2)
-    position: relative
-    font-size: 1em
-
-    /* Mobile Tail (Bottom Center) */
-    &::after
-      content: ''
-      position: absolute
-      bottom: -18px
-      left: 50%
-      transform: translateX(-50%)
-      width: 0
-      height: 0
-      border-left: 20px solid transparent
-      border-right: 20px solid transparent
-      border-top: 20px solid #f0f0f0 /* Tail color matches bubble background */
-
-  .floating-icon
-    width: 40px
-    opacity: 0.8
-    filter: blur(2px) /* Less blur for better visibility */
-
-  /* Hiding desktop-tail on mobile */
-  .bubble-tail
-    display: none

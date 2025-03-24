@@ -7,7 +7,7 @@ import Layout from "../components/Layout";
 import FeaturesSection from '../components/FeaturesSection';
 import SimpleInfoBox from '../components/SimpleInfoBox';
 import MainPageBanner from '../components/MainPageBanner';
-import GroupCourses from '../components/GroupCourses'
+import GroupCourses from '../components/GroupCourses';
 import IndividualCourses from '../components/IndividualCourses';
 
 export const IndexPageTemplate = ({ image, heading, description, courses, individualCourses, features, sampleInfoBox }) => {
@@ -36,8 +36,7 @@ export const IndexPageTemplate = ({ image, heading, description, courses, indivi
           <FeaturesSection features={features} />
 
           {/* Render Course Categories */}
-          {/* <CourseCards courseCards={courses} /> */}
-          <GroupCourses courseCards={courses}/>
+          <GroupCourses courseCards={courses} />
           <IndividualCourses courseCards={individualCourses} />
 
           {/* Info Box */}
@@ -52,7 +51,6 @@ export const IndexPageTemplate = ({ image, heading, description, courses, indivi
         </div>
       </section>
     </>
-
   );
 };
 
@@ -60,9 +58,28 @@ IndexPageTemplate.propTypes = {
   image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   heading: PropTypes.string,
   description: PropTypes.string,
-  courses: PropTypes.arrayOf(PropTypes.object),
-  individualCourses: PropTypes.arrayOf(PropTypes.object),
-  features: PropTypes.arrayOf(PropTypes.object),
+  courses: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      body: PropTypes.string,
+      headerColor: PropTypes.string,
+      btnLink: PropTypes.string,
+    })
+  ),
+  individualCourses: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      headerColor: PropTypes.string,
+      btnLink: PropTypes.string,
+      selectedCourse: PropTypes.object
+    })
+  ),
+  features: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string,
+      svgIcon: PropTypes.string,
+    })
+  ),
   sampleInfoBox: PropTypes.shape({
     title: PropTypes.string,
     btnLink: PropTypes.string,
@@ -112,25 +129,20 @@ export const pageQuery = graphql`
         heading
         description
         courses {
-          courseCard {
-            title
-            body
-            headerColor
-            btnLink
-          }
+          title
+          body
+          headerColor
+          btnLink
         }
         individualCourses {
-          courseCard {
-            title
-            headerColor
-            btnLink
-          }
+          title
+          headerColor
+          btnLink
+          selectedCourse
         }
         features {
-          feature {
-            text
-            svgIcon
-          }
+          text
+          svgIcon
         }
         sampleInfoBox {
           title

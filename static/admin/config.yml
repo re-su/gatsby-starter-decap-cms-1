@@ -9,6 +9,7 @@ backend:
     deleteMedia: "[skip ci] Delete “{{path}}”"
 
 local_backend: true
+
 media_folder: static/img
 public_folder: /img
 
@@ -27,6 +28,21 @@ collections:
       - { label: "Featured Image", name: "featuredimage", widget: "image" }
       - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Tags", name: "tags", widget: "list" }
+
+  - name: "courses"
+    label: "Courses"
+    folder: "src/pages/courses"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Template Key", name: "templateKey", widget: "hidden", default: "course" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Color", name: "color", widget: "color" }
+      - { label: "Last modification date", name: "date", widget: "datetime" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Card heading", name: "cardheading", widget: "string" }
+      - { label: "Card color", name: "cardcolor", widget: "color" }
+      - { label: "Card List", name: "cardlist", widget: "list", field: { label: "Item", name: "item", widget: "string" } }
 
   - name: "pages"
     label: "Pages"
@@ -60,6 +76,15 @@ collections:
               - { name: "title", label: "Title", widget: "string" }
               - { name: "headerColor", label: "Header Color", widget: "color" }
               - { name: "btnLink", label: "Button Link", widget: "string" }
+              - name: "selectedCourse"
+                label: "Select a Course"
+                widget: "relation"
+                collection: "courses"  # Fetch from the courses collection
+                search_fields: ["title"]  # Search by course title
+                value_field: "{{slug}}"  # Store the course slug for linking
+                display_fields: ["title"]  # Show course titles in the dropdown
+                multiple: false
+                
           - name: "sampleInfoBox"
             label: "Sample Info Box"
             widget: "object"

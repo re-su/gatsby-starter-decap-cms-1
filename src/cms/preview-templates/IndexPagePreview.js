@@ -10,15 +10,12 @@ const IndexPagePreview = ({ entry, getAsset }) => {
       <>
         <IndexPageTemplate
           image={getAsset(data.image)}
-          title={data.title}
           heading={data.heading}
-          subheading={data.subheading}
           description={data.description}
-          menu={data.menu}
-          intro={data.intro || { blurbs: [] }}
-          mainpitch={data.mainpitch || {}}
-          courseCard={data.courseCard || {}}
           courses={data.courses}
+          individualCourses={data.individualCourses}
+          features={data.features}
+          sampleInfoBox={data.sampleInfoBox}
         />
         <p>Index page preview</p>
       </>

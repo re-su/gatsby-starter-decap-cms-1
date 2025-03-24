@@ -9,7 +9,6 @@ const FeaturesSection = ({ features }) => {
       <div className="features-container">
         {/* Left side: Image */}
         <div className="features-image">
-          {/* Static image or Gatsby image for optimization */}
           <img src={Girl} alt="Student learning" />
         </div>
 
@@ -18,12 +17,21 @@ const FeaturesSection = ({ features }) => {
           <div className="features-list">
             {features.map((feature, index) => (
               <div key={index} className="feature-item">
-                {feature.feature.icon !== null && feature.feature.svgIcon === null ? <GatsbyImage
-                  image={getImage(feature.feature.icon.childImageSharp.gatsbyImageData)}
-                  alt={`Feature icon ${index}`}
-                  className="feature-icon"
-                /> : <div className="feature-icon"><img src={feature.feature.svgIcon} alt={`Feature icon ${index}`} /></div>}
-                <span className="feature-text">{feature.feature.text}</span>
+                {/* Handle Gatsby Image or Fallback to SVG */}
+                {feature.icon && feature.icon.childImageSharp ? (
+                  <GatsbyImage
+                    image={getImage(feature.icon.childImageSharp.gatsbyImageData)}
+                    alt={`Feature icon ${index}`}
+                    className="feature-icon"
+                  />
+                ) : (
+                  feature.svgIcon && (
+                    <div className="feature-icon">
+                      <img src={feature.svgIcon} alt={`Feature icon ${index}`} />
+                    </div>
+                  )
+                )}
+                <span className="feature-text">{feature.text}</span>
               </div>
             ))}
           </div>
@@ -44,14 +52,13 @@ const FeaturesSection = ({ features }) => {
 FeaturesSection.propTypes = {
   features: PropTypes.arrayOf(
     PropTypes.shape({
-      feature: PropTypes.shape({
-        icon: PropTypes.shape({
-          childImageSharp: PropTypes.shape({
-            gatsbyImageData: PropTypes.object.isRequired,
-          }).isRequired,
-        }).isRequired,
-        text: PropTypes.string.isRequired,
-      }).isRequired,
+      icon: PropTypes.shape({
+        childImageSharp: PropTypes.shape({
+          gatsbyImageData: PropTypes.object,
+        }),
+      }),
+      svgIcon: PropTypes.string,
+      text: PropTypes.string.isRequired,
     })
   ).isRequired,
 };

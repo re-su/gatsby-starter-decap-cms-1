@@ -10,8 +10,9 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(true); // Controls mobile dropdown
   const IS_INDEX_PAGE = typeof window !== "undefined" && (window.location.pathname === "/" || window.location.pathname === "");
+  const IS_COURSE_PAGE = typeof window !== "undefined" && window.location.pathname.includes("/courses/");
   const navTop = useSetNavigationTop();
-  const backgroundColorValue = useScrollBehavior(IS_INDEX_PAGE);
+  const backgroundColorValue = useScrollBehavior(IS_INDEX_PAGE || IS_COURSE_PAGE);
   const showLogo = useScrollVHThreshold(70) || !IS_INDEX_PAGE || menuOpen;
 
   // GraphQL query to fetch dynamic pages
@@ -83,8 +84,8 @@ const Navbar = () => {
       </div>
 
       {/* Signup Button */}
-      <a className="signup-btn">Zapisz Się</a>
-
+      {IS_COURSE_PAGE ? <a className="signup-btn" href="/#group-offers">Pełna oferta</a> : <a className="signup-btn">Zapisz się</a>}
+    
       {/* Mobile Menu Toggle */}
       <div className={`menu-toggle ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(!menuOpen)}>
         <div className="bar top"></div>
