@@ -86,12 +86,12 @@ const ContactForm = ({ display, id, handleSubmit }) => {
 
                     <label>
                         Imię i nazwisko:
-                        <input type="text" name="name" required />
+                        <input type="text" name="name" id="name" required />
                     </label>
 
                     <label>
                         Email:
-                        <input type="email" name="email" required />
+                        <input type="email" name="email" id="email" />
                     </label>
 
                     <label>
@@ -100,6 +100,7 @@ const ContactForm = ({ display, id, handleSubmit }) => {
                             type="tel"
                             name="number"
                             value={phone}
+                            id="number"
                             placeholder="123-456-789"
                             pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
                             onChange={handlePhoneChange}
@@ -108,13 +109,14 @@ const ContactForm = ({ display, id, handleSubmit }) => {
                     </label>
 
                     <label>
-                        Wybierz kurs:
+                        Kurs:
                         {/* If id is provided, show the course name directly */}
                         {id ? (
-                            <div className="course-form-name">{selectedOption}</div>
+                            <><input type="hidden" name="course" id="course" value={selectedOption} />
+                            <div className="course-form-name">{selectedOption}</div></>
                         ) : (
                             // If no id, show all courses as clickable options
-                            <select>
+                            <select name="course" id="course">
                                 {courses.map((course, index) => (
                                     <option
                                         type="button"
