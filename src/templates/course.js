@@ -21,29 +21,6 @@ export const CoursePageTemplate = ({
 }) => {
   const PostContent = contentComponent || Content;
   const [showForm, setShowForm] = useState(false);
-  const [formData, setFormData] = React.useState({}); // State for form inputs
-
-  function encode(data) {
-    return Object.keys(data)
-      .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-      .join("&");
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({
-        "form-name": form.getAttribute("name"),
-        ...formData,
-      }),
-    })
-      .then(() => navigate(form.getAttribute("action")))
-      .catch((error) => alert(error));
-  };
 
   return (
     <section className="course-page">
@@ -73,7 +50,7 @@ export const CoursePageTemplate = ({
         </div>
 
         {/* Contact Form (Visible when button is clicked) */}
-        <ContactForm display={showForm} id={id} handleSubmit={handleSubmit} />
+        <ContactForm display={showForm} id={id} />
       </div>
     </section>
   );

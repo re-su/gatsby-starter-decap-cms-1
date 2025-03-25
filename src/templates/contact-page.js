@@ -1,41 +1,12 @@
 import * as React from "react";
-import { navigate } from "gatsby-link";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Content, { HTMLContent } from "../components/Content";
 import ContactForm from "../components/ContactForm";
 
-function encode(data) {
-  return Object.keys(data)
-    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&");
-}
-
 // eslint-disable-next-line
 export const ContactPageTemplate = ({ title, desc, content, contentComponent, menutest }) => {
-  const [formData, setFormData] = React.useState({}); // State for form inputs
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value }); // Update state with form values
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({
-        "form-name": form.getAttribute("name"),
-        ...formData,
-      }),
-    })
-      .then(() => navigate(form.getAttribute("action")))
-      .catch((error) => alert(error));
-  };
-
   const PageContent = contentComponent || Content;
 
   return (
@@ -45,7 +16,7 @@ export const ContactPageTemplate = ({ title, desc, content, contentComponent, me
             <h1>{title}</h1>
             <p>{desc}</p>
             <PageContent content={content} />
-            <ContactForm display={true} handleSubmit={handleSubmit} />
+            <ContactForm display={true} />
           </div>
         </div>
       </section>

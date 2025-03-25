@@ -1,143 +1,141 @@
 import React, { useState, useEffect } from "react";
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql, navigate } from "gatsby";
 
-const ContactForm = ({ display, id, handleSubmit }) => {
-    const [phone, setPhone] = useState("");
-    const [selectedOption, setSelectedOption] = useState("");
+const ContactForm = ({ display, id, isFullscreen }) => {
+  const [phone, setPhone] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    number: "",
+    course: "",
+  });
 
-    // GraphQL query to fetch courses
-    const data = useStaticQuery(graphql`
-        query CourseListQuery {
-          allMarkdownRemark(
-            sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { frontmatter: { templateKey: { eq: "course" } } }
-          ) {
-            edges {
-              node {
-                id
-                excerpt(pruneLength: 150)
-                fields {
-                  slug
-                }
-                frontmatter {
-                  title
-                  date(formatString: "MMMM DD, YYYY")
-                  featuredimage {
-                    childImageSharp {
-                      gatsbyImageData(
-                        width: 300
-                        quality: 100
-                        layout: CONSTRAINED
-                      )
-                    }
-                  }
-                }
-              }
+  // Fetch courses
+  const data = useStaticQuery(graphql`
+    query CourseListQuery {
+      allMarkdownRemark(
+        sort: { order: DESC, fields: [frontmatter___date] }
+        filter: { frontmatter: { templateKey: { eq: "course" } } }
+      ) {
+        edges {
+          node {
+            id
+            frontmatter {
+              title
             }
           }
         }
-      `);
+      }
+    }
+  `);
 
-    // Extracting the courses data
-    const courses = data.allMarkdownRemark.edges.map((edge) => ({
-        id: edge.node.id,
-        title: edge.node.frontmatter.title,
-    }));
+  const courses = data.allMarkdownRemark.edges.map((edge) => ({
+    id: edge.node.id,
+    title: edge.node.frontmatter.title,
+  }));
 
-    const formatPhoneNumber = (value) => {
-        // Remove all non-numeric characters
-        const cleaned = value.replace(/\D/g, "");
+  const formatPhoneNumber = (value) => {
+    const cleaned = value.replace(/\D/g, "");
+    if (cleaned.length <= 3) return cleaned;
+    if (cleaned.length <= 6) return `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
+    return `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6, 9)}`;
+  };
 
-        // Format as XXX-XXX-XXX
-        if (cleaned.length <= 3) return cleaned;
-        if (cleaned.length <= 6) return `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
-        return `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6, 9)}`;
-    };
+  const handlePhoneChange = (e) => {
+    setPhone(formatPhoneNumber(e.target.value));
+    setFormData({ ...formData, number: formatPhoneNumber(e.target.value) });
+  };
 
-    const handlePhoneChange = (e) => {
-        console.log(e.target.value)
-        setPhone(formatPhoneNumber(e.target.value));
-    };
+  useEffect(() => {
+    if (id) {
+      const selectedCourse = courses.find((course) => course.id === id);
+      if (selectedCourse) {
+        setFormData({ ...formData, course: selectedCourse.title });
+      }
+    }
+  }, [id, courses]);
 
-    // If id is provided, set the selected option to the specific course
-    useEffect(() => {
-        if (id) {
-            const selectedCourse = courses.find((course) => course.id === id);
-            console.log(selectedCourse)
-            if (selectedCourse) {
-                setSelectedOption(selectedCourse.title);
-            }
-        }
-    }, [id, courses]);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    return (
-        <div className={`contact-form-container ${display ? "open" : ""}`}>
-            <div className="contact-form">
-                <h3>Zapisz się na kurs</h3>
-                <form 
-                    name="course-form"
-                    method="post"
-                    action="/contact/thanks/"
-                    data-netlify="true"
-                    data-netlify-honeypot="bot-field"
-                    onSubmit={handleSubmit} // Updated to use local `handleSubmit`
-                >
-                    <input type="hidden" name="form-name" value="course-signup" />
+  const encode = (data) => {
+    return Object.keys(data)
+      .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  };
 
-                    <label>
-                        Imię i nazwisko:
-                        <input type="text" name="name" id="name" required />
-                    </label>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
 
-                    <label>
-                        Email:
-                        <input type="email" name="email" id="email" />
-                    </label>
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({
+        "form-name": form.getAttribute("name"),
+        ...formData,
+      }),
+    })
+      .then(() => navigate(form.getAttribute("action")))
+      .catch((error) => alert(error));
+  };
 
-                    <label>
-                        Numer telefonu:
-                        <input
-                            type="tel"
-                            name="number"
-                            value={phone}
-                            id="number"
-                            placeholder="123-456-789"
-                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
-                            onChange={handlePhoneChange}
-                            required
-                        />
-                    </label>
+  return (
+    <div className={`contact-form-container ${display ? "open" : ""} ${isFullscreen ? "isFullscreen" : ""}`}>
+      <div className="contact-form">
+        <h3>Zapisz się na kurs</h3>
+        <form
+          name="course-signup"
+          method="post"
+          action="/contact/thanks/"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          onSubmit={handleSubmit}
+        >
+          <input type="hidden" name="form-name" value="course-signup" />
 
-                    <label>
-                        Kurs:
-                        {/* If id is provided, show the course name directly */}
-                        {id ? (
-                            <><input type="hidden" name="course" id="course" value={selectedOption} />
-                            <div className="course-form-name">{selectedOption}</div></>
-                        ) : (
-                            // If no id, show all courses as clickable options
-                            <select name="course" id="course">
-                                {courses.map((course, index) => (
-                                    <option
-                                        type="button"
-                                        key={index}
-                                        onClick={() => setSelectedOption(course.title)}
-                                        className="course-option-btn"
-                                    >
-                                        {course.title}
-                                    </option>
-                                ))}
-                            </select>
-                        )}
-                    </label>
+          <label>
+            Imię i nazwisko:
+            <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+          </label>
 
-                    <button type="submit" className="primary-btn">
-                        Wyślij
-                    </button>
-                </form>
-            </div>
-        </div>
-    );
+          <label>
+            Email:
+            <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+          </label>
+
+          <label>
+            Numer telefonu:
+            <input
+              type="tel"
+              name="number"
+              value={phone}
+              placeholder="123-456-789"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
+              onChange={handlePhoneChange}
+              required
+            />
+          </label>
+
+          <label>
+            Kurs:
+            <select name="course" value={formData.course} onChange={handleChange} required>
+              {courses.map((course) => (
+                <option key={course.id} value={course.title}>
+                  {course.title}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <button type="submit" className="primary-btn">
+            Wyślij
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default ContactForm;
