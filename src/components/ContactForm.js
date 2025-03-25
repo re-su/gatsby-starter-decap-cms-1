@@ -3,6 +3,7 @@ import { useStaticQuery, graphql, navigate } from "gatsby";
 
 const ContactForm = ({ display, id, isFullscreen }) => {
   const [phone, setPhone] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -10,58 +11,63 @@ const ContactForm = ({ display, id, isFullscreen }) => {
     course: "",
   });
 
-  // Fetch courses
+  // GraphQL query to fetch courses
   const data = useStaticQuery(graphql`
-    query CourseListQuery {
-      allMarkdownRemark(
-        sort: { order: DESC, fields: [frontmatter___date] }
-        filter: { frontmatter: { templateKey: { eq: "course" } } }
-      ) {
-        edges {
-          node {
-            id
-            frontmatter {
-              title
+        query CourseListQuery {
+          allMarkdownRemark(
+            sort: { order: DESC, fields: [frontmatter___date] }
+            filter: { frontmatter: { templateKey: { eq: "course" } } }
+          ) {
+            edges {
+              node {
+                id
+                excerpt(pruneLength: 150)
+                fields {
+                  slug
+                }
+                frontmatter {
+                  title
+                  date(formatString: "MMMM DD, YYYY")
+                  featuredimage {
+                    childImageSharp {
+                      gatsbyImageData(
+                        width: 300
+                        quality: 100
+                        layout: CONSTRAINED
+                      )
+                    }
+                  }
+                }
+              }
             }
           }
         }
-      }
-    }
-  `);
+      `);
 
+  // Extracting the courses data
   const courses = data.allMarkdownRemark.edges.map((edge) => ({
     id: edge.node.id,
     title: edge.node.frontmatter.title,
   }));
 
   const formatPhoneNumber = (value) => {
+    // Remove all non-numeric characters
     const cleaned = value.replace(/\D/g, "");
+
+    // Format as XXX-XXX-XXX
     if (cleaned.length <= 3) return cleaned;
     if (cleaned.length <= 6) return `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
     return `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6, 9)}`;
   };
 
   const handlePhoneChange = (e) => {
+    console.log(e.target.value)
     setPhone(formatPhoneNumber(e.target.value));
-    setFormData({ ...formData, number: formatPhoneNumber(e.target.value) });
-  };
-
-  useEffect(() => {
-    if (id) {
-      const selectedCourse = courses.find((course) => course.id === id);
-      if (selectedCourse) {
-        setFormData({ ...formData, course: selectedCourse.title });
-      }
-    }
-  }, [id, courses]);
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const encode = (data) => {
     return Object.keys(data)
-      .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key] || ""))
       .join("&");
   };
 
@@ -81,6 +87,22 @@ const ContactForm = ({ display, id, isFullscreen }) => {
       .catch((error) => alert(error));
   };
 
+    // Handle form data changes
+    const handleChange = (e) => {
+      setFormData((prevData) => ({ ...prevData, [e.target.name]: e.target.value }));
+    };
+
+  // If id is provided, set the selected option to the specific course
+  useEffect(() => {
+    if (id) {
+      const selectedCourse = courses.find((course) => course.id === id);
+      console.log(selectedCourse)
+      if (selectedCourse) {
+        setSelectedOption(selectedCourse.title);
+      }
+    }
+  }, [id, courses]);
+
   return (
     <div className={`contact-form-container ${display ? "open" : ""} ${isFullscreen ? "isFullscreen" : ""}`}>
       <div className="contact-form">
@@ -94,6 +116,11 @@ const ContactForm = ({ display, id, isFullscreen }) => {
           onSubmit={handleSubmit}
         >
           <input type="hidden" name="form-name" value="course-signup" />
+          <p hidden>
+            <label>
+              Don’t fill this out if you’re human: <input name="bot-field" />
+            </label>
+          </p>
 
           <label>
             Imię i nazwisko:
