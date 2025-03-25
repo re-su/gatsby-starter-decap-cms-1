@@ -13,36 +13,36 @@ const ContactForm = ({ display, id, isFullscreen }) => {
 
   // GraphQL query to fetch courses
   const data = useStaticQuery(graphql`
-        query CourseListQuery {
-          allMarkdownRemark(
-            sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { frontmatter: { templateKey: { eq: "course" } } }
-          ) {
-            edges {
-              node {
-                id
-                excerpt(pruneLength: 150)
-                fields {
-                  slug
-                }
-                frontmatter {
-                  title
-                  date(formatString: "MMMM DD, YYYY")
-                  featuredimage {
-                    childImageSharp {
-                      gatsbyImageData(
-                        width: 300
-                        quality: 100
-                        layout: CONSTRAINED
-                      )
-                    }
-                  }
+    query CourseListQuery {
+      allMarkdownRemark(
+        sort: { order: DESC, fields: [frontmatter___date] }
+        filter: { frontmatter: { templateKey: { eq: "course" } } }
+      ) {
+        edges {
+          node {
+            id
+            excerpt(pruneLength: 150)
+            fields {
+              slug
+            }
+            frontmatter {
+              title
+              date(formatString: "MMMM DD, YYYY")
+              featuredimage {
+                childImageSharp {
+                  gatsbyImageData(
+                    width: 300
+                    quality: 100
+                    layout: CONSTRAINED
+                  )
                 }
               }
             }
           }
         }
-      `);
+      }
+    }
+  `);
 
   // Extracting the courses data
   const courses = data.allMarkdownRemark.edges.map((edge) => ({
@@ -61,42 +61,47 @@ const ContactForm = ({ display, id, isFullscreen }) => {
   };
 
   const handlePhoneChange = (e) => {
-    console.log(e.target.value)
     setPhone(formatPhoneNumber(e.target.value));
   };
 
   const encode = (data) => {
-    return Object.keys(data)
+    const encoded = Object.keys(data)
       .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key] || ""))
       .join("&");
+    console.log("Encoded Form Data: ", encoded); // Log the data to see if it's correct
+    return encoded;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
 
+    const finalFormData = {
+      ...formData,
+      number: phone, // Ensure phone is included correctly
+    };
+
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({
         "form-name": form.getAttribute("name"),
-        ...formData,
+        ...finalFormData,
       }),
     })
       .then(() => navigate(form.getAttribute("action")))
       .catch((error) => alert(error));
   };
 
-    // Handle form data changes
-    const handleChange = (e) => {
-      setFormData((prevData) => ({ ...prevData, [e.target.name]: e.target.value }));
-    };
+  // Handle form data changes
+  const handleChange = (e) => {
+    setFormData((prevData) => ({ ...prevData, [e.target.name]: e.target.value }));
+  };
 
   // If id is provided, set the selected option to the specific course
   useEffect(() => {
     if (id) {
       const selectedCourse = courses.find((course) => course.id === id);
-      console.log(selectedCourse)
       if (selectedCourse) {
         setSelectedOption(selectedCourse.title);
       }
