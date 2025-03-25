@@ -80,7 +80,7 @@ const ContactForm = ({ display, id, isFullscreen }) => {
       ...formData,
       number: phone, // Ensure phone number is correctly set
     };
-
+    console.log(finalFormData);
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -95,6 +95,7 @@ const ContactForm = ({ display, id, isFullscreen }) => {
 
   // Handle form data changes
   const handleChange = (e) => {
+    console.log(e.target.name);
     setFormData((prevData) => ({ ...prevData, [e.target.name]: e.target.value }));
   };
 
@@ -102,19 +103,21 @@ const ContactForm = ({ display, id, isFullscreen }) => {
   useEffect(() => {
     if (id) {
       const selectedCourse = courses.find((course) => course.id === id);
-      if (selectedCourse) {
+      if (selectedCourse && selectedCourse.title !== formData.course) {
         setFormData((prevData) => ({
           ...prevData,
           course: selectedCourse.title, // Set the course from `id`
         }));
       }
-    } else if (courses.length > 0) {
+    } else if (courses.length > 0 && formData.course !== courses[0].title) {
+      // Set the first course as default if no `id` is provided and course is not already set
       setFormData((prevData) => ({
         ...prevData,
-        course: courses[0].title, // Set the first course as default
+        course: courses[0].title, // Set to the title of the first course
       }));
     }
-  }, [id, courses]);
+  }, [id, courses, formData.course]); // Add `formData.course` as a dependency to prevent unnecessary updates
+  
 
   return (
     <div className={`contact-form-container ${display ? "open" : ""} ${isFullscreen ? "isFullscreen" : ""}`}>
@@ -160,7 +163,7 @@ const ContactForm = ({ display, id, isFullscreen }) => {
 
           <label>
             Kurs:
-            <select name="course" value={formData.course} onChange={handleChange} required>
+            <select name="course" id="course" value={"123"} onChange={handleChange} required>
               {courses.map((course) => (
                 <option key={course.id} value={course.title}>
                   {course.title}
