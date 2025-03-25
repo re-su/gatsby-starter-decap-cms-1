@@ -76,9 +76,11 @@ const ContactForm = ({ display, id, isFullscreen }) => {
     e.preventDefault();
     const form = e.target;
 
+    // Ensure phone number is included correctly
     const finalFormData = {
       ...formData,
-      number: phone, // Ensure phone is included correctly
+      number: phone, // Ensure phone number is correctly set
+      course: selectedOption || formData.course, // Ensure course is included
     };
 
     fetch("/", {
@@ -104,6 +106,7 @@ const ContactForm = ({ display, id, isFullscreen }) => {
       const selectedCourse = courses.find((course) => course.id === id);
       if (selectedCourse) {
         setSelectedOption(selectedCourse.title);
+        setFormData((prevData) => ({ ...prevData, course: selectedCourse.title })); // Set the selected course in formData
       }
     }
   }, [id, courses]);
@@ -152,7 +155,7 @@ const ContactForm = ({ display, id, isFullscreen }) => {
 
           <label>
             Kurs:
-            <select name="course" value={formData.course} onChange={handleChange} required>
+            <select name="course" value={formData.course || selectedOption} onChange={handleChange} required>
               {courses.map((course) => (
                 <option key={course.id} value={course.title}>
                   {course.title}
