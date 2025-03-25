@@ -3,12 +3,11 @@ import { useStaticQuery, graphql, navigate } from "gatsby";
 
 const ContactForm = ({ display, id, isFullscreen }) => {
   const [phone, setPhone] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     number: "",
-    course: "",
+    course: "", // Initialize course as empty
   });
 
   // GraphQL query to fetch courses
@@ -80,7 +79,6 @@ const ContactForm = ({ display, id, isFullscreen }) => {
     const finalFormData = {
       ...formData,
       number: phone, // Ensure phone number is correctly set
-      course: selectedOption || formData.course, // Ensure course is included
     };
 
     fetch("/", {
@@ -105,9 +103,16 @@ const ContactForm = ({ display, id, isFullscreen }) => {
     if (id) {
       const selectedCourse = courses.find((course) => course.id === id);
       if (selectedCourse) {
-        setSelectedOption(selectedCourse.title);
-        setFormData((prevData) => ({ ...prevData, course: selectedCourse.title })); // Set the selected course in formData
+        setFormData((prevData) => ({
+          ...prevData,
+          course: selectedCourse.title, // Set the course from `id`
+        }));
       }
+    } else if (courses.length > 0) {
+      setFormData((prevData) => ({
+        ...prevData,
+        course: courses[0].title, // Set the first course as default
+      }));
     }
   }, [id, courses]);
 
@@ -155,7 +160,7 @@ const ContactForm = ({ display, id, isFullscreen }) => {
 
           <label>
             Kurs:
-            <select name="course" value={formData.course || selectedOption} onChange={handleChange} required>
+            <select name="course" value={formData.course} onChange={handleChange} required>
               {courses.map((course) => (
                 <option key={course.id} value={course.title}>
                   {course.title}
