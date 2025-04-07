@@ -7,7 +7,7 @@ const useScrollVHThreshold = (vhThreshold = 50) => {
     const thresholdInPixels = (vhThreshold / 100) * window.innerHeight;
 
     const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
+      const currentScrollPos = window.scrollY;
       setIsThresholdExceeded(currentScrollPos > thresholdInPixels);
     };
 
