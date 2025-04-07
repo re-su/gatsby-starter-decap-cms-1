@@ -45,7 +45,7 @@ const GroupCourses = ({ courseCards }) => {
           {/* Mobile: Show Strawberry Below Cards */}
           {isMobile && (
             <div className="has-text-centered mt-5">
-              <img src={StrawberryUp} alt="Strawberry Mascot" className="image strawberry-up" />
+              <img src={StrawberryUp} alt="Strawberry Mascot" className="group-courses-strawberry-up" />
             </div>
           )}
         </div>
