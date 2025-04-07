@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import strawberry from "../img/strawberry-pointing-down.svg";
+import { Link } from 'gatsby'
 
 const SimpleInfoBox = ({ title, body, btnLink, btnText, backgroundColor }) => {
   return (
@@ -16,7 +17,7 @@ const SimpleInfoBox = ({ title, body, btnLink, btnText, backgroundColor }) => {
       </h2>
       { body ? <p className="content has-text-centered">{body}</p> : <></>}
       <div className="has-text-centered">
-        <a href={btnLink} className="primary-btn">{btnText}</a>
+        <Link to={btnLink} className="primary-btn">{btnText}</Link>
       </div>
     </div>
   );

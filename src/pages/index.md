@@ -1,7 +1,7 @@
 ---
 templateKey: index-page
 title: Fragaria school home page
-heading: Cześć! Jestem poziomka. Jestem tu by pomagać dzieciom w nauce
+heading: Cześć! Jestem poziomka. Jestem tu by pomagać małym i dużym w nauce
   angielskiego! W czym mogę pomóc?
 description: Opis strony głównej
 features:
@@ -43,7 +43,7 @@ individualCourses:
     selectedCourse: tytuł-2-kursu
 sampleInfoBox:
   title: WYPEŁNIJ FORMULARZ \n ABY ZAPISAĆ SIĘ NA ZAJĘCIA
-  btnLink: /kontakt
+  btnLink: /zapisy
   btnText: Zapisz się
   backgroundColor: "#548DF4"
 ---

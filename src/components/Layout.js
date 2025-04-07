@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
 import Footer from "../components/Footer";
-// import Navbar from "../components/Navbar";
+import Breadcrumb from "./Breadcrumb";
 import Navbar from "../components/navbar2/Navbar";
 import "../style/bulma-style.sass";
 import "../style/custom-style.sass";
@@ -59,6 +59,7 @@ const TemplateWrapper = ({ children }) => {
         <body className={`has-navbar-fixed-top ${isIndexPage ? 'is-index-page' : ''}`} />
       </Helmet>
       <Navbar />
+      <Breadcrumb />
       <div>{children}</div>
       <Footer />
     </div>

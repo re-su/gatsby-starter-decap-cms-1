@@ -34,8 +34,14 @@ a.nav-item
   display: flex
   align-items: center
 
-.nav-item:hover  
+.nav-item:hover, a[aria-current="page"]:not(.nav-logo > a)
   background-color: $primary-color
+
+.mobile-item > a[aria-current="page"], .mobile-dropdown-content > a[aria-current="page"]
+  background-color: $secondary-color !important
+
+.mobile-item:has(a[aria-current="page"])
+  background-color: $secondary-color !important
 
 /* Dropdown Menu */
 .dropdown-parent  
@@ -163,7 +169,7 @@ a.signup-btn
 
 /* When Dropdown is Open */
 .mobile-dropdown-content.open  
-  max-height: 200px  
+  max-height: 500px  
   opacity: 1  
   transform: translateY(0)  
 
@@ -178,7 +184,7 @@ a.signup-btn
   padding: 10px  
   border: 2px solid black  
   border-radius: 8px  
-  background-color: $primary-color 
+  background-color: #f3f3f3
   color: black
   text-align: center  
   transition: background-color 0.3s  

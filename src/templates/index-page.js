@@ -28,7 +28,6 @@ export const IndexPageTemplate = ({ image, heading, description, courses, indivi
 
   return (
     <>
-      {console.log(features)}
       <MainPageBanner message={heading} />
       <section className="section main-section"> {/* Full width section */}
         <div className="content">
@@ -71,7 +70,7 @@ IndexPageTemplate.propTypes = {
       title: PropTypes.string,
       headerColor: PropTypes.string,
       btnLink: PropTypes.string,
-      selectedCourse: PropTypes.object
+      selectedCourse: PropTypes.string
     })
   ),
   features: PropTypes.arrayOf(

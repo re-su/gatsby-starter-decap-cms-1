@@ -35,10 +35,12 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Template Key", name: "templateKey", widget: "hidden", default: "course" }
+      - { label: "Template Key", name: "templateKey", widget: "hidden", default: "course-page" }
+      - { label: "Path", name: "path", widget: "string", default: "/courses/{{slug}}" }
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Color", name: "color", widget: "color" }
-      - { label: "Last modification date", name: "date", widget: "datetime" }
+      - { label: "Navigation priority", name: "navigationpriority", widget: "string" }          
+      - { label: "Featured image", name: "featuredimage", widget: "image" }
+      - { label: "Background color", name: "color", widget: "color" }
       - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Card heading", name: "cardheading", widget: "string" }
       - { label: "Card color", name: "cardcolor", widget: "color" }
@@ -97,66 +99,30 @@ collections:
       - file: "src/pages/about/index.md"
         label: "About"
         name: "about"
+        slug: "{{slug}}"
         fields:
           - { label: "Template Key", name: "templateKey", widget: "hidden", default: "about-page" }
           - { label: "Title", name: "title", widget: "string" }
+          - { label: "Navigation priority", name: "navigationpriority", widget: "number" }              
+          - { label: "Teachers", name: "teachers", widget: "list", fields: [
+              { label: "Teacher Name", name: "name", widget: "string" },
+              { label: "Teacher Role", name: "role", widget: "string" },
+              { label: "Teacher Bio", name: "bio", widget: "markdown" },
+              { label: "Teacher Photo", name: "photo", widget: "image" }
+            ]
+          }
           - { label: "Body", name: "body", widget: "markdown" }
-          - { label: "Description", name: "desc", widget: "string" }
-          - { label: "Menu", name: "menutest", widget: "string" }
-
-      - file: "src/pages/products/index.md"
-        label: "Products Page"
-        name: "products"
+          
+      - label: "Contact Page"
+        name: "contact"
+        file: "src/pages/contact/index.md"
         fields:
-          - { label: "Template Key", name: "templateKey", widget: "hidden", default: "product-page" }
+          - { label: "Template Key", name: "templateKey", widget: "hidden", default: "contact-page" }
           - { label: "Title", name: "title", widget: "string" }
-          - { label: "Image", name: "image", widget: "image" }
-          - { label: "Heading", name: "heading", widget: "string" }
-          - { label: "Description", name: "description", widget: "string" }
-          - name: "intro"
-            label: "Intro"
-            widget: "object"
-            fields:
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Description", name: "description", widget: "text" }
-              - name: "blurbs"
-                label: "Blurbs"
-                widget: "list"
-                fields:
-                  - { label: "Image", name: "image", widget: "image" }
-                  - { label: "Text", name: "text", widget: "text" }
-          - name: "main"
-            label: "Main"
-            widget: "object"
-            fields:
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Description", name: "description", widget: "text" }
-              - name: "image1"
-                label: "Image 1"
-                widget: "object"
-                fields:
-                  - { label: "Image", name: "image", widget: "image" }
-                  - { label: "Alt", name: "alt", widget: "string" }
-              - name: "image2"
-                label: "Image 2"
-                widget: "object"
-                fields:
-                  - { label: "Image", name: "image", widget: "image" }
-                  - { label: "Alt", name: "alt", widget: "string" }
-              - name: "image3"
-                label: "Image 3"
-                widget: "object"
-                fields:
-                  - { label: "Image", name: "image", widget: "image" }
-                  - { label: "Alt", name: "alt", widget: "string" }
-          - { label: "Full Image", name: "full_image", widget: "image" }
-
-      - file: "src/pages/about/test/index.md"
-        label: "Test"
-        name: "test"
-        fields:
-          - { label: "Template Key", name: "templateKey", widget: "hidden", default: "about-page" }
-          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Navigation priority", name: "navigationpriority", widget: "string" }          
+          - { label: "Phone", name: "phone", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Address", name: "address", widget: "string" }
+          - { label: "Facebook Link", name: "facebook", widget: "string" }
+          - { label: "Instagram Link", name: "instagram", widget: "string" }
           - { label: "Body", name: "body", widget: "markdown" }
-          - { label: "Description", name: "desc", widget: "string" }
-          - { label: "Menu", name: "menutest", widget: "string" }

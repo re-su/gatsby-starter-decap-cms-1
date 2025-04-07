@@ -11,34 +11,34 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(true); // Controls mobile dropdown
   const IS_INDEX_PAGE = typeof window !== "undefined" && (window.location.pathname === "/" || window.location.pathname === "");
   const IS_COURSE_PAGE = typeof window !== "undefined" && window.location.pathname.includes("/courses/");
+  const IS_SIGNUP_PAGE = typeof window !== "undefined" && window.location.pathname.includes("/zapisy");
   const navTop = useSetNavigationTop();
   const backgroundColorValue = useScrollBehavior(IS_INDEX_PAGE || IS_COURSE_PAGE);
   const showLogo = useScrollVHThreshold(70) || !IS_INDEX_PAGE || menuOpen;
 
   // GraphQL query to fetch dynamic pages
   const data = useStaticQuery(graphql`
-    query NavbarQuery {
-      allMarkdownRemark(
-        filter: {
-          frontmatter: {
-            templateKey: { regex: "/^(?!.*index-page).*page$/" }
-          }
+query NavbarQuery {
+  allMarkdownRemark(
+    filter: {frontmatter: {templateKey: {regex: "/^(?!.*index-page).*page$/"}}}
+    sort: {fields: frontmatter___title, order: ASC}
+  ) {
+    edges {
+      node {
+        frontmatter {
+          title
+          path
+          nav
+          navigationpriority
         }
-        sort: { fields: frontmatter___title, order: ASC }
-      ) {
-        edges {
-          node {
-            frontmatter {
-              title
-              path
-            }
-            fields {
-              slug
-            }
-          }
+        fields {
+          slug
         }
       }
     }
+  }
+}
+
   `);
 
   const pages = organizePages(data.allMarkdownRemark.edges);
@@ -67,13 +67,13 @@ const Navbar = () => {
       <div className="nav-links">
         {pages.map(({ title, path, children }) => (
           <div key={path} className="dropdown-parent">
-            <Link to={path} className="nav-item">
+            <Link to={path} className={`nav-item`} title={title}>
               {title} {children && children.length > 0 && (<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000"><path d="M480-345 240-585l56-56 184 183 184-183 56 56-240 240Z"/></svg>)}
             </Link>
             {children && children.length > 0 && (
               <div className="nav-dropdown">
                 {children.map((child) => (
-                  <Link key={child.path} to={child.path} className="dropdown-link">
+                  <Link key={child.path} to={child.path} title={child.title} className={`dropdown-link`}>
                     {child.title}
                   </Link>
                 ))}
@@ -84,7 +84,7 @@ const Navbar = () => {
       </div>
 
       {/* Signup Button */}
-      {IS_COURSE_PAGE ? <a className="signup-btn" href="/#group-offers">Pełna oferta</a> : <a className="signup-btn">Zapisz się</a>}
+      {IS_COURSE_PAGE || IS_SIGNUP_PAGE ? <Link className="signup-btn" to="/courses">Pełna oferta</Link> : <Link className="signup-btn" to="/zapisy">Zapisz się</Link>}
     
       {/* Mobile Menu Toggle */}
       <div className={`menu-toggle ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(!menuOpen)}>

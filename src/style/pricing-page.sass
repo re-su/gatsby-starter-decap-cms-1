@@ -1,0 +1,54 @@
+.pricing-page-container
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))
+  gap: 2rem
+  padding: 2rem
+
+.pricing-page-card
+  background-color: var(--secondary-color)
+  border-radius: 1.5rem
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1)
+  overflow: hidden
+  display: flex
+  flex-direction: column
+  transition: transform 0.3s ease
+
+.pricing-page-card:hover
+  transform: translateY(-5px)
+
+.pricing-page-card-image img
+  width: 100%
+  height: auto
+  border-bottom: 4px solid $primary-color
+
+.pricing-page-card-content
+  padding: 1.5rem
+  color: var(--text-dark)
+  display: flex
+  flex-direction: column
+  gap: 1rem
+  > .primary-btn
+    max-width: 200px
+
+.pricing-page-card-title
+  font-size: 1.5rem
+  font-weight: bold
+  color: $primary-color
+
+.pricing-page-card-heading
+  font-size: 1rem
+  font-weight: bold
+
+.pricing-page-card-details
+  list-style: none
+  padding-left: 0
+  line-height: 1.5
+
+.pricing-page-card-details li::before
+  content: '✓ '
+  color: $primary-color
+  font-weight: bold
+
+@media (max-width: 768px)
+  .pricing-page-container
+    grid-template-columns: 1fr

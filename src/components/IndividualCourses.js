@@ -20,7 +20,7 @@ IndividualCourses.propTypes = {
       body: PropTypes.string.isRequired,
       headerColor: PropTypes.string.isRequired,
       btnLink: PropTypes.string.isRequired,
-      selectedCourse: PropTypes.object.isRequired
+      selectedCourse: PropTypes.string.isRequired
     })
   ).isRequired,
   bgColor: PropTypes.string,

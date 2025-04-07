@@ -33,7 +33,7 @@ CourseCards.propTypes = {
       price: PropTypes.number, // Made price optional (remove `.isRequired` if it's missing in some courses)
       headerColor: PropTypes.string.isRequired,
       btnLink: PropTypes.string.isRequired,
-      selectedCourse: PropTypes.object
+      selectedCourse: PropTypes.string
     })
   ).isRequired,
 };

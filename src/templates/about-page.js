@@ -3,23 +3,35 @@ import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Content, { HTMLContent } from "../components/Content";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-// eslint-disable-next-line
-export const AboutPageTemplate = ({ title, desc, content, contentComponent, menutest }) => {
+export const AboutPageTemplate = ({ title, content, contentComponent, teachers }) => {
   const PageContent = contentComponent || Content;
-  console.log(desc);
   return (
-    <section className="section section--gradient">
+    <section className="section">
+      <h2 className="title is-size-3 has-text-weight-bold">{title}</h2>
       <div className="container">
-        <div className="columns">
-          <div className="column is-10 is-offset-1">
-            <div className="section">
-              <h2 className="title is-size-3 has-text-weight-bold is-bold-light">
-                {title} {menutest}
-              </h2>
-              <PageContent className="content" content={content} />
-            </div>
-          </div>
+        <div className="about-content">
+          <PageContent className="content" content={content} />
+        </div>
+        <div className="teachers">
+          {teachers.map((teacher) => {
+            return (
+              <div key={teacher.name} className="teacher-box">
+                {/* Use GatsbyImage to render the image */}
+                {!teacher.photo.childImageSharp ? (
+                  <img src={teacher.photo.url} alt={teacher.name} className="teacher-photo" />
+                ) : (
+                  <GatsbyImage image={getImage(teacher.photo.childImageSharp.gatsbyImageData)} alt={teacher.name} className="teacher-photo" />
+                )}
+                <div className="teacher-info">
+                  <h3 className="title is-size-4">{teacher.name}</h3>
+                  <p className="teacher-role">{teacher.role}</p>
+                  <p>{teacher.bio}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -30,6 +42,7 @@ AboutPageTemplate.propTypes = {
   title: PropTypes.string.isRequired,
   content: PropTypes.string,
   contentComponent: PropTypes.func,
+  teachers: PropTypes.array.isRequired,
 };
 
 const AboutPage = ({ data }) => {
@@ -38,11 +51,10 @@ const AboutPage = ({ data }) => {
   return (
     <Layout>
       <AboutPageTemplate
-        contentComponent={HTMLContent}
         title={post.frontmatter.title}
         content={post.html}
-        desc={post.frontmatter.desc}
-        menutest={post.frontmatter.menutest}
+        contentComponent={HTMLContent}
+        teachers={post.frontmatter.teachers}
       />
     </Layout>
   );
@@ -60,8 +72,17 @@ export const aboutPageQuery = graphql`
       html
       frontmatter {
         title
-        desc
-        menutest
+        teachers {
+          name
+          role
+          bio
+          photo {
+            childImageSharp {
+              gatsbyImageData(width: 150, height: 150, quality: 90)
+            }
+            publicURL
+          }
+        }
       }
     }
   }

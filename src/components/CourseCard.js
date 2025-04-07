@@ -5,7 +5,6 @@ import MoreHoriz from "@mui/icons-material/MoreHoriz";
 const CourseCard = ({ title, body, price, btnLink, headerColor, selectedCourse }) => {
   return (
     <div className="course-card">
-      {console.log(selectedCourse)}
       <h2 className="course-card-title" style={{ '--course-card-title-bg-color': headerColor }}>
         <p className="course-card-title-text">{title}</p>
         <p className="course-card-title-dots"> <MoreHoriz fontSize="large" aria-label="More options" /></p>

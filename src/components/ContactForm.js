@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useStaticQuery, graphql, navigate } from "gatsby";
+import { navigate } from "gatsby";
 
-const ContactForm = ({ display, id, isFullscreen }) => {
+const ContactForm = ({ display, courses, id, isFullscreen }) => {
   const [phone, setPhone] = useState("");
   const [formData, setFormData] = useState({
     name: "",
@@ -9,45 +9,6 @@ const ContactForm = ({ display, id, isFullscreen }) => {
     number: "",
     course: "", // Initialize course as empty
   });
-
-  // GraphQL query to fetch courses
-  const data = useStaticQuery(graphql`
-    query CourseListQuery {
-      allMarkdownRemark(
-        sort: { order: DESC, fields: [frontmatter___date] }
-        filter: { frontmatter: { templateKey: { eq: "course" } } }
-      ) {
-        edges {
-          node {
-            id
-            excerpt(pruneLength: 150)
-            fields {
-              slug
-            }
-            frontmatter {
-              title
-              date(formatString: "MMMM DD, YYYY")
-              featuredimage {
-                childImageSharp {
-                  gatsbyImageData(
-                    width: 300
-                    quality: 100
-                    layout: CONSTRAINED
-                  )
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `);
-
-  // Extracting the courses data
-  const courses = data.allMarkdownRemark.edges.map((edge) => ({
-    id: edge.node.id,
-    title: edge.node.frontmatter.title,
-  }));
 
   const formatPhoneNumber = (value) => {
     // Remove all non-numeric characters
@@ -95,13 +56,12 @@ const ContactForm = ({ display, id, isFullscreen }) => {
 
   // Handle form data changes
   const handleChange = (e) => {
-    console.log(e.target.name);
     setFormData((prevData) => ({ ...prevData, [e.target.name]: e.target.value }));
   };
 
   // If id is provided, set the selected option to the specific course
   useEffect(() => {
-    if (id) {
+    if (id && courses) {
       const selectedCourse = courses.find((course) => course.id === id);
       if (selectedCourse && selectedCourse.title !== formData.course) {
         setFormData((prevData) => ({
@@ -109,7 +69,7 @@ const ContactForm = ({ display, id, isFullscreen }) => {
           course: selectedCourse.title, // Set the course from `id`
         }));
       }
-    } else if (courses.length > 0 && formData.course !== courses[0].title) {
+    } else if (courses.length > 0 && formData.course === "") {
       // Set the first course as default if no `id` is provided and course is not already set
       setFormData((prevData) => ({
         ...prevData,
@@ -117,7 +77,6 @@ const ContactForm = ({ display, id, isFullscreen }) => {
       }));
     }
   }, [id, courses, formData.course]); // Add `formData.course` as a dependency to prevent unnecessary updates
-  
 
   return (
     <div className={`contact-form-container ${display ? "open" : ""} ${isFullscreen ? "isFullscreen" : ""}`}>
@@ -163,13 +122,18 @@ const ContactForm = ({ display, id, isFullscreen }) => {
 
           <label>
             Kurs:
-            <select name="course" id="course" value={"123"} onChange={handleChange} required>
-              {courses.map((course) => (
-                <option key={course.id} value={course.title}>
-                  {course.title}
-                </option>
-              ))}
-            </select>
+            {id && id !== null ? (
+              // Display the title of the course based on the selected id
+              <div className="contact-form-course-name">{courses.find((course) => course.id === id)?.title}</div>
+            ) : (
+              <select name="course" id="course" value={formData.course} onChange={handleChange} required>
+                {courses.map((course) => (
+                  <option key={course.id} value={course.title}>
+                    {course.title}
+                  </option>
+                ))}
+              </select>
+            )}
           </label>
 
           <button type="submit" className="primary-btn">

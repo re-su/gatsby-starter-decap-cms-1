@@ -1,0 +1,33 @@
+.breadcrumb
+  margin: 1rem
+  margin-left: 2rem
+  font-size: 0.9rem
+
+  ul
+    display: flex
+    flex-wrap: wrap
+    list-style: none
+    gap: 0rem
+
+  li
+    display: flex
+    align-items: center
+
+    .separator
+      margin: 0 0.5rem
+      color: #aaa
+
+    a
+      text-decoration: none
+      color: #FEA6A4
+      padding: 0
+
+      &:hover
+        color: $secondary-color
+
+    span[aria-current="page"]
+      font-weight: bold
+      color: #333
+
+.breadcrumb li + li::before
+    content: "" !important

@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import Girl from "../img/girl2.png";
+import { Link } from 'gatsby'
 
 const FeaturesSection = ({ features }) => {
   return (
@@ -38,10 +39,10 @@ const FeaturesSection = ({ features }) => {
 
           {/* CTA Button */}
           <div className="see-more">
-            <a href="https://reactjs.org" className="secondary-btn">
-              Dowiedz się więcej o szkole językowej <br />
-              Twojego dziecka
-            </a>
+            <Link to="/o-nas" className="secondary-btn">
+              Dowiedz się więcej o <br />
+              naszej szkole językowej
+            </Link>
           </div>
         </div>
       </div>

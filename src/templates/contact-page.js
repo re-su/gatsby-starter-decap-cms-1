@@ -1,30 +1,59 @@
-import * as React from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Content, { HTMLContent } from "../components/Content";
-import ContactForm from "../components/ContactForm";
 
-// eslint-disable-next-line
-export const ContactPageTemplate = ({ title, desc, content, contentComponent, menutest }) => {
+import facebookIcon from "../img/social/facebook.svg";
+import instagramIcon from "../img/social/instagram.svg";
+import phoneIcon from "../img/icons/phone.svg";
+import locationIcon from "../img/icons/location.svg";
+import emailIcon from "../img/icons/email.svg";
+
+export const ContactPageTemplate = ({ title, phone, email, address, facebook, instagram, content, contentComponent }) => {
   const PageContent = contentComponent || Content;
 
   return (
-      <section className="section">
-        <div className="container">
-          <div className="content">
-            <h1>{title}</h1>
-            <p>{desc}</p>
-            <PageContent content={content} />
-            <ContactForm display={true} />
+    <section className="section section--gradient">
+      <h2 className="title is-size-3 has-text-weight-bold">{title}</h2>
+      <div className="container">
+        <div className="contact-page-contact-section">
+        <h3 className="title is-size-4">Napisz lub zadzwoń</h3>
+          <div className="contact-page-contact-box">
+            <div className="contact-page-contact-item">
+              <img src={phoneIcon} alt="Phone"/>
+              <p>{phone}</p>
+            </div>
+            <div className="contact-page-contact-item">
+              <img src={emailIcon} alt="Email"/>
+              <p>{email}</p>
+            </div>
           </div>
+          <h3 className="title is-size-4">Gdzie odbywają się zajęcia?</h3>
+          <div className="contact-page-address-box">
+            <p className="contact-page-address-box-header">
+              <img src={locationIcon} alt="Location"/> 
+            </p>
+            <p>{address}</p>
+          </div>
+          <h3 className="title is-size-4">Odwiedź nasze media społecznościowe</h3>
+          <div className="contact-page-social-links">
+            <a href={facebook} target="_blank" rel="noopener noreferrer"><img src={facebookIcon} alt="Facebook"/> Facebook</a>
+            <a href={instagram} target="_blank" rel="noopener noreferrer"><img src={instagramIcon} alt="Instagram icon"/> Instagram</a>
+          </div>
+          <PageContent className="content" content={content} />
         </div>
-      </section>
+      </div>
+    </section>
   );
 };
 
 ContactPageTemplate.propTypes = {
-  title: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+  facebook: PropTypes.string.isRequired,
+  instagram: PropTypes.string.isRequired,
   content: PropTypes.string,
   contentComponent: PropTypes.func,
 };
@@ -35,11 +64,14 @@ const ContactPage = ({ data }) => {
   return (
     <Layout>
       <ContactPageTemplate
-        contentComponent={HTMLContent}
         title={post.frontmatter.title}
+        phone={post.frontmatter.phone}
+        email={post.frontmatter.email}
+        address={post.frontmatter.address}
+        facebook={post.frontmatter.facebook}
+        instagram={post.frontmatter.instagram}
+        contentComponent={HTMLContent}
         content={post.html}
-        desc={post.frontmatter.desc}
-        menutest={post.frontmatter.menutest}
       />
     </Layout>
   );
@@ -57,8 +89,11 @@ export const contactPageQuery = graphql`
       html
       frontmatter {
         title
-        desc
-        menutest
+        phone
+        email
+        address
+        facebook
+        instagram
       }
     }
   }

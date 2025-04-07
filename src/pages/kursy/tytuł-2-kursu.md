@@ -1,16 +1,18 @@
 ---
 color: "#d5f0fd"
 contentbottom: bottom2
-templateKey: course
+templateKey: course-page
+path: /kursy/tytuł-2-kursu
+price: 76zł
+title: Kurs2
 featuredimage: /img/chemex.jpg
-title: Tytuł 2 kursu
-date: 2025-03-14T15:25:57.347Z
-cardheading: head2
+cardheading: 150zł/miesiąc
 cardcolor: "#ffffff"
 cardlist:
   - item21
   - item22
   - item23
+date: 2025-03-14T15:25:57.347Z
 contenttop: top2
 ---
 Lorem ipsum *dolor* sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut **aliquip** ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate **velit** esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non **proident**, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -19,7 +21,7 @@ Lorem ipsum *dolor* sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 
 Lorem impsu dolores diuadsa Lorem impsu dolores diuadsa Lorem impsu dolores diuadsa Lorem impsu dolores diuadsa Lorem impsu dolores diuadsa Lorem impsu dolores diuadsa Lorem impsu dolores diuadsa Lorem impsu dolores diuadsa Lorem impsu dolores diuadsa Lorem impsu dolores diuadsa Lorem impsu dolores diuadsa 
 
-> It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. 
+> It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text **block**. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. It is different text block. 
 
 COŚ
 
