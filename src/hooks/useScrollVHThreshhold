@@ -12,11 +12,10 @@ const useScrollVHThreshold = (vhThreshold = 50) => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    window.addEventListener("load", handleScroll);
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("load", handleScroll);
     };
   }, [vhThreshold]);
 
