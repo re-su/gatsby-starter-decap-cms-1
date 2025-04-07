@@ -11,11 +11,21 @@ const useScrollVHThreshold = (vhThreshold = 50) => {
       setIsThresholdExceeded(currentScrollPos > thresholdInPixels);
     };
 
+    const onLoad = () => {
+      requestAnimationFrame(handleScroll); // Ensures DOM is fully ready
+    };
+
     window.addEventListener("scroll", handleScroll);
-    handleScroll();
+    window.addEventListener("load", onLoad);
+
+    // If the document is already loaded (e.g. after hot reload), trigger it manually
+    if (document.readyState === "complete") {
+      onLoad();
+    }
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("load", onLoad);
     };
   }, [vhThreshold]);
 
