@@ -15,7 +15,16 @@ const TemplateWrapper = ({ children }) => {
   React.useEffect(() => {
     setIsIndexPage(window.location.pathname === "/" || window.location.pathname === "");
   }, []);
-  
+
+  React.useEffect(() => {
+    const currentScrollY = window.scrollY;
+    if (currentScrollY == 52) {
+      window.scrollTo({
+        top: currentScrollY - 52
+      });
+    }
+  }, []);
+
 
   return (
     <div>

@@ -19,7 +19,7 @@ CMS.registerPreviewTemplate('index', IndexPagePreview)
 CMS.registerPreviewTemplate('about', AboutPagePreview)
 CMS.registerPreviewTemplate('products', ProductPagePreview)
 CMS.registerPreviewTemplate('blog', BlogPostPreview)
-CMS.registerPreviewTemplate('courses', CoursePagePreview)
+CMS.registerPreviewTemplate('kursy', CoursePagePreview)
 CMS.registerPreviewTemplate('contact', ContactPagePreview)
 console.log("cms invoked");
 CMS.registerWidget("menutest", MenuWidget)

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { navigate } from "gatsby-link";
 import { Helmet } from "react-helmet";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Content, { HTMLContent } from "../components/Content";
 import ContactForm from "../components/ContactForm";
@@ -12,11 +11,9 @@ export const CoursePageTemplate = ({
   content,
   contentComponent,
   title,
-  date,
   cardheading,
   cardlist,
   cardcolor,
-  color,
   helmet,
 }) => {
   const PostContent = contentComponent || Content;
@@ -25,6 +22,7 @@ export const CoursePageTemplate = ({
   return (
     <section className="course-page">
       {helmet || ""}
+      {console.log(helmet)}
       <div className="course-container">
         <h1 className="course-title">{title}</h1>
         <PostContent content={content} className="course-body" />
@@ -61,11 +59,9 @@ CoursePageTemplate.propTypes = {
   content: PropTypes.node.isRequired,
   contentComponent: PropTypes.func,
   title: PropTypes.string,
-  date: PropTypes.string,
   cardheading: PropTypes.string,
   cardlist: PropTypes.arrayOf(PropTypes.string),
   cardcolor: PropTypes.string,
-  color: PropTypes.string,
   helmet: PropTypes.object,
 };
 
@@ -79,10 +75,8 @@ const CoursePage = ({ data }) => {
         content={course.html}
         contentComponent={HTMLContent}
         title={course.frontmatter.title}
-        date={course.frontmatter.date}
         cardheading={course.frontmatter.cardheading}
         cardlist={course.frontmatter.cardlist}
-        color={course.frontmatter.color}
         cardcolor={course.frontmatter.cardcolor}
         helmet={
           <Helmet titleTemplate="%s | Fragaria">

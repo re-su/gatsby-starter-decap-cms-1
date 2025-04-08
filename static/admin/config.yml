@@ -29,9 +29,9 @@ collections:
       - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Tags", name: "tags", widget: "list" }
 
-  - name: "courses"
-    label: "Courses"
-    folder: "src/pages/courses"
+  - name: "kursy"
+    label: "Kursy"
+    folder: "src/pages/kursy"
     create: true
     slug: "{{slug}}"
     fields:
