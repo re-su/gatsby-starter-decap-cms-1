@@ -22,7 +22,6 @@ export const CoursePageTemplate = ({
   return (
     <section className="course-page">
       {helmet || ""}
-      {console.log(helmet)}
       <div className="course-container">
         <h1 className="course-title">{title}</h1>
         <PostContent content={content} className="course-body" />

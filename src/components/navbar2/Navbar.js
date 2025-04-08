@@ -10,7 +10,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(true); // Controls mobile dropdown
   const IS_INDEX_PAGE = typeof window !== "undefined" && (window.location.pathname === "/" || window.location.pathname === "");
-  const IS_COURSE_PAGE = typeof window !== "undefined" && window.location.pathname.includes("/courses/");
+  const IS_COURSE_PAGE = typeof window !== "undefined" && window.location.pathname.includes("/kursy/");
   const IS_SIGNUP_PAGE = typeof window !== "undefined" && window.location.pathname.includes("/zapisy");
   const navTop = useSetNavigationTop();
   const backgroundColorValue = useScrollBehavior(IS_INDEX_PAGE || IS_COURSE_PAGE);

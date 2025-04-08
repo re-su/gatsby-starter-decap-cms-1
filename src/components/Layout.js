@@ -67,7 +67,7 @@ const TemplateWrapper = ({ children }) => {
         />
         <body className={`has-navbar-fixed-top ${isIndexPage ? 'is-index-page' : ''}`} />
       </Helmet>
-      {/* <Navbar /> */}
+      <Navbar />
       <Breadcrumb />
       <div>{children}</div>
       <Footer />
