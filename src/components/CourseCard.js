@@ -24,8 +24,8 @@ const CourseCard = ({ title, body, price, btnLink, headerColor, selectedCourse }
 // Prop Types for the CourseCard component
 CourseCard.propTypes = {
   title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  body: PropTypes.string,
+  price: PropTypes.number,
   btnLink: PropTypes.string.isRequired,
   headerColor: PropTypes.string.isRequired,
   selectedCourse: PropTypes.string

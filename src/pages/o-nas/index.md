@@ -1,7 +1,7 @@
 ---
 templateKey: about-page
 title: Poznajmy się
-navigationpriority: 1
+navigationpriority: 0
 teachers:
   - name: John Doe
     role: English Teacher

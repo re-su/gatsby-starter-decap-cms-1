@@ -8,7 +8,7 @@ export const CourseListTemplate = ({ data }) => {
   const { edges: courses } = data.allMarkdownRemark;
 
   return (
-    <section class="section">
+    <section className="section">
       <h2 className="title is-size-3 has-text-weight-bold">Kursy</h2>
       <div className="course-list">
         {courses.map(({ node: course }) => (
@@ -29,12 +29,12 @@ export const CourseListTemplate = ({ data }) => {
             )}
             <div className="course-info">
               <h2>
-                <Link to={course.fields.slug} className="course-title">
+                <Link to={course.fields.slug.replace(/\/$/, '')} className="course-title">
                   {course.frontmatter.title}
                 </Link>
               </h2>
               <p className="course-excerpt">{course.excerpt}</p>
-              <Link className="primary-btn" to={course.fields.slug}>
+              <Link className="primary-btn" to={course.fields.slug.replace(/\/$/, '')}>
                 Zobacz kurs →
               </Link>
             </div>

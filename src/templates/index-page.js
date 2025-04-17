@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from "prop-types";
-import { Link, graphql } from "gatsby";
-import { getImage } from "gatsby-plugin-image";
+import { graphql } from "gatsby";
 
 import Layout from "../components/Layout";
 import FeaturesSection from '../components/FeaturesSection';
@@ -10,8 +9,7 @@ import MainPageBanner from '../components/MainPageBanner';
 import GroupCourses from '../components/GroupCourses';
 import IndividualCourses from '../components/IndividualCourses';
 
-export const IndexPageTemplate = ({ image, heading, description, courses, individualCourses, features, sampleInfoBox }) => {
-  const heroImage = getImage(image) || image;
+export const IndexPageTemplate = ({ heading, description, courses, individualCourses, features, sampleInfoBox }) => {
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.netlifyIdentity) {
@@ -93,7 +91,6 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <IndexPageTemplate
-        image={frontmatter.image}
         heading={frontmatter.heading}
         description={frontmatter.description}
         courses={frontmatter.courses}
@@ -120,11 +117,6 @@ export const pageQuery = graphql`
     markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
       frontmatter {
         title
-        image {
-          childImageSharp {
-            gatsbyImageData(quality: 100, layout: FULL_WIDTH)
-          }
-        }
         heading
         description
         courses {

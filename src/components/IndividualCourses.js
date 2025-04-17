@@ -17,7 +17,7 @@ IndividualCourses.propTypes = {
   courseCards: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
-      body: PropTypes.string.isRequired,
+      body: PropTypes.string,
       headerColor: PropTypes.string.isRequired,
       btnLink: PropTypes.string.isRequired,
       selectedCourse: PropTypes.string.isRequired

@@ -59,7 +59,7 @@ GroupCourses.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       body: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
+      price: PropTypes.number,
       headerColor: PropTypes.string.isRequired,
       btnLink: PropTypes.string.isRequired,
     })

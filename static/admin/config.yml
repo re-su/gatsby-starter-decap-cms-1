@@ -14,21 +14,6 @@ media_folder: static/img
 public_folder: /img
 
 collections:
-  - name: "blog"
-    label: "Blog"
-    folder: "src/pages/blog"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - { label: "Template Key", name: "templateKey", widget: "hidden", default: "blog-post" }
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Featured Post", name: "featuredpost", widget: "boolean" }
-      - { label: "Featured Image", name: "featuredimage", widget: "image" }
-      - { label: "Body", name: "body", widget: "markdown" }
-      - { label: "Tags", name: "tags", widget: "list" }
-
   - name: "kursy"
     label: "Kursy"
     folder: "src/pages/kursy"
@@ -36,7 +21,7 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Template Key", name: "templateKey", widget: "hidden", default: "course-page" }
-      - { label: "Path", name: "path", widget: "string", default: "/courses/{{slug}}" }
+      - { label: "Path", name: "path", widget: "string", default: "/kursy/{{slug}}" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Navigation priority", name: "navigationpriority", widget: "string" }          
       - { label: "Featured image", name: "featuredimage", widget: "image" }
@@ -96,9 +81,9 @@ collections:
               - { name: "btnText", label: "Button Text", widget: "string" }
               - { name: "backgroundColor", label: "Background Color", widget: "color" }
 
-      - file: "src/pages/about/index.md"
-        label: "About"
-        name: "about"
+      - file: "src/pages/o-nas/index.md"
+        label: "Poznaj nas"
+        name: "o-nas"
         slug: "{{slug}}"
         fields:
           - { label: "Template Key", name: "templateKey", widget: "hidden", default: "about-page" }
@@ -113,9 +98,9 @@ collections:
           }
           - { label: "Body", name: "body", widget: "markdown" }
           
-      - label: "Contact Page"
-        name: "contact"
-        file: "src/pages/contact/index.md"
+      - label: "Kontakt"
+        name: "kontakt"
+        file: "src/pages/kontakt/index.md"
         fields:
           - { label: "Template Key", name: "templateKey", widget: "hidden", default: "contact-page" }
           - { label: "Title", name: "title", widget: "string" }

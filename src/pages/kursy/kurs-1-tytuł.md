@@ -4,6 +4,7 @@ contentbottom: Bottom
 templateKey: course-page
 path: /kursy/kurs-1-tytuł
 title: Dla maturzystów
+navigationpriority: 2
 featuredimage: /img/blog-index.jpg
 cardheading: 220zł/miesiąc
 cardcolor: "#664b4b"

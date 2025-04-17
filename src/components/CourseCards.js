@@ -29,8 +29,8 @@ CourseCards.propTypes = {
   courseCards: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
-      body: PropTypes.string.isRequired,
-      price: PropTypes.number, // Made price optional (remove `.isRequired` if it's missing in some courses)
+      body: PropTypes.string,
+      price: PropTypes.number,
       headerColor: PropTypes.string.isRequired,
       btnLink: PropTypes.string.isRequired,
       selectedCourse: PropTypes.string

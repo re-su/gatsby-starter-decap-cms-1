@@ -5,6 +5,7 @@ templateKey: course-page
 path: /kursy/tytuł-2-kursu
 price: 76zł
 title: Kurs2
+navigationpriority: 4
 featuredimage: /img/chemex.jpg
 cardheading: 150zł/miesiąc
 cardcolor: "#ffffff"

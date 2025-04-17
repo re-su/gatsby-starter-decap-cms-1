@@ -6,6 +6,7 @@ color: "#4700ff"
 price: 1000 PLN
 featuredImage: /img/kids1.jpg
 title: Dla maluchów
+navigationpriority: 3
 cardheading: 120zł/miesiąc
 cardcolor: "#bd0b0b"
 cardlist:

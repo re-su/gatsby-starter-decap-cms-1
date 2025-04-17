@@ -26,7 +26,7 @@ const SimpleInfoBox = ({ title, body, btnLink, btnText, backgroundColor }) => {
 // Prop Types for the SimpleInfoBox component
 SimpleInfoBox.propTypes = {
   title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
+  body: PropTypes.string,
   btnLink: PropTypes.string.isRequired,
   btnText: PropTypes.string.isRequired,
   backgroundColor: PropTypes.string.isRequired

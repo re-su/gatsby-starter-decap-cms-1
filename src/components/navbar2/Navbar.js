@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import logo from "../../img/logo2.svg";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import useSetNavigationTop from "./useSetNavigationTop";
