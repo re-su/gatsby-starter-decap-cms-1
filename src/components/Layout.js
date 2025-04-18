@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
 import Footer from "../components/Footer";
+import Breadcrumb from "./Breadcrumb";
 import Navbar from "../components/navbar2/Navbar";
 import "../style/bulma-style.sass";
 import "../style/custom-style.sass";
@@ -9,7 +10,7 @@ import { withPrefix } from "gatsby";
 
 const TemplateWrapper = ({ children }) => {
   const { title, description } = useSiteMetadata();
-  const [isIndexPage, setIsIndexPage] = React.useState(false);
+  const [isIndexPage, setIsIndexPage] = React.useState(true);
 
   React.useEffect(() => {
     setIsIndexPage(window.location.pathname === "/" || window.location.pathname === "");
@@ -67,6 +68,7 @@ const TemplateWrapper = ({ children }) => {
         <body className={`has-navbar-fixed-top ${isIndexPage ? 'is-index-page' : ''}`} />
       </Helmet>
       <Navbar />
+      <Breadcrumb />
       <div>{children}</div>
       <Footer />
     </div>

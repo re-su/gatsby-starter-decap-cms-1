@@ -48,7 +48,7 @@ const Navbar = () => {
     };
   }, [prevScrollPos]);
 
-  const data = useStaticQuery(graphql`
+  const data = graphql`
     query NavbarQuery {
       allMarkdownRemark(
         filter: {
@@ -71,7 +71,7 @@ const Navbar = () => {
         }
       }
     }
-  `);
+  `;
 
   const pages = data.allMarkdownRemark.edges;
 

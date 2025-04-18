@@ -16,7 +16,7 @@ const Navbar = () => {
 
   const toggleMenu = () => setIsActive(!isActive);
 
-  const data = useStaticQuery(graphql`
+  const data = graphql`
     query NavbarQuery {
       allMarkdownRemark(
         filter: {
@@ -39,7 +39,7 @@ const Navbar = () => {
         }
       }
     }
-  `);
+  `;
 
   const pages = organizePages(data.allMarkdownRemark.edges);
 
