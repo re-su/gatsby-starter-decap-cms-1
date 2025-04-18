@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../img/logo2.svg";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import useSetNavigationTop from "./useSetNavigationTop";
@@ -14,7 +14,7 @@ const Navbar = () => {
   const IS_SIGNUP_PAGE = typeof window !== "undefined" && window.location.pathname.includes("/zapisy");
   const navTop = useSetNavigationTop();
   const backgroundColorValue = useScrollBehavior(IS_INDEX_PAGE || IS_COURSE_PAGE);
-  const showLogo = useScrollVHThreshold(70) || !IS_INDEX_PAGE || menuOpen;
+  const showLogo = !IS_INDEX_PAGE || menuOpen || useScrollVHThreshold(70);
 
   // GraphQL query to fetch dynamic pages
   const data = useStaticQuery(graphql`

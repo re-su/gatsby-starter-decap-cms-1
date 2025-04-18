@@ -10,11 +10,7 @@ import { withPrefix } from "gatsby";
 
 const TemplateWrapper = ({ children }) => {
   const { title, description } = useSiteMetadata();
-  const [isIndexPage, setIsIndexPage] = React.useState(true);
-
-  React.useEffect(() => {
-    setIsIndexPage(window.location.pathname === "/" || window.location.pathname === "");
-  }, []);
+  const IS_INDEX_PAGE = typeof window !== "undefined" && (window.location.pathname === "/" || window.location.pathname === "");
 
   // React.useEffect(() => {
   //   const currentScrollY = window.scrollY;
@@ -65,7 +61,7 @@ const TemplateWrapper = ({ children }) => {
           property="og:image"
           content={`${withPrefix("/")}img/og-image.jpg`}
         />
-        <body className={`has-navbar-fixed-top ${isIndexPage ? 'is-index-page' : ''}`} />
+        <body className={`has-navbar-fixed-top ${IS_INDEX_PAGE ? 'is-index-page' : ''}`} />
       </Helmet>
       <Navbar />
       <Breadcrumb />
