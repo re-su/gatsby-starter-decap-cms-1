@@ -5,6 +5,8 @@ import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Content, { HTMLContent } from "../components/Content";
 import ContactForm from "../components/ContactForm";
+import PreviewCompatibleImage from '../components/PreviewCompatibleImage';
+import priceIcon from "../img/icons/dolar.svg"
 
 export const CoursePageTemplate = ({
   id,
@@ -26,21 +28,34 @@ export const CoursePageTemplate = ({
         <h1 className="course-title">{title}</h1>
         <PostContent content={content} className="course-body" />
 
-        {/* Info Card */}
-        <div id="course-info-card" style={{ backgroundColor: cardcolor }}>
-          <h2 className="course-info-card-title">{cardheading}</h2>
-          <ul className="course-info-card-list">
-            {cardlist &&
-              cardlist.map((item, index) => (
-                <li key={index} className="course-info-card-list-item">
-                  {item}
-                </li>
-              ))}
-          </ul>
+        {/* Info Cards */}
+        <div className="course-info-cards-container">
+          <div key={0} className="course-info-card" style={{ backgroundColor: cardcolor }}>
+            
+            <img src={priceIcon} />
+            
+            <p className="course-info-card-text">{cardheading}</p>
+          </div>
+          {cardlist &&
+            cardlist.map((item, index) => (
+              <div key={index} className="course-info-card" style={{ backgroundColor: cardcolor }}>
+                {console.log(item)}
+                {item.image && (
+                  <PreviewCompatibleImage
+                    imageInfo={{
+                      image: item.image,
+                      alt: `Image`,
+                    }}
+                  />
+                )}
+                <p className="course-info-card-text">{item.item}</p>
+              </div>
+            ))}
         </div>
 
+
         {/* Button to show form */}
-        <div className="course-card-container">
+        <div className="course-card-button-container">
           <button className="primary-btn" onClick={() => setShowForm(!showForm)}>
             Zapisz się
           </button>
@@ -106,7 +121,15 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         title
         cardheading
-        cardlist
+        cardlist {
+          item
+          image {
+            publicURL
+            childImageSharp {
+              gatsbyImageData(width: 300, quality: 100, layout: CONSTRAINED)
+            }
+          }
+        }
         cardcolor
         color
       }

@@ -16,7 +16,7 @@ const CourseCard = ({ title, body, price, btnLink, headerColor, selectedCourse }
         <span className="course-card-course-value">{price} zł</span>
       </div> : <></>
       }
-      <a href={selectedCourse ? "/courses/" + selectedCourse : btnLink} className="secondary-btn">SZCZEGÓŁY KURSU</a>
+      <a href={"/kursy/" + selectedCourse} className="secondary-btn">SZCZEGÓŁY KURSU</a>
     </div>
   );
 };

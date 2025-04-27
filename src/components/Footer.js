@@ -23,6 +23,7 @@ const Footer = () => {
               title
               path
               nav
+              navigationpriority
             }
             fields {
               slug
@@ -50,7 +51,7 @@ const Footer = () => {
           </div>
           <div className="contact-item">
             <img src={locationIcon} alt="Location" className="contact-icon" />
-            <span>Tu będzie adres</span>
+            <span>Lubsko</span>
           </div>
           <div className="contact-item social-icons">
             <a href="https://facebook.com"><img src={facebookIcon} alt="Facebook" className="social-icon" /></a>

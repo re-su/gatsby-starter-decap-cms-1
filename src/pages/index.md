@@ -16,31 +16,31 @@ courses:
     body: 4-5 LAT
     headerColor: "#def5ff"
     btnLink: /courses/kurs2
+    selectedCourse: dla-starszaków
   - title: Dla starszaków
     body: 6-7 LAT
     headerColor: "#cbefff"
     btnLink: /dla-starszakow
+    selectedCourse: dla-starszaków
   - title: Dla szkoły podstawowej
     body: 5-12 LAT
     headerColor: "#b9e9ff"
     btnLink: /dla-szkoly-podstawowej
+    selectedCourse: dla-szkoły-podstawowej
   - title: Dla młodzieży
-    body: 4-5 LAT
+    body: Od 12 lat
     headerColor: "#a7e3ff"
     btnLink: /dla-mlodziezy
+    selectedCourse: dla-młodzieży
 individualCourses:
   - title: Zajęcia w parach
     headerColor: "#FFD2D2"
     btnLink: dsadsa
-    selectedCourse: dla-par
+    selectedCourse: zajęcia-w-parach
   - title: Zajęcia indywidualne
     headerColor: "#FFD2D2"
     btnLink: /zajecia-indywidualne
-    selectedCourse: kurs-1-tytuł
-  - title: Zajęcia dla maturzystów
-    headerColor: "#74dcff"
-    btnLink: /dla-maturzystow
-    selectedCourse: tytuł-2-kursu
+    selectedCourse: zajęcia-indywidualne
 sampleInfoBox:
   title: WYPEŁNIJ FORMULARZ \n ABY ZAPISAĆ SIĘ NA ZAJĘCIA
   btnLink: /zapisy

@@ -23,13 +23,18 @@ collections:
       - { label: "Template Key", name: "templateKey", widget: "hidden", default: "course-page" }
       - { label: "Path", name: "path", widget: "string", default: "/kursy/{{slug}}" }
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Navigation priority", name: "navigationpriority", widget: "string" }          
+      - { label: "Navigation priority", name: "navigationpriority", widget: "number" }          
       - { label: "Featured image", name: "featuredimage", widget: "image" }
       - { label: "Background color", name: "color", widget: "color" }
       - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Card heading", name: "cardheading", widget: "string" }
       - { label: "Card color", name: "cardcolor", widget: "color" }
-      - { label: "Card List", name: "cardlist", widget: "list", field: { label: "Item", name: "item", widget: "string" } }
+      - label: "Card List"
+        name: "cardlist"
+        widget: "list"
+        fields:
+          - { label: "Text", name: "item", widget: "string" }
+          - { label: "Image", name: "image", widget: "image" }
 
   - name: "pages"
     label: "Pages"
@@ -56,6 +61,14 @@ collections:
               - { name: "body", label: "Body", widget: "string" }
               - { name: "headerColor", label: "Header Color", widget: "color" }
               - { name: "btnLink", label: "Button Link", widget: "string" }
+              - name: "selectedCourse"
+                label: "Select a Course"
+                widget: "relation"
+                collection: "kursy"  # Fetch from the courses collection
+                search_fields: ["title"]  # Search by course title
+                value_field: "{{slug}}"  # Store the course slug for linking
+                display_fields: ["title"]  # Show course titles in the dropdown
+                multiple: false
           - name: "individualCourses"
             label: "Individual Courses"
             widget: "list"
@@ -66,7 +79,7 @@ collections:
               - name: "selectedCourse"
                 label: "Select a Course"
                 widget: "relation"
-                collection: "courses"  # Fetch from the courses collection
+                collection: "kursy"  # Fetch from the courses collection
                 search_fields: ["title"]  # Search by course title
                 value_field: "{{slug}}"  # Store the course slug for linking
                 display_fields: ["title"]  # Show course titles in the dropdown

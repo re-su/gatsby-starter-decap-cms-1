@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link, useStaticQuery, graphql } from "gatsby";
+import { Link, graphql } from "gatsby";
 import logo from "../img/logo.svg";
+import { useLocation } from "@reach/router";
 
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(typeof window !== "undefined" ? window.pageYOffset : 0);
-  const IS_INDEX_PAGE = window.location.pathname === "/" || window.location.pathname === "";
+  const { pathname } = useLocation();
+  const IS_INDEX_PAGE = pathname === "/";
 
   // Scroll behavior
   useEffect(() => {

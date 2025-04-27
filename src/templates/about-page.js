@@ -4,6 +4,7 @@ import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Content, { HTMLContent } from "../components/Content";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import Markdown from 'react-markdown'
 
 export const AboutPageTemplate = ({ title, content, contentComponent, teachers }) => {
   const PageContent = contentComponent || Content;
@@ -27,7 +28,7 @@ export const AboutPageTemplate = ({ title, content, contentComponent, teachers }
                 <div className="teacher-info">
                   <h3 className="title is-size-4">{teacher.name}</h3>
                   <p className="teacher-role">{teacher.role}</p>
-                  <p>{teacher.bio}</p>
+                  <Markdown>{teacher.bio}</Markdown>
                 </div>
               </div>
             );

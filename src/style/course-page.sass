@@ -31,13 +31,13 @@
   align-items: center
   text-align: justify
 
-  > blockquote
+  * > blockquote, > blockquote
     position: relative  
     padding: 1rem  
     margin: 1rem 0
     max-width: 80%
-    // background: #f9f9f9  
-    // border-left: 5px solid #007bff  
+    background: #f9f9f9  
+    border-left: 5px solid $secondary-color
     font-style: italic  
     color: #333  
     display: flex  
@@ -47,53 +47,87 @@
       max-width: 100vw !important
       padding: 1rem 0.5rem
 
-  > blockquote::before 
-    content: ""  
-    display: inline-block  
-    width: 50px  
-    height: 200px  
-    background-image: url('../img/arrow-down.svg')  
-    background-size: contain  
-    background-repeat: no-repeat  
-    transform: scaleX(-1)
-    margin-right: 20px
-    flex-shrink: 0
+  // * > blockquote::before, > blockquote::before 
+  //   content: ""  
+  //   display: inline-block  
+  //   width: 50px  
+  //   height: 200px  
+  //   background-image: url('../img/arrow-down.svg')  
+  //   background-size: contain  
+  //   background-repeat: no-repeat  
+  //   transform: scaleX(-1)
+  //   margin-right: 20px
+  //   flex-shrink: 0
   > p
     padding: 5px
+    margin: 0 auto
+    width: 100%
 
-  > * img
+  > p:has(img)
+    text-align: center
+
+  .gatsby-resp-image-link
+    width: 80%
+    @media screen and (max-width: 768px)
+      width: 100%
+
+  * > * img, > * img
     border-radius: 10px
     border: 4px solid white
+    width: 80% //Applies only to direct p > img (From URL, not uploaded)
+    object-fit: cover
+    @media screen and (max-width: 768px)
+      width: 100%
+
+
+.course-info-cards-container
+  display: flex
+  gap: 10px
+  flex-wrap: wrap
+  justify-content: center
+  width: 100%
+  padding-bottom: 10px
+
+  @media screen and (max-width: 768px)
+    flex-wrap: nowrap
+    justify-content: flex-start
+    overflow-x: auto
+    -webkit-overflow-scrolling: touch
+    scroll-behavior: smooth
+    scroll-snap-type: x mandatory
+
+.course-info-card
+  display: flex
+  flex-direction: column
+  align-content: center
+  justify-content: space-between
+  align-items: center
+  background-color: $secondary-color
+  width: 200px
+  padding: 10px
+  border-radius: 8px
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+  flex: 0 0 auto
+
+  @media screen and (max-width: 768px)
+    scroll-snap-align: start
+    width: 60%
+    max-width: 200px
+
+  > * img, > img
+    width: 50%
+    margin: 0 auto
+    @media screen and (max-width: 768px)
+      width: 30%
+
+  > .course-info-card-text
+    font-weight: bold
+    text-align: center
 
 
 
-.course-card-container
+.course-card-button-container
   width: 100%
   margin: 0
   padding: 0
   text-align: center
-
-#course-info-card
-  background-color: $secondary-color
-  max-width: 400px
-  padding: 20px
-  margin: 0 auto
-  border-radius: 8px
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
-
-.course-info-card-title
-  font-size: 1.4rem
-  font-weight: bold
-  margin-bottom: 15px
-  text-align: center
-
-.course-info-card-list
-  display: flex
-  list-style-type: disc
-  padding: 0
-  flex-direction: column
-  align-items: center
-
-.course-info-card-list-item
-  font-size: 1rem
-  margin-bottom: 10px

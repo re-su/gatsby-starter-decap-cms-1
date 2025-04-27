@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-const useScrollVHThreshold = (vhThreshold = 50) => {
-  const [isThresholdExceeded, setIsThresholdExceeded] = useState(false);
+const useScrollVHThreshold = (vhThreshold = 50, defaultResult = false) => {
+  const [isThresholdExceeded, setIsThresholdExceeded] = useState(defaultResult);
 
   useEffect(() => {
     const thresholdInPixels = (vhThreshold / 100) * window.innerHeight;

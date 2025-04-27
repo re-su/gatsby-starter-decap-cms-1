@@ -5,7 +5,7 @@ import { useLocation } from "@reach/router";
 const Breadcrumb = ({ separator = "›", rootLabel = "Strona główna" }) => {
   const { pathname } = useLocation();
   const segments = pathname.split("/").filter(Boolean);
-  const IS_INDEX_PAGE = typeof window !== "undefined" && (window.location.pathname === "/" || window.location.pathname === "");
+  const IS_INDEX_PAGE = pathname === "/";
 
   const breadcrumbs = [
     { path: "/", label: rootLabel },

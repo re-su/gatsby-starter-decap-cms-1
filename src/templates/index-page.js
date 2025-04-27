@@ -124,6 +124,7 @@ export const pageQuery = graphql`
           body
           headerColor
           btnLink
+          selectedCourse
         }
         individualCourses {
           title

@@ -1,17 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import personImage from "../img/svg/logo-4.svg";
+import { Link } from "gatsby";
 
 export default function MainPageBanner(props) {
   return (
     <div className="main-banner">
+      <div className="banner-background"></div> 
       <div className="banner-content">
         <div className="banner-left">
           <h1>
             Szkoła językowa <span className="highlight">Fragaria</span>
           </h1>
           <p>Wyzwalamy potencjał <br /> naszych kursantów</p>
-          <a href="#group-offers" className="primary-btn offer-btn">Zobacz ofertę</a>
+          <Link className="primary-btn offer-btn" to="/kursy">Zobacz ofertę</Link>
         </div>
         <div className="banner-right">
           {/* Text Bubble */}
@@ -38,7 +40,7 @@ export default function MainPageBanner(props) {
             <div className="bubble-tail dark"></div>
             <div className="bubble-tail light"></div>
           </div>
-          <img src={personImage} alt="Person" className="person-image" />
+          <img src={personImage} alt="Person" loading="eager" className="person-image" />
         </div>
       </div>
     </div>

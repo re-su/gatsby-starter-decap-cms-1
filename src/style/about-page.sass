@@ -1,6 +1,23 @@
 /* About Section */
 .about-content
   margin-bottom: 2rem
+  text-align: justify
+  
+  * > blockquote, > blockquote
+    position: relative  
+    padding: 1rem  
+    margin: 1rem 0
+    max-width: 80%
+    background: #f9f9f9  
+    border-left: 5px solid $secondary-color
+    font-style: italic  
+    color: #333  
+    display: flex  
+    align-items: center  
+    text-align: justify
+    @media screen and (max-width: 768px)
+      max-width: 100vw !important
+      padding: 1rem 0.5rem
 
 .teachers
   display: flex
@@ -28,10 +45,12 @@
   .teacher-role
     font-weight: 600
     color: white
+    text-align: center
 
   p
     font-size: 1rem
     color: #333
+    text-align: left
 
 /* Responsive Styles */
 @media (max-width: 768px)

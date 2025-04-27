@@ -11,35 +11,41 @@ export const CourseListTemplate = ({ data }) => {
     <section className="section">
       <h2 className="title is-size-3 has-text-weight-bold">Kursy</h2>
       <div className="course-list">
-        {courses.map(({ node: course }) => (
-          <div
-            className="course-item"
-            key={course.id}
-            style={{ borderLeft: `5px solid ${course.frontmatter.color || '#007acc'}` }}
-          >
-            {course.frontmatter.featuredimage && (
-              <div className="course-thumbnail">
-                <PreviewCompatibleImage
-                  imageInfo={{
-                    image: course.frontmatter.featuredimage,
-                    alt: `Featured image for ${course.frontmatter.title}`,
-                  }}
-                />
-              </div>
-            )}
-            <div className="course-info">
-              <h2>
-                <Link to={course.fields.slug.replace(/\/$/, '')} className="course-title">
-                  {course.frontmatter.title}
+        {courses
+          .sort((a, b) => {
+            const priorityA = a.node.frontmatter.navigationpriority ?? 0;
+            const priorityB = b.node.frontmatter.navigationpriority ?? 0;
+            return priorityA - priorityB;
+          })
+          .map(({ node: course }) => (
+            <div
+              className="course-item"
+              key={course.id}
+              style={{ borderLeft: `5px solid ${course.frontmatter.color || '#007acc'}` }}
+            >
+              {course.frontmatter.featuredimage && (
+                <div className="course-thumbnail">
+                  <PreviewCompatibleImage
+                    imageInfo={{
+                      image: course.frontmatter.featuredimage,
+                      alt: `Featured image for ${course.frontmatter.title}`,
+                    }}
+                  />
+                </div>
+              )}
+              <div className="course-info">
+                <h2>
+                  <Link to={course.fields.slug.replace(/\/$/, '')} className="course-title">
+                    {course.frontmatter.title}
+                  </Link>
+                </h2>
+                <p className="course-excerpt">{course.excerpt}</p>
+                <Link className="primary-btn" to={course.fields.slug.replace(/\/$/, '')}>
+                  Zobacz kurs →
                 </Link>
-              </h2>
-              <p className="course-excerpt">{course.excerpt}</p>
-              <Link className="primary-btn" to={course.fields.slug.replace(/\/$/, '')}>
-                Zobacz kurs →
-              </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </section>
   );
@@ -83,6 +89,7 @@ export const pageQuery = graphql`
           frontmatter {
             title
             color
+            navigationpriority
             featuredimage {
               childImageSharp {
                 gatsbyImageData(width: 300, quality: 100, layout: CONSTRAINED)

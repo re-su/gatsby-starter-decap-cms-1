@@ -14,7 +14,7 @@ const CoursePagePreview = ({ entry, widgetFor }) => {
         helmet={
           <Helmet titleTemplate="%s | Fragaria">
             <title>Kurs</title>
-            <style>{`html { background-color: red; }; }`}</style>
+            <style>{`body { background-color: red; }; }`}</style>
           </Helmet>
         }
       />

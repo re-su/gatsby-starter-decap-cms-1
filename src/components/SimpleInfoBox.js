@@ -6,7 +6,7 @@ import { Link } from 'gatsby'
 const SimpleInfoBox = ({ title, body, btnLink, btnText, backgroundColor }) => {
   return (
     <div className="simple-info-box" style={{ backgroundColor: backgroundColor }}>
-      <img src={strawberry} alt="Person" className="pointing-strawberry"/>
+      <img src={strawberry} alt="Person" className="pointing-strawberry" loading="lazy"/>
       <h2 className="title is-4 has-text-centered">
         {title.split('\\n').map((line, index) => (
             <React.Fragment key={index}>

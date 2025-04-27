@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import Girl from "../img/girl2.png";
+import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image";
+import Girl from "../img/girl2.png"
 import { Link } from 'gatsby'
 
 const FeaturesSection = ({ features }) => {
@@ -10,7 +10,16 @@ const FeaturesSection = ({ features }) => {
       <div className="features-container">
         {/* Left side: Image */}
         <div className="features-image">
-          <img src={Girl} alt="Student learning" />
+          <StaticImage
+            src="../img/girl2.png"
+            alt="Student learning"
+            placeholder="blurred"
+            layout="constrained"
+            width={1000}
+            quality={100}
+            formats={["auto", "webp"]}
+          />
+          {/* <img src={Girl}/> */}
         </div>
 
         {/* Right side: Features + CTA */}

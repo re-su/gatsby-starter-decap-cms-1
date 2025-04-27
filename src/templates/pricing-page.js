@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Layout from '../components/Layout'
-import { getImage } from 'gatsby-plugin-image'
+
 import { graphql, Link } from 'gatsby';
 
 const PricingPageTemplate = ({ data }) => {
@@ -12,27 +12,33 @@ const PricingPageTemplate = ({ data }) => {
     <section className='section'>
       <h2 className='title is-size-3 has-text-weight-bold'>{pageTitle}</h2>
       <section className="pricing-page-container">
-        {courses.map(({ node }) => {
-          const {
-            frontmatter: { title, cardheading, cardlist, featuredimage },
-            fields: { slug },
-          } = node;
+        {courses
+          .sort((a, b) => {
+            const priorityA = a.node.frontmatter.navigationpriority || 0;
+            const priorityB = b.node.frontmatter.navigationpriority || 0;
+            return priorityA - priorityB;
+          })
+          .map(({ node }) => {
+            const {
+              frontmatter: { title, cardheading, cardlist, featuredimage },
+              fields: { slug },
+            } = node;
 
-          return (
-            <div className="pricing-page-card" key={node.id}>
-              <div className="pricing-page-card-content">
-                <h2 className="pricing-page-card-title">{title}</h2>
-                <p className="pricing-page-card-heading">{cardheading}</p>
-                <ul className="pricing-page-card-details">
-                  {cardlist.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
-                <Link className="primary-btn" to={slug}>Zapisz się</Link>
+            return (
+              <div className="pricing-page-card" key={node.id}>
+                <div className="pricing-page-card-content">
+                  <h2 className="pricing-page-card-title">{title}</h2>
+                  <p className="pricing-page-card-heading">{cardheading}</p>
+                  <ul className="pricing-page-card-details">
+                    {cardlist.map((item, index) => (
+                      <li key={index}>{item.item}</li>
+                    ))}
+                  </ul>
+                  <Link className="primary-btn" to={slug}>Zapisz się</Link>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </section>
     </section>
   );
@@ -78,7 +84,15 @@ export const pageQuery = graphql`
             title
             color
             cardheading
-            cardlist
+            navigationpriority
+            cardlist {
+              item
+              image {
+                childImageSharp {
+                  gatsbyImageData(width: 300, quality: 100, layout: CONSTRAINED)
+                }
+              }
+            }
             cardcolor
             featuredimage {
               childImageSharp {

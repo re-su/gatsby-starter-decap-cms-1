@@ -25,9 +25,9 @@
   justify-content: center
   align-items: flex-end
 
-  img
+  img, .gatsby-image-wrapper
     transform: scale(1.15) translateY(-6.5%)
-    height: 500px
+    width: 500px
     object-fit: cover
 
 .features-content
@@ -84,8 +84,9 @@
     width: 100%  /* Full width for image */
     height: auto  /* Allow height to adjust with aspect ratio */
     clip-path: polygon(50% -10%, 100% -10%, 100% 35%, 100% 100%, 80% 90%, 50% 100%, 20% 90%, -10% 100%, -10% 35%, -10% -10%)
-    img
+    img, .gatsby-image-wrapper
       max-height: 300px
+      width: auto
       object-fit: cover  /* Ensure image fills the container without stretching */
 
   .features-content
