@@ -34,7 +34,7 @@ const TemplateWrapper = ({ children }) => {
         <link
           rel="apple-touch-icon"
           sizes="180x180"
-          href={`${withPrefix("/")}img/apple-touch-icon.png`}
+          href={`${withPrefix("/")}img/favicon-32x32.png`}
         />
         <link
           rel="icon"
@@ -51,7 +51,7 @@ const TemplateWrapper = ({ children }) => {
 
         <link
           rel="mask-icon"
-          href={`${withPrefix("/")}img/safari-pinned-tab.svg`}
+          href={`${withPrefix("/")}img/favicon-32x32.png`}
           color="#ff4400"
         />
         <meta name="theme-color" content="#fff" />
@@ -61,7 +61,7 @@ const TemplateWrapper = ({ children }) => {
         <meta property="og:url" content="/" />
         <meta
           property="og:image"
-          content={`${withPrefix("/")}img/og-image.jpg`}
+          content={`${withPrefix("/")}img/og-image.png`}
         />
         <body className={`has-navbar-fixed-top ${IS_INDEX_PAGE ? 'is-index-page' : ''}`} />
       </Helmet>
