@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import CourseCards from "./CourseCards";
+import { useInView } from "../hooks/useInView";
 
 const IndividualCourses = ({ courseCards, bgColor }) => {
+  const [ref, inView] = useInView({ threshold: 0.1 });
   return (
-    <section className="individual-courses" style={{ backgroundColor: bgColor }}>
+    <section ref={ref} className={`individual-courses fade-in-section ${inView ? "is-visible" : ""}`} style={{ backgroundColor: bgColor }}>
       <h2 className="title is-4 has-text-centered">
         Oprócz zajęć grupowych w ofercie <br /> znajdują się również
       </h2>

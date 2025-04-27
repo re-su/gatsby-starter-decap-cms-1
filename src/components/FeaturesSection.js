@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image";
-import Girl from "../img/girl2.png"
+import { useInView } from "../hooks/useInView";
 import { Link } from 'gatsby'
 
 const FeaturesSection = ({ features }) => {
+  const [ref, inView] = useInView({ threshold: 0.1 });
   return (
-    <section className="features-section">
+    <section ref={ref} className={`features-section fade-in-section ${inView ? "is-visible" : ""}`}>
       <div className="features-container">
         {/* Left side: Image */}
         <div className="features-image">

@@ -5,12 +5,13 @@ import StrawberryRight from "../img/strawberry-pointing-right.svg";
 import StrawberryUp from "../img/strawberry-pointing-up.svg";
 import ArrowDown from "../img/arrow-down.svg"; // ✅ Import arrow image
 import { useMediaQuery } from "react-responsive"; // ✅ Import useMediaQuery
+import { useInView } from "../hooks/useInView";
 
 const GroupCourses = ({ courseCards }) => {
   const isMobile = useMediaQuery({ maxWidth: 768 }); // ✅ Detect mobile screens
-
+  const [ref, inView] = useInView({ threshold: 0.1 });
   return (
-    <div className="section" id="group-offers" style={{ padding: "85px 1.5rem" }}>
+    <div ref={ref} className={`section fade-in-section ${inView ? "is-visible" : ""}`} id="group-offers" style={{ padding: "85px 1.5rem" }}>
       <div className="container">
         <div className={`columns is-vcentered ${isMobile ? "is-flex is-flex-direction-column" : ""}`}>
 

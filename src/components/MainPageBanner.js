@@ -2,20 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import personImage from "../img/svg/logo-4.svg";
 import { Link } from "gatsby";
+import { useInView } from "../hooks/useInView";
 
 export default function MainPageBanner(props) {
+  const [ref, inView] = useInView({ threshold: 0.1 });
   return (
     <div className="main-banner">
       <div className="banner-background"></div> 
       <div className="banner-content">
-        <div className="banner-left">
+        <div ref={ref} className={`banner-left fade-in-section ${inView ? "is-visible" : ""}`}>
           <h1>
             Szkoła językowa <span className="highlight">Fragaria</span>
           </h1>
           <p>Wyzwalamy potencjał <br /> naszych kursantów</p>
           <Link className="primary-btn offer-btn" to="/kursy">Zobacz ofertę</Link>
         </div>
-        <div className="banner-right">
+        <div ref={ref} className={`banner-right fade-in-section ${inView ? "is-visible" : ""}`}>
           {/* Text Bubble */}
           <div className="text-bubble pbottom acenter">
             {props.message.split(' ').map((word, wordIndex, wordsArray) => {
