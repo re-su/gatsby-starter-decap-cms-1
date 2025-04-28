@@ -23,12 +23,12 @@ courses:
     btnLink: /dla-starszakow
     selectedCourse: dla-starszaków
   - title: Dla szkoły podstawowej
-    body: 5-12 LAT
+    body: 8-14 LAT
     headerColor: "#b9e9ff"
     btnLink: /dla-szkoly-podstawowej
     selectedCourse: dla-szkoły-podstawowej
   - title: Dla młodzieży
-    body: Od 12 lat
+    body: 15-19 lat
     headerColor: "#a7e3ff"
     btnLink: /dla-mlodziezy
     selectedCourse: dla-młodzieży
