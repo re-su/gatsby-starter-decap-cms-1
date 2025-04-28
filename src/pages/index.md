@@ -1,8 +1,8 @@
 ---
 templateKey: index-page
 title: Fragaria school home page
-heading: Cześć! Jestem poziomka. Jestem tu by pomagać małym i dużym w nauce
-  angielskiego! W czym mogę pomóc?
+heading: Cześć! Tu Poziomka! Razem zamienimy naukę angielskiego w świetną
+  zabawę. Gotowy na przygodę?
 description: Opis strony głównej
 features:
   - svgIcon: img/fce.svg
@@ -16,7 +16,7 @@ courses:
     body: 4-5 LAT
     headerColor: "#def5ff"
     btnLink: /courses/kurs2
-    selectedCourse: dla-starszaków
+    selectedCourse: dla-najmłodszych
   - title: Dla starszaków
     body: 6-7 LAT
     headerColor: "#cbefff"

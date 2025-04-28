@@ -7,7 +7,7 @@ price: 1000 PLN
 featuredImage: /img/kids1.jpg
 title: Dla szkoły podstawowej
 navigationpriority: 3
-cardheading: 177 zł / miesięcznie
+cardheading: 180 zł / miesięcznie
 cardcolor: "#ffcdcc"
 cardlist:
   - item: 30 lekcji
