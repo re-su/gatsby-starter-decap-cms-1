@@ -49,7 +49,7 @@ query NavbarQuery {
       style={{ top: navTop, transition: "top 0.3s, background-color 1s", backgroundColor: backgroundColorValue }}
     >
       <div className="nav-logo">
-        <Link to="/" title="Strona główna" style={{ display: "block", height: "60px", padding: "5px", paddingBottom: "2px" }}>
+        <Link to="/" title="Strona główna" style={{ display: "block", height: "60px", width: "113.44px", padding: "5px", paddingBottom: "2px" }}>
           <img
             src={logo}
             alt="Site Logo"
