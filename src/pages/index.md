@@ -16,7 +16,7 @@ courses:
     body: 4-5 LAT
     headerColor: "#def5ff"
     btnLink: /courses/kurs2
-    selectedCourse: dla-starszaków
+    selectedCourse: dla-najmłodszych
   - title: Dla starszaków
     body: 6-7 LAT
     headerColor: "#cbefff"
