@@ -17,4 +17,3 @@ CMS.registerPreviewTemplate('index', IndexPagePreview)
 CMS.registerPreviewTemplate('o-nas', AboutPagePreview)
 CMS.registerPreviewTemplate('kursy', CoursePagePreview)
 CMS.registerPreviewTemplate('kontakt', ContactPagePreview)
-console.log("cms invoked");

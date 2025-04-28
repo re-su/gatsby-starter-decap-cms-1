@@ -21,7 +21,6 @@ export const CourseSignupPageTemplate = ({
           <h1>{title}</h1>
           <p>{desc}</p>
           <PageContent content={content} />
-          {console.log(courses)}
           <ContactForm display={true} courses={courses} /> {/* Pass courses here */}
         </div>
       </div>

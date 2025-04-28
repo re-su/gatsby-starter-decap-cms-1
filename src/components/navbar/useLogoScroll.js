@@ -6,7 +6,6 @@ const useLogoScroll = ({ initialPosition = "60", isIndexPage } = {}) => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window !== undefined ? window.pageYOffset : 0;
-      console.log(isIndexPage);
       if(!isIndexPage) {
         setLogoPosition("0")
       }
@@ -15,7 +14,6 @@ const useLogoScroll = ({ initialPosition = "60", isIndexPage } = {}) => {
         setLogoPosition("0") // Stick to the navbar
       } else if(isIndexPage){
         const calculatedPosition = Math.max(60 - currentScrollPos, 0) // Calculate logo position
-        console.log(calculatedPosition)
         setLogoPosition(`${calculatedPosition}`)
       }
     }

@@ -1,8 +1,6 @@
 import React from "react";
 
 const CourseCard = ({ value = {}, field, forID, classNameWrapper, onChange }) => {
-  console.log("CourseCardWidget invoked");
-
   // Handle the change of input value for individual fields
   const handleInputChange = (event, fieldName) => {
     const updatedValue = { ...value, [fieldName]: event.target.value };

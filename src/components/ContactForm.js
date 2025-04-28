@@ -28,7 +28,7 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
     const encoded = Object.keys(data)
       .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key] || ""))
       .join("&");
-    console.log("Encoded Form Data: ", encoded); // Log the data to see if it's correct
+    // console.log("Encoded Form Data: ", encoded); // Log the data to see if it's correct
     return encoded;
   };
 
@@ -41,7 +41,6 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
       ...formData,
       number: phone, // Ensure phone number is correctly set
     };
-    console.log(finalFormData);
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -85,7 +84,7 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
         <form
           name="course-signup"
           method="post"
-          action="/contact/thanks/"
+          action="/zapisy/thanks/"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
           onSubmit={handleSubmit}

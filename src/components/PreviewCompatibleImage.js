@@ -6,7 +6,6 @@ const PreviewCompatibleImage = ({ imageInfo, lazyLoad }) => {
   const imageStyle = { borderRadius: "5px" };
 
   const { alt = "", childImageSharp, image } = imageInfo;
-  console.log(imageInfo);
 
   if (!!image && !!image.childImageSharp) {
     return (

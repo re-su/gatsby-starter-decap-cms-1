@@ -19,7 +19,6 @@ export default function FullWidthImage(props) {
   // Helper function to generate random positions
   const getRandomPosition = (icon) => {
     // Define the positions
-    //console.log("pos", icon);
     const positions = [
       { top: "15%", left: "10%" }, // Top-left
       { top: "15%", left: "80%" }, // Top-right
@@ -31,7 +30,6 @@ export default function FullWidthImage(props) {
       { top: "65%", left: "50%" }, // Near center-bottom
     ];
 
-    //console.log(positions[icon]);
     return positions[icon];
   };
 

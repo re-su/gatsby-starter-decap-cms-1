@@ -14,7 +14,6 @@ const Navbar = () => {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
       const navbar = document.getElementById("navbar");
-      console.log(currentScrollPos, prevScrollPos);
       if (prevScrollPos > currentScrollPos) {
         navbar.style.top = "0"; // Show the navbar
       } else if(currentScrollPos > 200) {
@@ -31,14 +30,11 @@ const Navbar = () => {
     };
 
     const handleLoad = () => {
-      console.log("HANDLE LOAD")
       const currentScrollPos = window.pageYOffset;
-      console.log("SCroll pos in load: ", currentScrollPos)
       if(currentScrollPos <= 10) {
         document.getElementById("navbar").style.backgroundColor = "rgba(164, 226, 255, 0)"
       }
     }
-    console.log("Is index: ", IS_INDEX_PAGE);
 
     if(IS_INDEX_PAGE) {
       window.addEventListener("scroll", handleScroll);

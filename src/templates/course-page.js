@@ -39,7 +39,6 @@ export const CoursePageTemplate = ({
           {cardlist &&
             cardlist.map((item, index) => (
               <div key={index} className="course-info-card" style={{ backgroundColor: cardcolor }}>
-                {console.log(item)}
                 {item.image && (
                   <PreviewCompatibleImage
                     imageInfo={{
