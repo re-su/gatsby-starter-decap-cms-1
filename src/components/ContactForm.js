@@ -36,22 +36,21 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
     e.preventDefault();
     const form = e.target;
 
-    // Ensure phone number is included correctly
-    const finalFormData = {
-      ...formData,
-      number: phone, // Ensure phone number is correctly set
-    };
+    // Build FormData from the form DOM itself
+    const formDataDom = new FormData(form);
+
+    // Convert it into URL encoded string
+    const encodedData = new URLSearchParams(formDataDom).toString();
+
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({
-        "form-name": form.getAttribute("name"),
-        ...finalFormData,
-      }),
+      body: encodedData,
     })
       .then(() => navigate(form.getAttribute("action")))
       .catch((error) => alert(error));
   };
+
 
   // Handle form data changes
   const handleChange = (e) => {
@@ -122,8 +121,10 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
           <label>
             Kurs:
             {id && id !== null ? (
-              // Display the title of the course based on the selected id
-              <div className="contact-form-course-name">{courses.find((course) => course.id === id)?.title}</div>
+              <>
+                <div className="contact-form-course-name">{courses.find((course) => course.id === id)?.title}</div>
+                <input type="hidden" name="course" value={courses.find((course) => course.id === id)?.title} />
+              </>
             ) : (
               <select name="course" id="course" value={formData.course} onChange={handleChange} required>
                 {courses.map((course) => (
