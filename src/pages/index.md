@@ -28,7 +28,7 @@ courses:
     btnLink: /dla-szkoly-podstawowej
     selectedCourse: dla-szkoły-podstawowej
   - title: Dla młodzieży
-    body: 15-19
+    body: 15-19 lat
     headerColor: "#a7e3ff"
     btnLink: /dla-mlodziezy
     selectedCourse: dla-młodzieży
