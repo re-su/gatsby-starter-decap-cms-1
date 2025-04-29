@@ -44,7 +44,7 @@ individualCourses:
 sampleInfoBox:
   title: |-
     WYPEŁNIJ FORMULARZ \n ABY ZAPISAĆ SIĘ NA ZAJĘCIA
-
+    \n
     Start zajęć - wrzesień 2025!
   btnLink: /zapisy
   btnText: Zapisz się
