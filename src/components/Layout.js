@@ -25,9 +25,9 @@ const TemplateWrapper = ({ children }) => {
 
 
   return (
-    <div>
+    <div class="notranslate" translate="no">
       <Helmet>
-        <html lang="en" />
+        <html lang="pl" class="notranslate" translate="no"/>
         <title>{title}</title>
         <meta name="description" content={description} />
 
@@ -63,6 +63,7 @@ const TemplateWrapper = ({ children }) => {
           property="og:image"
           content={`${withPrefix("/")}img/og-image.png`}
         />
+        <meta name="google" content="notranslate" />
         <body className={`has-navbar-fixed-top ${IS_INDEX_PAGE ? 'is-index-page' : ''}`} />
       </Helmet>
       <Navbar />

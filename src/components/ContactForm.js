@@ -8,6 +8,7 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
     email: "",
     number: "",
     course: "", // Initialize course as empty
+    consent: false, // New field for consent
   });
 
   const formatPhoneNumber = (value) => {
@@ -34,6 +35,12 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!formData.consent) {
+      alert("Musisz wyrazić zgodę na przetwarzanie danych osobowych.");
+      return;
+    }
+
     const form = e.target;
 
     // Build FormData from the form DOM itself
@@ -51,10 +58,13 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
       .catch((error) => alert(error));
   };
 
-
   // Handle form data changes
   const handleChange = (e) => {
     setFormData((prevData) => ({ ...prevData, [e.target.name]: e.target.value }));
+  };
+
+  const handleConsentChange = (e) => {
+    setFormData((prevData) => ({ ...prevData, consent: e.target.checked }));
   };
 
   // If id is provided, set the selected option to the specific course
@@ -79,6 +89,9 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
   return (
     <div className={`contact-form-container ${display ? "open" : ""} ${isFullscreen ? "isFullscreen" : ""}`}>
       <div className="contact-form">
+        <h5 className="contact-form-container-info">
+          Zajęcia startują we wrześniu 2025
+        </h5>
         <h3>Zapisz się na kurs</h3>
         <form
           name="course-signup"
@@ -136,7 +149,22 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
             )}
           </label>
 
-          <button type="submit" className="primary-btn">
+          <label>
+            <input
+              type="checkbox"
+              name="consent"
+              checked={formData.consent}
+              onChange={handleConsentChange}
+              required
+            />
+            Wyrażam zgodę na przetwarzanie moich danych osobowych w celach rekrutacyjnych.
+          </label>
+
+          <button
+            type="submit"
+            className={`primary-btn ${!formData.consent ? 'disabled' : ''}`}
+            disabled={!formData.consent}
+          >
             Wyślij
           </button>
         </form>

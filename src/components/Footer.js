@@ -43,6 +43,7 @@ const Footer = () => {
           {pages.map(({ title, path, children }) => (
             <Link key={path} to={path}>{title}</Link>
           ))}
+          <Link key={"/polityka-prywatności"} to={"/polityka-prywatności"}>Polityka prywatności</Link>
         </nav>
         <div className="footer-contact">
           <div className="contact-item">
