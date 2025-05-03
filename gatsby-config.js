@@ -4,7 +4,7 @@ module.exports = {
     description:
       "Fragaria to szkoła językowa, która oferuje profesjonalne kursy języka angielskiego, dostosowane do różnych poziomów zaawansowania.",
     author: "Fragaria School",
-    siteUrl: "https://www.fragaria-szkola.pl",
+    siteUrl: "https://www.fragariaschool.pl",
     keywords: ["angielski", "kursy językowe", "szkoła językowa", "nauka języka"]
   },
   plugins: [
@@ -74,20 +74,6 @@ module.exports = {
       resolve: "gatsby-plugin-decap-cms",
       options: {
         modulePath: `${__dirname}/src/cms/cms.js`,
-      },
-    },
-    {
-      resolve: `gatsby-plugin-sitemap`,
-      options: {
-        output: `/sitemap.xml`,
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-robots-txt',
-      options: {
-        host: "https://www.fragariaschool.pl", // or use siteMetadata.siteUrl if needed dynamically
-        sitemap: "https://www.fragariaschool.pl/sitemap.xml",
-        policy: [{ userAgent: '*', allow: '/' }],
       },
     },
     {
