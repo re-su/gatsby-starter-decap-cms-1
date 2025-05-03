@@ -1,6 +1,6 @@
 [build]
   publish = "public"
-  command = "npm run build"
+  command = "npm run build --legacy-peer-deps"
 [build.environment]
   NODE_VERSION = "16.20.0"
   YARN_VERSION = "1.22.4"
