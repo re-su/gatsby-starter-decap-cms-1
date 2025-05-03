@@ -4,34 +4,45 @@ import { GatsbyImage } from "gatsby-plugin-image";
 
 const PreviewCompatibleImage = ({ imageInfo, lazyLoad }) => {
   const imageStyle = { borderRadius: "5px" };
+  const { alt = "", image } = imageInfo;
 
-  const { alt = "", childImageSharp, image } = imageInfo;
+  const gatsbyImage =
+    image?.childImageSharp?.gatsbyImageData || imageInfo?.childImageSharp?.gatsbyImageData;
 
-  if (!!image && !!image.childImageSharp) {
+  if (gatsbyImage) {
     return (
       <GatsbyImage
-        image={image.childImageSharp.gatsbyImageData}
+        image={gatsbyImage}
         style={imageStyle}
         alt={alt}
         loading={lazyLoad ? "lazy" : "eager"}
       />
     );
-  } else if (!!childImageSharp) {
+  }
+
+  if (image?.publicURL) {
     return (
-      <GatsbyImage
-        image={childImageSharp.gatsbyImageData}
+      <img
         style={imageStyle}
+        src={image.publicURL}
         alt={alt}
+        loading={lazyLoad ? "lazy" : "eager"}
       />
     );
-    // for Netlify CMS 
-  } else if (image && image.publicURL) {
-    return <img style={{imageStyle}} src={image.publicURL} alt={alt} loading={lazyLoad ? "lazy" : "eager"} />;
-  } else if(image) {
-    return <img style={{imageStyle}} src={image} alt={alt} loading={lazyLoad ? "lazy" : "eager"} />;
-  } else {
-    return null;
   }
+
+  if (typeof image === "string") {
+    return (
+      <img
+        style={imageStyle}
+        src={image}
+        alt={alt}
+        loading={lazyLoad ? "lazy" : "eager"}
+      />
+    );
+  }
+
+  return null;
 };
 
 PreviewCompatibleImage.propTypes = {

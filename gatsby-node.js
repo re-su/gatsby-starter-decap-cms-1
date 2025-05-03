@@ -1,5 +1,6 @@
 const _ = require('lodash')
 const path = require('path')
+const fs = require('fs')
 const { createFilePath } = require('gatsby-source-filesystem')
 
 exports.createPages = ({ actions, graphql }) => {
@@ -43,6 +44,9 @@ exports.createPages = ({ actions, graphql }) => {
         },
       })
     })
+
+    // Save slugs for use in sitemap generation
+    exports.allSlugs = pages.map(edge => edge.node.fields.slug)
   })
 }
 
@@ -57,4 +61,28 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       value,
     })
   }
+}
+
+exports.onPostBuild = async ({ graphql }) => {
+  const siteUrl = 'https://www.fragariaschool.pl'
+
+  const sitemapEntries = exports.allSlugs.map(
+    slug => `<url><loc>${siteUrl}${slug}</loc></url>`
+  ).join('\n')
+
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapEntries}
+</urlset>`
+
+  const robots = `User-agent: *
+Allow: /
+Sitemap: ${siteUrl}/sitemap.xml
+`
+
+  // Write the files to the public directory
+  fs.writeFileSync(path.join('public', 'sitemap.xml'), sitemap)
+  fs.writeFileSync(path.join('public', 'robots.txt'), robots)
+
+  console.log('✅ Generated sitemap.xml and robots.txt')
 }
