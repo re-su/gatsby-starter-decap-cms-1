@@ -80,18 +80,20 @@
     background-color: $primary-color
 
   .features-container
-    flex-direction: column  /* Stack elements vertically */
+    flex-direction: column /* Stack elements vertically */
     text-align: center
 
   .features-image
-    width: 100%  /* Full width for image */
-    height: auto  /* Allow height to adjust with aspect ratio */
+    width: 100% /* Full width for image */
+    height: auto /* Allow height to adjust with aspect ratio */
     clip-path: polygon(50% -10%, 100% -10%, 100% 35%, 100% 100%, 80% 90%, 50% 100%, 20% 90%, -10% 100%, -10% 35%, -10% -10%)
     img, .gatsby-image-wrapper
-      max-height: 300px
+      // max-height: 300px
       min-height: auto
       width: auto
-      object-fit: cover  /* Ensure image fills the container without stretching */
+      max-width: min(90%, 500px)
+      margin: 0 auto
+      object-fit: cover /* Ensure image fills the container without stretching */
 
   .features-content
     width: 100%
@@ -100,4 +102,4 @@
     // clip-path: none
 
   .features-list
-    gap: 10px  /* Increased gap for better readability on small screens */
+    gap: 10px /* Increased gap for better readability on small screens */
