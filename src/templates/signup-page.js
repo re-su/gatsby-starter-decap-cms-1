@@ -1,6 +1,7 @@
 import * as React from "react";
 import { graphql } from "gatsby";
 import PropTypes from "prop-types";
+import { Helmet } from "react-helmet";
 import { HTMLContent } from "../components/Content";
 import ContactForm from "../components/ContactForm";
 import Layout from "../components/Layout"
@@ -11,11 +12,13 @@ export const CourseSignupPageTemplate = ({
   content,
   contentComponent,
   courses, // Add courses prop to be passed
+  helmet
 }) => {
   const PageContent = contentComponent || HTMLContent;
 
   return (
     <section className="section">
+      {helmet || ""}
       <div className="container">
         <div className="content">
           <h1>{title}</h1>
@@ -52,6 +55,11 @@ const CourseSignupPage = ({ data }) => {
         content={post.html}
         desc={post.frontmatter.desc}
         courses={courses}
+        helmet={
+          <Helmet titleTemplate="%s | Fragaria - szkoła językowa Lubsko">
+            <title>Zapisy</title>
+          </Helmet>
+        }
       />
     </Layout>
   );

@@ -1,14 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
+import { Helmet } from "react-helmet";
 import Layout from "../components/Layout";
 import Content, { HTMLContent } from "../components/Content";
 
-export const PrivacyPolicyPageTemplate = ({ title, content, contentComponent }) => {
+export const PrivacyPolicyPageTemplate = ({ title, content, contentComponent, helmet }) => {
   const PageContent = contentComponent || Content;
 
   return (
     <section className="section">
+      {helmet || ""}
       <h2 className="title is-size-3 has-text-weight-bold">{title}</h2>
       <div className="container">
         <div className="privacy-policy-content">
@@ -34,6 +36,11 @@ const PrivacyPolicyPage = ({ data }) => {
         title={post.frontmatter.title}
         content={post.html}
         contentComponent={HTMLContent}
+        helmet={
+          <Helmet titleTemplate="%s | Fragaria - szkoła językowa Lubsko">
+            <title>Polityka Prywatności</title>
+          </Helmet>
+        }
       />
     </Layout>
   );

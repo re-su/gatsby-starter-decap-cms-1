@@ -1,15 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Helmet } from 'react-helmet';
 import Layout from '../components/Layout'
 
 import { graphql, Link } from 'gatsby';
 
-const PricingPageTemplate = ({ data }) => {
+const PricingPageTemplate = ({ data, helmet }) => {
   const { edges: courses } = data.allMarkdownRemark;
   const pageTitle = data.markdownRemark.frontmatter.title
 
   return (
     <section className='section'>
+      {helmet || ""}
       <h2 className='title is-size-3 has-text-weight-bold'>{pageTitle}</h2>
       <section className="pricing-page-container">
         {courses
@@ -56,7 +58,14 @@ PricingPageTemplate.propTypes = {
 const PricingPage = ({ data }) => {
   return (
     <Layout>
-      <PricingPageTemplate data={data} />
+      <PricingPageTemplate 
+        data={data}
+        helmet={
+          <Helmet titleTemplate="%s | Fragaria - szkoła językowa Lubsko">
+            <title>Cennik</title>
+          </Helmet>
+        }
+       />
     </Layout>
   );
 };

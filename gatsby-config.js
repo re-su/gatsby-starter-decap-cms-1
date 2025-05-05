@@ -1,11 +1,13 @@
 module.exports = {
   siteMetadata: {
-    title: "Fragaria - szkoła językowa",
+    title: "Fragaria - szkoła językowa Lubsko",
     description:
-      "Fragaria to szkoła językowa, która oferuje profesjonalne kursy języka angielskiego, dostosowane do różnych poziomów zaawansowania.",
+      "Fragaria to szkoła językowa w Lubsku, która oferuje profesjonalne kursy języka angielskiego, dostosowane do różnych poziomów zaawansowania.",
     author: "Fragaria School",
     siteUrl: "https://www.fragariaschool.pl",
-    keywords: ["angielski", "kursy językowe", "szkoła językowa", "nauka języka"]
+    keywords: ["angielski", "kursy językowe", "szkoła językowa", 
+      "nauka języka", "Lubsko", "Żary", "korepetycje", "korepetycje angielski",
+    "korepetycje Lubsko"]
   },
   plugins: [
     "gatsby-plugin-react-helmet",

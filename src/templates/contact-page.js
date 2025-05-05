@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
+import { Helmet } from "react-helmet";
 import Layout from "../components/Layout";
 import Content, { HTMLContent } from "../components/Content";
 
@@ -10,11 +11,12 @@ import phoneIcon from "../img/icons/phone.svg";
 import locationIcon from "../img/icons/location.svg";
 import emailIcon from "../img/icons/email.svg";
 
-export const ContactPageTemplate = ({ title, phone, email, address, facebook, instagram, content, contentComponent }) => {
+export const ContactPageTemplate = ({ title, phone, email, address, facebook, instagram, content, contentComponent, helmet }) => {
   const PageContent = contentComponent || Content;
 
   return (
     <section className="section section--gradient">
+      {helmet || ""}
       <h2 className="title is-size-3 has-text-weight-bold">{title}</h2>
       <div className="container">
         <div className="contact-page-contact-section">
@@ -72,6 +74,11 @@ const ContactPage = ({ data }) => {
         instagram={post.frontmatter.instagram}
         contentComponent={HTMLContent}
         content={post.html}
+        helmet={
+          <Helmet titleTemplate="%s | Fragaria - szkoła językowa Lubsko">
+            <title>{`${post.frontmatter.title}`}</title>
+          </Helmet>
+        }
       />
     </Layout>
   );

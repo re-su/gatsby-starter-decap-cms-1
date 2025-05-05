@@ -92,7 +92,7 @@ const CoursePage = ({ data }) => {
         cardlist={course.frontmatter.cardlist}
         cardcolor={course.frontmatter.cardcolor}
         helmet={
-          <Helmet titleTemplate="%s | Fragaria">
+          <Helmet titleTemplate="%s | Fragaria - szkoła językowa Lubsko">
             <title>{`${course.frontmatter.title}`}</title>
             <meta name="description" content={course.frontmatter.description} />
             <style>{`body { background-color: ${course.frontmatter.color}; }`}</style>

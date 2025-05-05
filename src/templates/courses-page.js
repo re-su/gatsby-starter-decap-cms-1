@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
+import { Helmet } from 'react-helmet';
 import Layout from '../components/Layout';
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage';
 
-export const CourseListTemplate = ({ data }) => {
+export const CourseListTemplate = ({ data, helmet }) => {
   const { edges: courses } = data.allMarkdownRemark;
 
   return (
     <section className="section">
+      {helmet || ""}
       <h2 className="title is-size-3 has-text-weight-bold">Kursy</h2>
       <div className="course-list">
         {courses
@@ -62,7 +64,14 @@ CourseListTemplate.propTypes = {
 const CourseListPage = ({ data }) => {
   return (
     <Layout>
-      <CourseListTemplate data={data} />
+      <CourseListTemplate 
+        data={data} 
+        helmet={
+          <Helmet titleTemplate="%s | Fragaria - szkoła językowa Lubsko">
+            <title>Oferta</title>
+          </Helmet>
+        }
+      />
     </Layout>
   );
 };

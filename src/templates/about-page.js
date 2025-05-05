@@ -4,12 +4,14 @@ import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Content, { HTMLContent } from "../components/Content";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { Helmet } from "react-helmet";
 import Markdown from 'react-markdown'
 
-export const AboutPageTemplate = ({ title, content, contentComponent, teachers }) => {
+export const AboutPageTemplate = ({ title, content, contentComponent, teachers, helmet }) => {
   const PageContent = contentComponent || Content;
   return (
     <section className="section">
+      {helmet || ""}
       <h2 className="title is-size-3 has-text-weight-bold">{title}</h2>
       <div className="container">
         <div className="about-content">
@@ -56,6 +58,11 @@ const AboutPage = ({ data }) => {
         content={post.html}
         contentComponent={HTMLContent}
         teachers={post.frontmatter.teachers}
+        helmet={
+          <Helmet titleTemplate="%s | Fragaria - szkoła językowa Lubsko">
+            <title>{`${post.frontmatter.title}`}</title>
+          </Helmet>
+        }
       />
     </Layout>
   );

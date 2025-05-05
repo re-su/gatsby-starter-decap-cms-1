@@ -10,7 +10,7 @@ import { withPrefix } from "gatsby";
 import { useLocation } from "@reach/router";
 
 const TemplateWrapper = ({ children }) => {
-  const { title, description } = useSiteMetadata();
+  const { title, description, keywords } = useSiteMetadata();
   const { pathname } = useLocation();
   const IS_INDEX_PAGE = pathname === "/";
 
@@ -27,9 +27,10 @@ const TemplateWrapper = ({ children }) => {
   return (
     <div class="notranslate" translate="no">
       <Helmet>
-        <html lang="pl" class="notranslate" translate="no"/>
+        <html lang="pl" class="notranslate" translate="no" />
         <title>{title}</title>
         <meta name="description" content={description} />
+        <meta name="keywords" content={keywords} />
 
         <link
           rel="apple-touch-icon"
@@ -47,6 +48,11 @@ const TemplateWrapper = ({ children }) => {
           type="image/png"
           href={`${withPrefix("/")}img/favicon-16x16.png`}
           sizes="16x16"
+        />
+
+        <link
+          rel="shortcut icon"
+          href={`${withPrefix("/")}img/favicon-32x32.png`}
         />
 
         <link
