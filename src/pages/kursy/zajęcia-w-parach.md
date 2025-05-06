@@ -5,7 +5,7 @@ title: Zajęcia w parach
 navigationpriority: 5
 featuredimage: /img/dla-par.jpg
 color: "#ffc7a9"
-cardheading: 170 zł / miesięcznie
+cardheading: 180 zł / miesięcznie
 cardcolor: "#ffcdcc"
 cardlist:
   - item: Zajęcia 45 lub 60 minut, raz w tygodniu
