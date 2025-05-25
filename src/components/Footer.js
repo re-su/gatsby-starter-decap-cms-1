@@ -82,10 +82,10 @@ const Footer = () => {
             <span>Lubsko</span>
           </div>
           <div className="contact-item social-icons">
-            <a href="https://facebook.com">
+            <a href="https://www.facebook.com/fragariaschool">
               <img src={facebookIcon} alt="Facebook" className="social-icon" />
             </a>
-            <a href="https://instagram.com">
+            <a href="https://www.instagram.com/fragariaschool">
               <img src={instagramIcon} alt="Instagram" className="social-icon" />
             </a>
           </div>

@@ -7,15 +7,13 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
     name: "",
     email: "",
     number: "",
-    course: "", // Initialize course as empty
-    consent: false, // New field for consent
+    course: "",
+    age: "", // ✅ Dodane pole wieku
+    consent: false,
   });
 
   const formatPhoneNumber = (value) => {
-    // Remove all non-numeric characters
     const cleaned = value.replace(/\D/g, "");
-
-    // Format as XXX-XXX-XXX
     if (cleaned.length <= 3) return cleaned;
     if (cleaned.length <= 6) return `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
     return `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6, 9)}`;
@@ -26,11 +24,9 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
   };
 
   const encode = (data) => {
-    const encoded = Object.keys(data)
+    return Object.keys(data)
       .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key] || ""))
       .join("&");
-    // console.log("Encoded Form Data: ", encoded); // Log the data to see if it's correct
-    return encoded;
   };
 
   const handleSubmit = (e) => {
@@ -42,11 +38,7 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
     }
 
     const form = e.target;
-
-    // Build FormData from the form DOM itself
     const formDataDom = new FormData(form);
-
-    // Convert it into URL encoded string
     const encodedData = new URLSearchParams(formDataDom).toString();
 
     fetch("/", {
@@ -58,7 +50,6 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
       .catch((error) => alert(error));
   };
 
-  // Handle form data changes
   const handleChange = (e) => {
     setFormData((prevData) => ({ ...prevData, [e.target.name]: e.target.value }));
   };
@@ -67,24 +58,22 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
     setFormData((prevData) => ({ ...prevData, consent: e.target.checked }));
   };
 
-  // If id is provided, set the selected option to the specific course
   useEffect(() => {
     if (id && courses) {
       const selectedCourse = courses.find((course) => course.id === id);
       if (selectedCourse && selectedCourse.title !== formData.course) {
         setFormData((prevData) => ({
           ...prevData,
-          course: selectedCourse.title, // Set the course from `id`
+          course: selectedCourse.title,
         }));
       }
     } else if (courses.length > 0 && formData.course === "") {
-      // Set the first course as default if no `id` is provided and course is not already set
       setFormData((prevData) => ({
         ...prevData,
-        course: courses[0].title, // Set to the title of the first course
+        course: courses[0].title,
       }));
     }
-  }, [id, courses, formData.course]); // Add `formData.course` as a dependency to prevent unnecessary updates
+  }, [id, courses, formData.course]);
 
   return (
     <div className={`contact-form-container ${display ? "open" : ""} ${isFullscreen ? "isFullscreen" : ""}`}>
@@ -116,6 +105,20 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
           <label>
             Email:
             <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+          </label>
+
+          {/* ✅ Pole wiek */}
+          <label>
+            Wiek:
+            <input
+              type="number"
+              name="age"
+              value={formData.age}
+              onChange={handleChange}
+              min="1"
+              max="120"
+              required
+            />
           </label>
 
           <label>

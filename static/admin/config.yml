@@ -123,4 +123,3 @@ collections:
           - { label: "Address", name: "address", widget: "string" }
           - { label: "Facebook Link", name: "facebook", widget: "string" }
           - { label: "Instagram Link", name: "instagram", widget: "string" }
-          - { label: "Body", name: "body", widget: "markdown" }

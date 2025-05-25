@@ -1,0 +1,72 @@
+@keyframes fadeSlideUp
+  0%
+    opacity: 0
+    transform: translateY(20px)
+  100%
+    opacity: 1
+    transform: translateY(0)
+
+.cookie-overlay
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  background: rgba(0, 0, 0, 0.6)
+  display: flex
+  justify-content: center
+  align-items: flex-end
+  padding: 1rem
+  z-index: 9999
+
+  @media (min-width: 480px)
+    align-items: center
+
+.cookie-banner
+  background: #fff
+  border-radius: 18px
+  max-width: 600px
+  width: 100%
+  padding: 1.5rem
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2)
+  animation: fadeSlideUp 0.4s ease forwards
+  font-size: 0.95rem
+  line-height: 1.6
+
+  p
+    color: #111
+    margin-bottom: 1.25rem
+
+    a
+      color: #003366
+      text-decoration: underline
+
+  .cookie-buttons
+    display: flex
+    flex-direction: column
+    gap: 0.75rem
+
+  .cookie-button
+    padding: 0.75rem 1rem
+    border-radius: 24px
+    font-weight: bold
+    font-size: 1rem
+    border: none
+    cursor: pointer
+    width: 100%
+
+  .cookie-button-accept
+    background-color: #FEA6A4
+    color: #fff
+
+  .cookie-button-deny
+    background-color: #2d3e50
+    color: #fff
+
+@media (min-width: 480px)
+  .cookie-buttons
+    flex-direction: row
+
+    .btn
+      width: auto
+      flex: 1
