@@ -27,7 +27,7 @@ const TemplateWrapper = ({ children }) => {
 
   return (
     <>
-      {/* <CookieBanner /> */}
+      <CookieBanner />
       <div class="notranslate" translate="no">
         <Helmet>
           <html lang="pl" class="notranslate" translate="no" />
