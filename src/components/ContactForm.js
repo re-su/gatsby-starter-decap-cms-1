@@ -97,82 +97,91 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
             </label>
           </p>
 
-          <label>
-            Imię i nazwisko:
-            <input type="text" name="name" value={formData.name} onChange={handleChange} required />
-          </label>
+          {/* 🔹 Sekcja: Dane kursanta */}
+          <div className="form-section">
+            <h4>Dane kursanta</h4>
 
-          <label>
-            Email:
-            <input type="email" name="email" value={formData.email} onChange={handleChange} required />
-          </label>
+            <label>
+              Imię i nazwisko:
+              <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+            </label>
 
-          {/* ✅ Pole wiek */}
-          <label>
-            Wiek:
-            <input
-              type="number"
-              name="age"
-              value={formData.age}
-              onChange={handleChange}
-              min="1"
-              max="120"
-              required
-            />
-          </label>
+            <label>
+              Wiek:
+              <input
+                type="number"
+                name="age"
+                value={formData.age}
+                onChange={handleChange}
+                min="1"
+                max="120"
+                required
+              />
+            </label>
 
-          <label>
-            Numer telefonu:
-            <input
-              type="tel"
-              name="number"
-              value={phone}
-              placeholder="123-456-789"
-              pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
-              onChange={handlePhoneChange}
-              required
-            />
-          </label>
+            <label>
+              Kurs:
+              {id && id !== null ? (
+                <>
+                  <div className="contact-form-course-name">{courses.find((course) => course.id === id)?.title}</div>
+                  <input type="hidden" name="course" value={courses.find((course) => course.id === id)?.title} />
+                </>
+              ) : (
+                <select name="course" id="course" value={formData.course} onChange={handleChange} required>
+                  {courses.map((course) => (
+                    <option key={course.id} value={course.title}>
+                      {course.title}
+                    </option>
+                  ))}
+                </select>
+              )}
+            </label>
+          </div>
+          <div className="form-section">
+            {/* 🔹 Sekcja: Dane kontaktowe */}
+            <h4>Dane kontaktowe</h4>
 
-          <label>
-            Kurs:
-            {id && id !== null ? (
-              <>
-                <div className="contact-form-course-name">{courses.find((course) => course.id === id)?.title}</div>
-                <input type="hidden" name="course" value={courses.find((course) => course.id === id)?.title} />
-              </>
-            ) : (
-              <select name="course" id="course" value={formData.course} onChange={handleChange} required>
-                {courses.map((course) => (
-                  <option key={course.id} value={course.title}>
-                    {course.title}
-                  </option>
-                ))}
-              </select>
-            )}
-          </label>
+            <label>
+              Email:
+              <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+            </label>
 
-          <label>
-            <input
-              type="checkbox"
-              name="consent"
-              checked={formData.consent}
-              onChange={handleConsentChange}
-              required
-            />
-            Wyrażam zgodę na przetwarzanie moich danych osobowych w celach rekrutacyjnych.
-          </label>
+            <label>
+              Numer telefonu:
+              <input
+                type="tel"
+                name="number"
+                value={phone}
+                placeholder="123-456-789"
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
+                onChange={handlePhoneChange}
+                required
+              />
+            </label>
 
-          <button
-            type="submit"
-            className={`primary-btn ${!formData.consent ? 'disabled' : ''}`}
-            disabled={!formData.consent}
-          >
-            Wyślij
-          </button>
+            <label>
+              <input
+                type="checkbox"
+                name="consent"
+                checked={formData.consent}
+                onChange={handleConsentChange}
+                required
+              />
+              Wyrażam zgodę na przetwarzanie moich danych osobowych w celach rekrutacyjnych.
+            </label>
+
+            <button
+              type="submit"
+              className={`primary-btn ${!formData.consent ? 'disabled' : ''}`}
+              disabled={!formData.consent}
+            >
+              Wyślij
+            </button>
+          </div>
         </form>
-      </div>
-    </div>
+
+      </div >
+    </div >
   );
 };
 

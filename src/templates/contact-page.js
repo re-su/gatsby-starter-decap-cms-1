@@ -20,28 +20,28 @@ export const ContactPageTemplate = ({ title, phone, email, address, facebook, in
       <h2 className="title is-size-3 has-text-weight-bold">{title}</h2>
       <div className="container">
         <div className="contact-page-contact-section">
-        <h3 className="title is-size-4">Napisz lub zadzwoń</h3>
+          <h3 className="title is-size-4">Napisz lub zadzwoń</h3>
           <div className="contact-page-contact-box">
-            <div className="contact-page-contact-item">
-              <img src={phoneIcon} alt="Phone"/>
+            <a href={`tel:${phone.replace(/\D/g, "")}`} className="contact-page-contact-item">
+              <img src={phoneIcon} alt="Phone" />
               <p>{phone}</p>
-            </div>
-            <div className="contact-page-contact-item">
-              <img src={emailIcon} alt="Email"/>
+            </a>
+            <a href={`mailto:${email}`} className="contact-page-contact-item">
+              <img src={emailIcon} alt="Email" />
               <p>{email}</p>
-            </div>
+            </a>
           </div>
           <h3 className="title is-size-4">Gdzie odbywają się zajęcia?</h3>
           <div className="contact-page-address-box">
             <p className="contact-page-address-box-header">
-              <img src={locationIcon} alt="Location"/> 
+              <img src={locationIcon} alt="Location" />
             </p>
             <p>{address}</p>
           </div>
           <h3 className="title is-size-4">Odwiedź nasze media społecznościowe</h3>
           <div className="contact-page-social-links">
-            <a href={facebook} target="_blank" rel="noopener noreferrer"><img src={facebookIcon} alt="Facebook"/> Facebook</a>
-            <a href={instagram} target="_blank" rel="noopener noreferrer"><img src={instagramIcon} alt="Instagram icon"/> Instagram</a>
+            <a href={facebook} target="_blank" rel="noopener noreferrer"><img src={facebookIcon} alt="Facebook" /> Facebook</a>
+            <a href={instagram} target="_blank" rel="noopener noreferrer"><img src={instagramIcon} alt="Instagram icon" /> Instagram</a>
           </div>
           <PageContent className="content" content={content} />
         </div>
