@@ -43,7 +43,6 @@ export const ContactPageTemplate = ({ title, phone, email, address, facebook, in
             <a href={facebook} target="_blank" rel="noopener noreferrer"><img src={facebookIcon} alt="Facebook" /> Facebook</a>
             <a href={instagram} target="_blank" rel="noopener noreferrer"><img src={instagramIcon} alt="Instagram icon" /> Instagram</a>
           </div>
-          <PageContent className="content" content={content} />
         </div>
       </div>
     </section>

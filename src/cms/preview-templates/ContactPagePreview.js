@@ -8,7 +8,6 @@ const ContactPagePreview = ({ entry, widgetFor, getAsset }) => {
   const address = entry.getIn(['data', 'address']);
   const facebook = entry.getIn(['data', 'facebook']);
   const instagram = entry.getIn(['data', 'instagram']);
-  const content = widgetFor('body'); // Get the body content
 
   return (
     <div>
@@ -18,7 +17,6 @@ const ContactPagePreview = ({ entry, widgetFor, getAsset }) => {
         address={address}
         facebook={facebook}
         instagram={instagram}
-        content={content} // Passing the body content
       />
     </div>
   );
