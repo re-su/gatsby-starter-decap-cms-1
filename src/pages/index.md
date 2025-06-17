@@ -1,8 +1,8 @@
 ---
 templateKey: index-page
 title: Fragaria school home page
-heading: Cześć! Tu Poziomka! Razem zamienimy naukę angielskiego w świetną
-  zabawę. Gotowy na przygodę?
+heading: Hello! Tu Poziomka! Razem zamienimy naukę angielskiego w świetną
+  zabawę. Gotowi na przygodę?
 description: Opis strony głównej
 features:
   - svgIcon: img/fce.svg
