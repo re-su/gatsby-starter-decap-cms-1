@@ -23,7 +23,7 @@ Z nami nauka to przygoda!
 
 <br/>
 
-Kurs dla szkoły podstawowej jest skierowany do uczniów w wieku od **8 do 14 roku życia**. Jest to połączenie solidnej nauki z **kreatywnymi zajęciami**, które dzieci po prostu uwielbiają. 
+Kurs dla szkoły podstawowej jest skierowany do uczniów w wieku od **8 do 13 roku życia**. Jest to połączenie solidnej nauki z **kreatywnymi zajęciami**, które dzieci po prostu uwielbiają. 
 
 <br/>
 
