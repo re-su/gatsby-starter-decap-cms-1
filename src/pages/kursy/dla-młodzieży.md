@@ -25,7 +25,7 @@ Rozwiń swój angielski. Otwórz się na świat.
 
 <br/>
 
-Kurs dla młodzieży jest skierowany dla kursantów w wieku od **15 do 19 roku życia**. Zajęcia łączą nowoczesne metody dydaktyczne z tematami bliskimi młodym ludziom, co sprawia, że nauka staje się nie tylko skuteczna, ale i przyjemna.
+Kurs dla młodzieży jest skierowany dla kursantów w wieku od **14 do 19 roku życia**. Zajęcia łączą nowoczesne metody dydaktyczne z tematami bliskimi młodym ludziom, co sprawia, że nauka staje się nie tylko skuteczna, ale i przyjemna.
 
 🗣️ **Stawiamy na aktywna naukę mówienia, rozumienia ze słuchu, pisania i czytania.**
 
