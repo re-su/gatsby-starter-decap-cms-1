@@ -15,7 +15,7 @@ cardlist:
   - item: materiały w cenie kursu
     image: /img/open-book.svg
 date: 2025-03-16T17:49:58.377Z
-cardheading: 145zł / miesięcznie
+cardheading: "145zł x 10 rat "
 cardcolor: "#ffcdcc"
 ---
 Kurs dla najmłodszych jest skierowany do dzieci w wieku od **4 do 5 lat**. Jest to wyjątkowe połączenie **zabawy i nauki**, które sprawia, że nauka języka angielskiego staje się przyjemna i efektywna.  Zajęcia są idealne zarówno dla dzieci, które dopiero rozpoczynają swoją przygodę z angielskim, jak i dla tych, które miały już z nim styczność.
