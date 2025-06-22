@@ -5,7 +5,10 @@ import { useInView } from "../hooks/useInView";
 import { Link } from 'gatsby'
 
 const FeaturesSection = ({ features }) => {
-  const [ref, inView] = useInView({ threshold: 0.1 });
+  const [ref, inView] = useInView({
+    rootMargin: "0px 0px 100px 0px",   // bottom edge moved out by 5 px
+    treshold: 0.1
+  });
   return (
     <section ref={ref} className={`features-section fade-in-section ${inView ? "is-visible" : ""}`}>
       <div className="features-container">
@@ -20,7 +23,6 @@ const FeaturesSection = ({ features }) => {
             quality={100}
             formats={["auto", "webp"]}
           />
-          {/* <img src={Girl}/> */}
         </div>
 
         {/* Right side: Features + CTA */}
