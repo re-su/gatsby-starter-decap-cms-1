@@ -1,4 +1,5 @@
 ---
+isBlocked: true
 color: "#a7e3ff"
 contentbottom: bottom2
 templateKey: course-page
