@@ -5,7 +5,7 @@ title: Zajęcia indywidualne
 navigationpriority: 6
 featuredimage: /img/indywidualne.jpg
 color: "#cf5b41"
-cardheading: 120 zł za zajęcia (60 min)
+cardheading: 120 zł za jedne zajęcia (60 min) lub 90 zł za jedne zajęcia (45min)
 cardcolor: "#ffcdcc"
 cardlist:
   - item: Zajęcia 45 lub 60 minut, raz w tygodniu
