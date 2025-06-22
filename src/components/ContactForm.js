@@ -135,10 +135,10 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
                   required
                 >
                   {courses
-                    .filter((course) => !course.isBlocked)      // ⬅️ skip blocked ones
+                    // .filter((course) => !course.isBlocked)      // ⬅️ skip blocked ones
                     .map((course) => (
-                      <option key={course.id} value={course.title}>
-                        {course.title}
+                      <option key={course.id} value={course.title} disabled={course.isBlocked}>
+                        {course.title} {course.isBlocked ? "(Aktualnie brak wolnych miejsc)" : ""}
                       </option>
                     ))}
                 </select>
