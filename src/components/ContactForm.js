@@ -11,6 +11,7 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
     age: "", // ✅ Dodane pole wieku
     consent: false,
   });
+  console.log(courses)
 
   const formatPhoneNumber = (value) => {
     const cleaned = value.replace(/\D/g, "");
@@ -127,13 +128,22 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
                   <input type="hidden" name="course" value={courses.find((course) => course.id === id)?.title} />
                 </>
               ) : (
-                <select name="course" id="course" value={formData.course} onChange={handleChange} required>
-                  {courses.map((course) => (
-                    <option key={course.id} value={course.title}>
-                      {course.title}
-                    </option>
-                  ))}
+                <select
+                  name="course"
+                  id="course"
+                  value={formData.course}
+                  onChange={handleChange}
+                  required
+                >
+                  {courses
+                    .filter((course) => !course.isBlocked)      // ⬅️ skip blocked ones
+                    .map((course) => (
+                      <option key={course.id} value={course.title}>
+                        {course.title}
+                      </option>
+                    ))}
                 </select>
+
               )}
             </label>
           </div>

@@ -16,6 +16,7 @@ export const CoursePageTemplate = ({
   cardheading,
   cardlist,
   cardcolor,
+  isBlocked,
   helmet,
 }) => {
   const PostContent = contentComponent || Content;
@@ -31,9 +32,9 @@ export const CoursePageTemplate = ({
         {/* Info Cards */}
         <div className="course-info-cards-container">
           <div key={0} className="course-info-card" style={{ backgroundColor: cardcolor }}>
-            
+
             <img src={priceIcon} />
-            
+
             <p className="course-info-card-text">{cardheading}</p>
           </div>
           {cardlist &&
@@ -52,16 +53,32 @@ export const CoursePageTemplate = ({
             ))}
         </div>
 
+        {/* Blocked notice – floating banner */}
+        {isBlocked && (
+          <div className="course-blocked-banner" role="alert">
+            Aktualnie brak wolnych miejsc na dany kurs – przepraszamy!
+          </div>
+        )}
 
-        {/* Button to show form */}
+        {/* CTA button */}
         <div className="course-card-button-container">
-          <button className="primary-btn" onClick={() => setShowForm(!showForm)}>
+          <button
+            className={`primary-btn${isBlocked ? " disabled" : ""}`}
+            onClick={() => !isBlocked && setShowForm(!showForm)}
+            disabled={isBlocked}
+          >
             Zapisz się
           </button>
         </div>
 
-        {/* Contact Form (Visible when button is clicked) */}
-        <ContactForm display={showForm} id={id} courses={[{ id: id, title: title }]} />
+        {/* Contact Form (only when course is available) */}
+        {!isBlocked && (
+          <ContactForm
+            display={showForm}
+            id={id}
+            courses={[{ id: id, title: title }]}
+          />
+        )}
       </div>
     </section>
   );
@@ -91,6 +108,7 @@ const CoursePage = ({ data }) => {
         cardheading={course.frontmatter.cardheading}
         cardlist={course.frontmatter.cardlist}
         cardcolor={course.frontmatter.cardcolor}
+        isBlocked={course.frontmatter.isBlocked}
         helmet={
           <Helmet titleTemplate="%s | Fragaria - szkoła językowa Lubsko">
             <title>{`${course.frontmatter.title}`}</title>
@@ -131,6 +149,7 @@ export const pageQuery = graphql`
         }
         cardcolor
         color
+        isBlocked
       }
     }
   }

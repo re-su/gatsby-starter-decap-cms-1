@@ -3,6 +3,7 @@ templateKey: course-page
 path: /kursy/zajęcia-indywidualne
 title: Zajęcia indywidualne
 navigationpriority: 6
+isBlocked: true
 featuredimage: /img/indywidualne.jpg
 color: "#cf5b41"
 cardheading: 120 zł za jedne zajęcia (60 min) lub 90 zł za jedne zajęcia (45min)

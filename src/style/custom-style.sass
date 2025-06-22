@@ -221,9 +221,27 @@ footer.footer
 
 .fade-in-section
   opacity: 0
-  transform: translateY(20px)
+  transform: translateY(50px)
   transition: opacity 600ms ease, transform 600ms ease
 
 .fade-in-section.is-visible
+  opacity: 1
+  transform: none
+
+.fade-in-from-left-section
+  opacity: 0
+  transform: translateX(-50px)
+  transition: opacity 600ms ease, transform 600ms ease
+
+.fade-in-from-left-section.is-visible
+  opacity: 1
+  transform: none
+
+.fade-in-from-right-section
+  opacity: 0
+  transform: translateX(50px)
+  transition: opacity 600ms ease, transform 600ms ease
+
+.fade-in-from-right-section.is-visible
   opacity: 1
   transform: none

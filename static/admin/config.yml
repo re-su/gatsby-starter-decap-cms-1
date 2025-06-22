@@ -21,6 +21,7 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Template Key", name: "templateKey", widget: "hidden", default: "course-page" }
+      - { label: "Is course blocked", name: "isBlocked", widget: "boolean" }
       - { label: "Path", name: "path", widget: "string", default: "/kursy/{{slug}}" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Navigation priority", name: "navigationpriority", widget: "number" }          

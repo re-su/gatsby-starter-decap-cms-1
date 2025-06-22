@@ -45,6 +45,7 @@ const CourseSignupPage = ({ data }) => {
   const courses = data.allMarkdownRemark.edges.map(edge => ({
     id: edge.node.id,
     title: edge.node.frontmatter.title,
+    isBlocked: edge.node.frontmatter.isBlocked
   }));
 
   return (
@@ -89,6 +90,7 @@ export const courseSignupPageQuery = graphql`
           id
           frontmatter {
             title
+            isBlocked
           }
         }
       }
