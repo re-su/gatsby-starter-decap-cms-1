@@ -11,7 +11,6 @@ const ContactForm = ({ display, courses, id, isFullscreen }) => {
     age: "", // ✅ Dodane pole wieku
     consent: false,
   });
-  console.log(courses)
 
   const formatPhoneNumber = (value) => {
     const cleaned = value.replace(/\D/g, "");
