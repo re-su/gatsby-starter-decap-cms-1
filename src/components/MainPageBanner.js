@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import banner from "../img/MainPageBanner.webp";
 import { Link } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
 import { useInView } from "../hooks/useInView";
 
 export default function MainPageBanner() {
@@ -41,11 +42,13 @@ export default function MainPageBanner() {
           ref={ref}
           className={`banner-right fade-in-from-right-section ${inView ? "is-visible" : ""}`}
         >
-          <img
-            src={banner}
-            alt="Person"
-            loading="eager"
-            className="person-image"
+          <StaticImage
+            src="../img/MainPageBanner.webp"
+            alt="Student learning"
+            placeholder="blurred"
+            layout="constrained"
+            width={1500}
+            quality={100}
           />
         </div>
       </div>
