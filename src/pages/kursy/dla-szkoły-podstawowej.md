@@ -38,7 +38,7 @@ Kurs dla szkoły podstawowej jest skierowany do uczniów w wieku od **8 do 13 ro
 
 <br/>
 
-Zajęciom towarzyszy tutaj nadal nasza **Poziomka**  – czasem trochę rozbrykana, ale zawsze gotowa do pomocy. Razem kursantami uczy się, bawi, ale też pokazuje, jak ważne jest zaangażowanie, wytrwałość i współpraca. Uczniowie ją uwielbiają i chętnie pomagają jej rozwiązywać językowe zagadki. 
+Zajęciom towarzyszy tutaj nadal nasza **Poziomka**  – czasem trochę rozbrykana, ale zawsze gotowa do pomocy. Razem z kursantami uczy się, bawi, ale też pokazuje, jak ważne jest zaangażowanie, wytrwałość i współpraca. Uczniowie ją uwielbiają i chętnie pomagają jej rozwiązywać językowe zagadki. 
 
 <br/>
 
