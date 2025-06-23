@@ -1,6 +1,6 @@
 ---
 templateKey: course-page
-isBlocked: true
+isBlocked: false
 path: /kursy/dla-szkoły-podstawowej
 featuredimage: /img/dla-szkoly-podstawowej2.jpg
 color: "#b9e9ff"
