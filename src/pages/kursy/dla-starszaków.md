@@ -1,4 +1,5 @@
 ---
+isBlocked: true
 color: "#cbefff"
 contentbottom: Bottom
 templateKey: course-page
@@ -6,7 +7,7 @@ path: /kursy/dla-starszaków
 title: Dla starszaków
 navigationpriority: 2
 featuredimage: /img/dla-starszakow.jpg
-cardheading: 160zł / miesięcznie
+cardheading: 160zł x 10 rat
 cardcolor: "#ffcdcc"
 cardlist:
   - item: 30 lekcji
