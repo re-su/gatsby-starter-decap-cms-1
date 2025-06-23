@@ -2,65 +2,79 @@
 .main-banner
   position: relative
   overflow: hidden
-  // min-height: 80vh
+  // height: 100vh
+  // min-height: 90vh
   display: flex
-  align-items: center
+  align-items: stretch            // <<< changed (was center)
   justify-content: center
   place-items: center
-  background: linear-gradient(90deg, $secondary-color 40%, $primary-color 100%)
+  // background: linear-gradient(90deg, $secondary-color 40%, $primary-color 100%)
+  background: #FFF6F1
 
 .banner-background
   position: absolute
-  bottom: -8%
-  left: 0
-  width: 100%
-  height: 100%
-  background: url('../img/svg/london-skyline.svg') bottom left no-repeat
-  background-size: contain
+  inset: 0
   pointer-events: none
-  z-index: 0
+  overflow: hidden
+  z-index: 1                      // sits behind content
 
-@media (max-width: 768px)
-  .banner-background
-    background-position: bottom center
-    bottom: 0
+  &::before,
+  &::after
+    content: ''
+    position: absolute
+    border-radius: 50%
+    // opacity: .15
 
+  /* large ellipse, upper-left */
+  &::before
+    width: 8rem
+    height: 8rem
+    top: 70%
+    left: 35%
+    background: $primary-color
 
 .banner-content
   z-index: 1
   display: flex
   flex-direction: row
-  align-items: center
+  align-items: stretch            // <<< changed (was center)
   justify-content: space-evenly
   width: 100%
-  padding: 1em
+  height: 100%
+  // padding: 1em
   margin-top: 60px
   max-width: 1500px
 
 .banner-left
   width: 40%
-  color: white
   font-weight: bold
+  padding: 1em
+  display: flex                   // <<< added
+  flex-direction: column          // <<< added
+  justify-content: center         // <<< added
+  align-items: flex-start
   > h1
-    font-size: 1.8rem
+    font-size: 2rem
     font-weight: bold
-    text-shadow: 0px 0px 6px rgba(66, 68, 90, 1)
+    color: $primary-color
   > p
-    font-size: 1.5rem
+    font-size: 1.8rem
     margin-top: 20px
     margin-bottom: 20px
-    text-shadow: 0px 0px 6px rgba(66, 68, 90, 1)
+    color: $secondary-color
+
+.highlight
+  padding: 1px
+  text-shadow: none
+  display: box
+  font-size: 2.2rem
 
 .banner-right
   width: 40%
   display: flex
   flex-direction: column
   align-items: center
-
-.highlight
-  background-color: $primary-color
-  padding: 1px
-  text-shadow: none
+  justify-content: flex-end       // <<< changed (was default/center)
 
 .offer-btn
   margin: 0
@@ -69,54 +83,60 @@
   font-weight: normal
 
 .person-image
-  max-height: 40vh
+  position: relative
+  overflow: visible
   width: auto
-  margin-bottom: 1rem
+
+  &::before
+    content: ''
+    position: absolute
+    width: 1em
+    height: 0.6em
+    background: #000
+    border-radius: 50%
+    left: -0.6em
+    top: 50%
+    transform: translateY(-50%)
+    z-index: 1
 
 .text-bubble
-  width: 70%
-  max-width: 500px
-  padding: 20px
-  background: #f0f0f0
-  border-radius: 15px
-  color: #333
-  margin-bottom: 20px
-  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2)
   position: relative
-  font-size: 1rem
+  display: inline-block
+  max-width: 100%
+  padding: 1.25rem 1.75rem
+  background: #fff
+  color: #000
+  font-family: "Comic Sans MS", "Comic Neue", cursive, sans-serif
+  font-weight: bold
+  font-size: 1.25rem
+  letter-spacing: 0.05em
+  text-align: center
+  user-select: none
+  border: 3px solid black
+  box-shadow: 3px 3px 0 black
+  clip-path: polygon(10% 0%,90% 5%,100% 30%,90% 90%,70% 100%,40% 90%,20% 100%,0% 70%)
 
-  /* Mobile Tail (Bottom Center) */
   &::after
     content: ''
     position: absolute
-    bottom: -18px
-    left: 50%
-    transform: translateX(-50%)
-    width: 0
-    height: 0
-    border-left: 10px solid transparent
-    border-right: 10px solid transparent
-    border-top: 20px solid #f0f0f0 /* Tail color matches bubble background */
+    bottom: -2.5rem
+    left: 20%
+    width: 3rem
+    height: 3rem
+    background: white
+    border: 3px solid black
+    clip-path: polygon(0% 0%,0% 20%,80% 100%,0% 80%)
+    box-shadow: 2px 2px 0 black
+    filter: drop-shadow(1px 1px 0 black)
 
-  /* Desktop Tail */
-  // .bubble-tail
-  //   position: absolute
-  //   top: 50%
-  //   left: -17px
-  //   transform: translateY(-50%)
-  //   width: 0
-  //   height: 0
+  &.pbottom
+    margin-bottom: 4rem
 
-  // .bubble-tail.dark
-  //   border-top: 17px solid transparent
-  //   border-bottom: 17px solid transparent
-  //   border-right: 17px solid black
-
-  // .bubble-tail.light
-  //   left: -14px
-  //   border-top: 15px solid transparent
-  //   border-bottom: 15px solid transparent
-  //   border-right: 15px solid white
+.plain-message
+  font-family: inherit
+  font-weight: inherit
+  font-size: inherit
+  color: inherit
 
 .text-word
   white-space: nowrap
@@ -127,50 +147,85 @@
   display: inline-block
   animation: fadeInFromLeft 0.2s ease-out forwards
 
+/* Small screen styles */
+@media (max-width: 1250px)
+  .banner-background
+    /* large ellipse, upper-left */
+    &::before
+      width: 7rem
+      height: 7rem
+      top: 70%
+      left: 30%
+
+@media (max-width: 1024px)
+  .banner-background
+    /* large ellipse, upper-left */
+    &::before
+      width: 5rem
+      height: 5rem
+      top: 70%
+      left: 35%
+
+  .banner-left
+    > h1
+      font-size: 1.5rem
+    > p
+      font-size: 1.3rem
+
+  .highlight
+    padding: 1px
+    text-shadow: none
+    display: box
+    font-size: 1.7rem
+
 /* Mobile Styles */
 @media (max-width: 768px)
   .main-banner
-      background: linear-gradient(180deg, #ffd2d2 40%, $primary-color 100%)
+    flex-direction: column
+    justify-content: flex-end
+
+  .banner-background
+    /* large ellipse, upper-left */
+    &::before
+      width: 0
+      height: 0
+
   .banner-content
     flex-direction: column
     margin: 0
+    margin-top: 60px
     gap: 50px
     padding: 20px
-    padding-top: 70px
+    padding-bottom: 0px
+    width: 100vw
+    height: auto
+    align-items: center          // <<< added (align after stacking)
+
+  .banner-right
+    width: calc(100% + 30px)
+    height: auto
+    justify-content: center      // <<< added (centre in column)
+
+  .person-image
+    width: 100%
+    height: auto
+    margin: 0
+    padding: -20px
+    overflow: visible
 
   .banner-left
     width: 100%
-    padding: 0px 20px
+    text-align: center
+    align-items: center
     > h1
       font-size: 1.5rem
     > p
       font-size: 1.2rem
 
-  .banner-right
-    width: 100%
+  .highlight
+    font-size: 1.5rem
 
-  .person-image
-    margin: 0
-    max-height: 32vh
-
-  .text-bubble
-    max-width: 80%
-    padding: 20px
-    background: #f0f0f0
-    border-radius: 15px
-    // border: 0
-    color: #333
-    // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2)
-    position: relative
-    font-size: 1rem
-
-  /* Hiding desktop-tail on mobile */
-  .bubble-tail
-    display: none
-
-/*
-    ANIMATIONS
-  */
+/* ANIMATIONS */
 @keyframes float
   0%, 100%
     transform: translateY(0)

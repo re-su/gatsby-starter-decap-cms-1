@@ -6,7 +6,7 @@ import { Link } from 'gatsby'
 
 const FeaturesSection = ({ features }) => {
   const [ref, inView] = useInView({
-    rootMargin: "0px 0px 100px 0px",   // bottom edge moved out by 5 px
+    rootMargin: "0px 0px 80px 0px",   // bottom edge moved out by 5 px
     treshold: 0.1
   });
   return (
