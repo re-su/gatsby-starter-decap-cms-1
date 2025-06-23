@@ -1,5 +1,6 @@
 ---
 templateKey: course-page
+isBlocked: false
 path: /kursy/dla-szkoły-podstawowej
 featuredimage: /img/dla-szkoly-podstawowej2.jpg
 color: "#b9e9ff"
@@ -7,7 +8,7 @@ price: 1000 PLN
 featuredImage: /img/kids1.jpg
 title: Dla szkoły podstawowej
 navigationpriority: 3
-cardheading: 180 zł / miesięcznie
+cardheading: "180 zł x 10 rat "
 cardcolor: "#ffcdcc"
 cardlist:
   - item: 30 lekcji
