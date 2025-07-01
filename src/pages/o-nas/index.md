@@ -3,7 +3,7 @@ templateKey: about-page
 title: Poznajmy się
 navigationpriority: 0
 teachers:
-  - name: Patrycja
+  - name: "Patrycja Pogorzelska "
     role: Założycielka i lektorka
     bio: >-
       Mam na imię Patrycja i jestem właścicielką oraz lektorką we Fragarii.
