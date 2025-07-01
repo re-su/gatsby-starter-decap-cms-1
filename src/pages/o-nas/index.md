@@ -8,10 +8,13 @@ teachers:
     bio: >-
       Mam na imię Patrycja i jestem właścicielką oraz lektorką we Fragarii.
       Ukończyłam studia z lingwistyki stosowanej na **Uniwersytecie im. Adama
-      Mickiewicza** w Poznaniu, uzyskując tytuł **magistra**.
+      Mickiewicza** w Poznaniu, uzyskując tytuł **magistra**
 
 
-      Język angielski to moja wielka pasja, jak i dzielenie się moja wiedzą z innymi. Praca z dziećmi i dorosłymi daje mi ogromną satysfakcję, a każdy postęp moich kursantów to dla mnie prawdziwa radość i motywacja do dalszego działania.
+      Język angielski to moja wielka pasja. A praca z dziećmi i dorosłymi daje mi ogromną satysfakcję. Każdy postęp moich kursantów to dla mnie prawdziwa radość i motywacja do dalszego działania.
+
+
+      Moim celem jest nie tylko przekazywanie wiedzy, ale także budowanie pewności siebie w komunikacji w języku angielskim.
     photo: /img/img_20250701_135836.jpg
 ---
 Szkoła Językowa Fragaria w Lubsku to miejsce, gdzie nauka angielskiego jest nie tylko skuteczna, ale także pełna zabawy i radości.
@@ -29,6 +32,6 @@ W Fragarii stawiamy na:
 
 <br/>
 
-Naszym celem jest nie tylko przekazywanie wiedzy, ale także budowanie pewności siebie w komunikacji w języku angielskim. Wierzymy, że nauka może być fascynującą przygodą – i właśnie taką ją u nas znajdziesz!
+Wierzymy, że nauka może być fascynującą przygodą – i właśnie taką ją u nas znajdziesz!
 
 > **Zapraszamy serdecznie do Fragarii – miejsca, gdzie razem spełniamy językowe marzenia!**
