@@ -7,7 +7,7 @@ path: /kursy/dla-starszaków
 title: Dla starszaków
 navigationpriority: 2
 featuredimage: /img/dla-starszakow.jpg
-cardheading: 160zł x 10 rat
+cardheading: 170 zł x 10 rat
 cardcolor: "#ffcdcc"
 cardlist:
   - item: 30 lekcji
