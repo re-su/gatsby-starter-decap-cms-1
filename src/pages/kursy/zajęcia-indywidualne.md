@@ -1,6 +1,6 @@
 ---
 templateKey: course-page
-isBlocked: false
+isBlocked: true
 path: /kursy/zajęcia-indywidualne
 title: Zajęcia indywidualne
 navigationpriority: 6
