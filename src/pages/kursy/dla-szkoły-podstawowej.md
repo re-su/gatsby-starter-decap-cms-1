@@ -8,7 +8,7 @@ price: 1000 PLN
 featuredImage: /img/kids1.jpg
 title: Dla szkoły podstawowej
 navigationpriority: 3
-cardheading: "180 zł x 10 rat "
+cardheading: "190 zł x 10 rat "
 cardcolor: "#ffcdcc"
 cardlist:
   - item: 30 lekcji
