@@ -1,5 +1,6 @@
 ---
 templateKey: course-page
+isBlocked: true
 path: /kursy/zajęcia-w-parach
 title: Zajęcia w parach
 navigationpriority: 5
