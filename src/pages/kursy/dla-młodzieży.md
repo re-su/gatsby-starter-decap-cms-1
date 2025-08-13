@@ -8,7 +8,7 @@ price: 76zł
 title: Dla młodzieży
 navigationpriority: 4
 featuredimage: /img/dla-maturzystow.jpg
-cardheading: "200zł x 10 rat "
+cardheading: "210 zł x 10 rat "
 cardcolor: "#ffcdcc"
 cardlist:
   - item: 30 lekcji
