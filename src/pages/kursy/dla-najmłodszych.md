@@ -1,6 +1,6 @@
 ---
 templateKey: course-page
-isBlocked: true
+isBlocked: false
 path: /kursy/dla-najmłodszych
 title: Dla najmłodszych
 navigationpriority: 1
