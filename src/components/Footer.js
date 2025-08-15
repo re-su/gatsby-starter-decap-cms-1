@@ -79,7 +79,7 @@ const Footer = () => {
           </div>
           <div className="contact-item">
             <img src={locationIcon} alt="Location" className="contact-icon" />
-            <span>Lubsko</span>
+            <span>Lubsko, Kopernika 32</span>
           </div>
           <div className="contact-item social-icons">
             <a href="https://www.facebook.com/fragariaschool">
